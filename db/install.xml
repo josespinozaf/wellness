@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/wellness/db" VERSION="20151223" COMMENT="XMLDB file for Moodle Deportes UAI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="asistencias" COMMENT="Asistencias deportivas alumnos UAI">
+      <FIELDS>
+        <FIELD NAME="sede" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="asisid" TYPE="int" LENGTH="7" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="rut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="dv" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="nombres" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="apellidos" TYPE="char" LENGTH="17" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="fecha" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="horainicio" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="horatermino" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="actividad" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="periodo" TYPE="char" LENGTH="13" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="rut"/>
+      </KEYS>
+    </TABLE>
+    
+    <TABLE NAME="fitnessgram" COMMENT="Asistencias deportivas alumnos UAI">
+      <FIELDS>
+        <FIELD NAME="rut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="dv" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="apellidopaterno" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="apellidomaterno" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nombres" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sexo" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sede" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="talla" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="peso" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="imc" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sumademm" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="porcentajegrasa" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sitandreachd" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sitandreachi" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="trunklift" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="abd" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="pullup" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="pushup" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nivel" TYPE="int" LENGTH="5" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="miles" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="vo2max" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="rut"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
