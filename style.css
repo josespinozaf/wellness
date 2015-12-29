@@ -1,12 +1,13 @@
 
 .tabs { /* es el rectángulo contenedor */
 margin: 0 auto;
-min-height:450px;
-max-height: 1500px;
+min-height:500px;
 position: relative;
 width: 950px;
 border-radius: 0px 10px 0 0;
 }
+
+
 .tab { /* cada una de las pestañas */
 float: left;
 }
@@ -30,7 +31,7 @@ text-shadow: 1px 1px #000;
 background-color: #678;
 bottom: 0;
 left: 0;
-overflow: hidden;
+overflow: scroll;
 padding: 20px;
 position: absolute;
 right: 0;

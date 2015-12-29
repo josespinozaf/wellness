@@ -134,8 +134,37 @@ echo $OUTPUT->header ();
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
     </script>
-    <script>
-    
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
     </script>
   
   </head>
@@ -145,30 +174,33 @@ echo $OUTPUT->header ();
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1">Antropometria</label>
        <div class="content1">
-         <h3>Antropometria</h3>
      <div id="table_div1"></div>
-     <br>
+       <br>
+        <h3><font color="white">Grafica</font></h3>
+     <div id="curve_chart" style="width: 900px; height: 500px"></div>
       </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-2" name="tab-group-1">
        <label for="tab-2">Fuerza</label>
-       <div class="content1">  <h3>Fuerza</h3>
+       <div class="content1"> 
      <div id="table_div2"></div>
-     <br></div>
+     <br> <h3><font color="white">Grafica</font></h3>
+     </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
        <label for="tab-3">Flexibilidad</label>
-       <div class="content1">  <h3>Flexibilidad</h3>
+       <div class="content1"> 
      <div id="table_div3"></div>
-       <br> </div>
+       <br>  <h3><font color="white">Grafica</font></h3></div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-4" name="tab-group-1">
        <label for="tab-4">Resistencia</label>
-       <div class="content1">     <h3>Resistencia</h3>
-     <div id="table_div4"></div>
+       <div class="content1">   
+     <div id="table_div4"></div><br>
+      <h3><font color="white">Grafica</font></h3>
    </div>
    </div>
  
