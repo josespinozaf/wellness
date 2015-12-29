@@ -78,7 +78,7 @@ echo $OUTPUT->header ();
 
         var table = new google.visualization.Table(document.getElementById('table_div1'));
 
-        table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
+        table.draw(data, {showRowNumber: false, width: '80%', height: '80%'});
       }
     </script>
   
@@ -134,39 +134,41 @@ echo $OUTPUT->header ();
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
     </script>
-    <script type="text/javascript"
-          src="https://www.google.com/jsapi?autoload={
-            'modules':[{
-              'name':'visualization',
-              'version':'1',
-              'packages':['corechart']
-            }]
-          }"></script>
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['line']});
+    google.setOnLoadCallback(drawChart);
 
-    <script type="text/javascript">
-      google.setOnLoadCallback(drawChart);
+    function drawChart() {
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Day');
+      data.addColumn('number', 'Guardians of the Galaxy');
+    
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
+      data.addRows([
+        [1,  37.8],
+        [2,  30.9],
+        [3,  25.4],
+        [4,  11.7],
+        [5,  11.9],
+        [6,   8.8],
+        [7,   7.6],
+        [8,  12.3],
+        [9,  16.9],
+        [10, 12.8]
+      ]);
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      var options = {
+        width: 800,
+        height: 400
+      };
 
-        chart.draw(data, options);
-      }
-    </script>
-  
+      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+      chart.draw(data, options);
+    }
+  </script>
   </head>
   <body>
   <div class="tabs">
@@ -177,7 +179,7 @@ echo $OUTPUT->header ();
      <div id="table_div1"></div>
        <br>
         <h3><font color="white">Grafica</font></h3>
-     <div id="curve_chart" style="width: 900px; height: 500px"></div>
+      <div id="linechart_material"></div>
       </div>
    </div>
    <div class="tab">
@@ -186,6 +188,7 @@ echo $OUTPUT->header ();
        <div class="content1"> 
      <div id="table_div2"></div>
      <br> <h3><font color="white">Grafica</font></h3>
+     <div id="linechart_material"></div>
      </div>
    </div>
    <div class="tab">
@@ -194,6 +197,7 @@ echo $OUTPUT->header ();
        <div class="content1"> 
      <div id="table_div3"></div>
        <br>  <h3><font color="white">Grafica</font></h3></div>
+ 		<div id="linechart_material"></div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-4" name="tab-group-1">
@@ -201,6 +205,7 @@ echo $OUTPUT->header ();
        <div class="content1">   
      <div id="table_div4"></div><br>
       <h3><font color="white">Grafica</font></h3>
+      <div id="linechart_material"></div>
    </div>
    </div>
  
