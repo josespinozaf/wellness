@@ -136,38 +136,33 @@ echo $OUTPUT->header ();
     </script>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
-    google.load('visualization', '1.1', {packages: ['line']});
-    google.setOnLoadCallback(drawChart);
+  google.load('visualization', '1', {packages: ['corechart', 'line']});
+  google.setOnLoadCallback(drawBackgroundColor);
 
-    function drawChart() {
+  function drawBackgroundColor() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Dogs');
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Day');
-      data.addColumn('number', 'Guardians of the Galaxy');
-    
+        data.addRows([
+          [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+          [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+          [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48]
+        ]);
 
-      data.addRows([
-        [1,  37.8],
-        [2,  30.9],
-        [3,  25.4],
-        [4,  11.7],
-        [5,  11.9],
-        [6,   8.8],
-        [7,   7.6],
-        [8,  12.3],
-        [9,  16.9],
-        [10, 12.8]
-      ]);
+        var options = {
+          hAxis: {
+            title: 'Time'
+          },
+          vAxis: {
+            title: 'Popularity'
+          },
+          backgroundColor: '#f1f8e9'
+        };
 
-      var options = {
-        width: 800,
-        height: 400
-      };
-
-      var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-      chart.draw(data, options);
-    }
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
   </script>
   </head>
   <body>
@@ -178,8 +173,8 @@ echo $OUTPUT->header ();
        <div class="content1">
      <div id="table_div1"></div>
        <br>
-        <h3><font color="white">Grafica</font></h3>
-      <div id="linechart_material"></div>
+        <h3><font color="white">Grafica</font></h3>   
+  		<div id="chart_div"></div>
       </div>
    </div>
    <div class="tab">
@@ -188,7 +183,7 @@ echo $OUTPUT->header ();
        <div class="content1"> 
      <div id="table_div2"></div>
      <br> <h3><font color="white">Grafica</font></h3>
-     <div id="linechart_material"></div>
+     <div id="chart_div"></div>
      </div>
    </div>
    <div class="tab">
@@ -197,7 +192,7 @@ echo $OUTPUT->header ();
        <div class="content1"> 
      <div id="table_div3"></div>
        <br>  <h3><font color="white">Grafica</font></h3></div>
- 		<div id="linechart_material"></div>
+ 		<div id="chart_div"></div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-4" name="tab-group-1">
@@ -205,8 +200,8 @@ echo $OUTPUT->header ();
        <div class="content1">   
      <div id="table_div4"></div><br>
       <h3><font color="white">Grafica</font></h3>
-      <div id="linechart_material"></div>
-   </div>
+      <div id="chart_div"></div>
+   </div>	
    </div>
  
 	
