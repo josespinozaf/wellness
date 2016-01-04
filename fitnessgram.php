@@ -1,8 +1,42 @@
 <?php
+global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
-
+include 
 redirect_if_major_upgrade_required();
+
+// **Conectando a la base de datos**
+include ("connect.php");
+
+//** USUARIO
+$userid= $USER->id;
+$usermail= $USER->email;
+// **Peticion al SQL**
+
+$result = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+
+$result2 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+
+$result3 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+
+$result4 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+
+// **Mostrando los resultados
+//  while ($row = mysql_fetch_array($result)) {
+ 	
+//  }
 
 $edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
 $reset  = optional_param('reset', null, PARAM_BOOL);
@@ -70,18 +104,17 @@ echo $OUTPUT->header ();
           data.addColumn('string', 'IMC');
           data.addColumn('string', 'Suma MM');
           data.addColumn('string', '% Grasa');
-          data.addRows([
-            ['2015','29','69','20','100','19'],
-            ['2015','29','69','20','100','19'],
-            ['2015','29','69','20','100','19']
+          <?php while ($row = mysql_fetch_array($result)) { ?>
+             data.addRows([
+           ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
             ]);
-
+<?php }?>
         var table = new google.visualization.Table(document.getElementById('table_div1'));
 
         table.draw(data, {showRowNumber: false, width: '80%', height: '80%'});
       }
     </script>
-  
+    
     <script type="text/javascript">
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
@@ -90,10 +123,11 @@ echo $OUTPUT->header ();
           data.addColumn('string', 'Año');
           data.addColumn('string', 'Abd');
           data.addColumn('string', 'Push Up');
+          <?php while ($row = mysql_fetch_array($result2)) { ?>
           data.addRows([
-            ['2015','29','69'],
-            ['2015','29','69'],
-            ]);
+        ['<?php echo $row['Ano']?>','<?php echo $row['Abd']?>','<?php echo $row['Push Up']?>'],
+         ]);
+          <?php }?>
         var table = new google.visualization.Table(document.getElementById('table_div2'));
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
@@ -107,12 +141,11 @@ echo $OUTPUT->header ();
           data.addColumn('string', 'Sit&Reach-D');
           data.addColumn('string', 'Sit&Reach-I');
           data.addColumn('string', 'Trunk Lift');
+          <?php while ($row = mysql_fetch_array($result3)) { ?>
           data.addRows([
-            ['2015','29','69','20'],
-            ['2015','29','69','20'],
-            ['2015','29','69','20']
+        ['<?php echo $row['Ano']?>','<?php echo $row['Sit&reach-D']?>','<?php echo $row['Sit&reach-IZ']?>','<?php echo $row['Trunk Lift']?>'],
             ]);
-
+          <?php }?>
         var table = new google.visualization.Table(document.getElementById('table_div3'));
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
@@ -125,15 +158,15 @@ echo $OUTPUT->header ();
           data.addColumn('string', 'Año');
           data.addColumn('string', 'Pacer');
           data.addColumn('string', 'Vo2 Max');
+          <?php while ($row = mysql_fetch_array($result4)) { ?>
           data.addRows([
-            ['2015','29','69'],
-            ['2015','29','69'],
-            ['2015','29','69']
-            ]);
-        var table = new google.visualization.Table(document.getElementById('table_div4'));
-        table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
-      }
-    </script>
+                        ['<?php echo $row['Ano']?>','<?php echo $row['Nivel']?>','<?php echo $row['Vo2 max']?>'],
+                            ]);
+                          <?php }?>
+                        var table = new google.visualization.Table(document.getElementById('table_div4'));
+                        table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
+                      }
+    </script> 
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
   google.load('visualization', '1', {packages: ['corechart', 'line']});
