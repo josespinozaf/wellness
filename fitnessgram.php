@@ -32,6 +32,16 @@ $result4 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
+	
+$result5 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+	if (!$result) {
+		die("Error en la peticion SQL: " . mysql_error());
+	}
+	
+$result6 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+		if (!$result) {
+			die("Error en la peticion SQL: " . mysql_error());
+}
 
 // **Mostrando los resultados
 //  while ($row = mysql_fetch_array($result)) {
@@ -167,38 +177,295 @@ echo $OUTPUT->header ();
                         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
                       }
     </script> 
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript">
-  google.load('visualization', '1', {packages: ['corechart', 'line']});
-  google.setOnLoadCallback(drawBackgroundColor);
+  <?php
+$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+mysql_select_db("moodle", $con); 
+// The Chart table contains two fields: weekly_task and percentage
+// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 
-  function drawBackgroundColor() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'X');
-        data.addColumn('number', 'Dogs');
+$rows = array();
+//flag is not needed
+$flag = true;
+$table = array();
+$table['cols'] = array(
 
-        data.addRows([
-          [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
-          [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-          [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48]
-        ]);
+    // Labels for your chart, these represent the column titles
+    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
+    array('label' => 'Año', 'type' => 'string'),
+    array('label' => 'Peso', 'type' => 'number'),
+	array('label' => 'IMC', 'type' => 'number'),
+	array('label' => 'Talla', 'type' => 'number'),
+	array('label' => '%Grasa', 'type' => 'number')
 
-        var options = {
-          hAxis: {
-            title: 'Time'
-          },
-          vAxis: {
-            title: 'Popularity'
-          },
-          backgroundColor: '#f1f8e9'
+);
+
+$rows = array();
+while($r = mysql_fetch_assoc($sth)) {
+    $temp = array();
+    // the following line will be used to slice the Pie chart
+    $temp[] = array('v' => (string) $r['Ano']); 
+
+    // Values of each slice
+    $temp[] = array('v' => (doubleval($r['Peso'])) ); 
+    $temp[] = array('v' => (float) (trim($r['IMC'])) );
+    $temp[] = array('v' => (float) (trim($r['Talla'])) );
+    $temp[] = array('v' => (float) (trim($r['%Grasa'])) );
+    $rows[] = array('c' => $temp);
+  
+}
+
+$table['rows'] = $rows;
+$jsonTable1 = json_encode($table);
+//echo $jsonTable;
+?>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    
+
+    function drawChart() {
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(<?=$jsonTable1?>);
+      var options = {
+           title: 'Año a Año',
+          is3D: 'true',
+          width: 800,
+          height: 230,
+          
         };
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      var formatter = new google.visualization.NumberFormat(
+      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+     formatter.format(data, 1); 
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+     chart.draw(data, options);
+    }
+    google.setOnLoadCallback(drawChart);
+    </script>
+    
+     <?php
+$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+mysql_select_db("moodle", $con); 
+// The Chart table contains two fields: weekly_task and percentage
+// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-  </script>
+$rows = array();
+//flag is not needed
+$flag = true;
+$table = array();
+$table['cols'] = array(
+
+    // Labels for your chart, these represent the column titles
+    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
+    array('label' => 'Año', 'type' => 'string'),
+    array('label' => 'Abdominales', 'type' => 'number'),
+	array('label' => 'Push Up', 'type' => 'number')
+);
+
+$rows = array();
+while($r = mysql_fetch_assoc($sth)) {
+	$temp = array();
+	// the following line will be used to slice the Pie chart
+	$temp[] = array('v' => (string) $r['Ano']);
+
+	// Values of each slice
+	$temp[] = array('v' => (doubleval($r['Abd'])) );
+	$temp[] = array('v' => (float) (trim($r['Push Up'])) );
+	$rows[] = array('c' => $temp);
+}
+
+
+$table['rows'] = $rows;
+$jsonTable2 = json_encode($table);
+//echo $jsonTable;
+?>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    
+
+    function drawChart() {
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(<?=$jsonTable2?>);
+      var options = {
+           title: 'Año a Año',
+          is3D: 'true',
+          width: 800,
+          height: 230,
+          
+        };
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      var formatter = new google.visualization.NumberFormat(
+      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+     formatter.format(data, 1); 
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+     chart.draw(data, options);
+    }
+    google.setOnLoadCallback(drawChart);
+    </script>
+    
+    <?php
+$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+mysql_select_db("moodle", $con); 
+// The Chart table contains two fields: weekly_task and percentage
+// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+
+$rows = array();
+//flag is not needed
+$flag = true;
+$table = array();
+$table['cols'] = array(
+
+    // Labels for your chart, these represent the column titles
+    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
+    array('label' => 'Año', 'type' => 'string'),
+    array('label' => 'SRDer', 'type' => 'number'),
+	array('label' => 'SRIzq', 'type' => 'number'),
+	array('label' => 'TrunkLift', 'type' => 'number')
+
+);
+
+$rows = array();
+while($r = mysql_fetch_assoc($sth)) {
+    $temp = array();
+    // the following line will be used to slice the Pie chart
+    $temp[] = array('v' => (string) $r['Ano']); 
+
+    // Values of each slice
+    $temp[] = array('v' => (doubleval($r['Sit&reach-D'])) ); 
+    $temp[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
+    $temp[] = array('v' => (float) (trim($r['Trunk Lift'])) );
+    $rows[] = array('c' => $temp);
+}
+
+$table['rows'] = $rows;
+$jsonTable3 = json_encode($table);
+//echo $jsonTable;
+?>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    
+
+    function drawChart() {
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(<?=$jsonTable3?>);
+      var options = {
+           title: 'Año a Año',
+          is3D: 'true',
+          width: 800,
+          height: 230,
+          
+        };
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      var formatter = new google.visualization.NumberFormat(
+      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+     formatter.format(data, 1); 
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
+     chart.draw(data, options);
+    }
+    google.setOnLoadCallback(drawChart);
+    </script>
+    
+     <?php
+$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+mysql_select_db("moodle", $con); 
+// The Chart table contains two fields: weekly_task and percentage
+// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+
+$rows = array();
+//flag is not needed
+$flag = true;
+$table = array();
+$table['cols'] = array(
+
+    // Labels for your chart, these represent the column titles
+    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
+    array('label' => 'Año', 'type' => 'string'),
+    array('label' => 'Nivel', 'type' => 'number'),
+	array('label' => 'Vo2 Max', 'type' => 'number')
+);
+
+$rows = array();
+
+while($r = mysql_fetch_assoc($sth)) {
+	$temp = array();
+	// the following line will be used to slice the Pie chart
+	$temp[] = array('v' => (string) $r['Ano']);
+
+	// Values of each slice
+	$temp[] = array('v' => (doubleval($r['Nivel'])) );
+	$temp[] = array('v' => (float) (trim($r['Vo2 max'])) );
+	$rows[] = array('c' => $temp);
+
+}
+
+$table['rows'] = $rows;
+$jsonTable4 = json_encode($table);
+//echo $jsonTable;
+?>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    
+
+    function drawChart() {
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(<?=$jsonTable4?>);
+      var options = {
+           title: 'Año a Año',
+          is3D: 'true',
+          width: 800,
+          height: 230,
+          
+        };
+      // Instantiate and draw our chart, passing in some options.
+      // Do not forget to check your div ID
+      var formatter = new google.visualization.NumberFormat(
+      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+     formatter.format(data, 1); 
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div4'));
+     chart.draw(data, options);
+    }
+    google.setOnLoadCallback(drawChart);
+    </script>
+    
   </head>
   <body>
+
   <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
@@ -216,7 +483,7 @@ echo $OUTPUT->header ();
        <div class="content1"> 
      <div id="table_div2"></div>
      <br> <h3><font color="white">Grafica</font></h3>
-     <div id="chart_div"></div>
+     <div id="chart_div2"></div>
      </div>
    </div>
    <div class="tab">
@@ -224,8 +491,9 @@ echo $OUTPUT->header ();
        <label for="tab-3">Flexibilidad</label>
        <div class="content1"> 
      <div id="table_div3"></div>
-       <br>  <h3><font color="white">Grafica</font></h3></div>
- 		<div id="chart_div"></div>
+       <br>  <h3><font color="white">Grafica</font></h3>
+ 		<div id="chart_div3"></div>
+   </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-4" name="tab-group-1">
@@ -233,11 +501,9 @@ echo $OUTPUT->header ();
        <div class="content1">   
      <div id="table_div4"></div><br>
       <h3><font color="white">Grafica</font></h3>
-      <div id="chart_div"></div>
+      <div id="chart_div4"></div>
    </div>	
    </div>
- 
-	
 </div>
 
    
