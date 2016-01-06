@@ -2,7 +2,7 @@
 global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
-include 
+
 redirect_if_major_upgrade_required();
 
 // **Conectando a la base de datos**
