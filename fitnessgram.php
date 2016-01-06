@@ -115,9 +115,9 @@ echo $OUTPUT->header ();
           data.addColumn('string', 'Suma MM');
           data.addColumn('string', '% Grasa');
           <?php while ($row = mysql_fetch_array($result)) { ?>
-             data.addRows([
-           ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
-            ]);
+          data.addRows([
+          ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
+          ]);
 <?php }?>
         var table = new google.visualization.Table(document.getElementById('table_div1'));
 
@@ -125,7 +125,7 @@ echo $OUTPUT->header ();
       }
     </script>
     
-    <script type="text/javascript">
+  	<script type="text/javascript">
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
       function drawTable() {
@@ -159,8 +159,8 @@ echo $OUTPUT->header ();
         var table = new google.visualization.Table(document.getElementById('table_div3'));
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
-    </script>   
-    <script type="text/javascript">
+    </script>
+  	<script type="text/javascript">
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
       function drawTable() {
@@ -252,41 +252,40 @@ $jsonTable1 = json_encode($table);
     </script>
     
      <?php
-$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-mysql_select_db("moodle", $con); 
-// The Chart table contains two fields: weekly_task and percentage
-// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
-$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-
-$rows = array();
-//flag is not needed
-$flag = true;
-$table = array();
-$table['cols'] = array(
+	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+	mysql_select_db("moodle", $con); 
+	// The Chart table contains two fields: weekly_task and percentage
+	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+	
+	$rows = array();
+	//flag is not needed
+	$flag = true;
+	$table = array();
+	$table['cols'] = array(
 
     // Labels for your chart, these represent the column titles
     // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
     array('label' => 'Año', 'type' => 'string'),
     array('label' => 'Abdominales', 'type' => 'number'),
 	array('label' => 'Push Up', 'type' => 'number')
-);
+	);
 
-$rows = array();
-while($r = mysql_fetch_assoc($sth)) {
-	$temp = array();
-	// the following line will be used to slice the Pie chart
-	$temp[] = array('v' => (string) $r['Ano']);
+	$rows = array();
+	while($r = mysql_fetch_assoc($sth)) {
+		$temp = array();
+		// the following line will be used to slice the Pie chart
+		$temp[] = array('v' => (string) $r['Ano']);
+	
+		// Values of each slice
+		$temp[] = array('v' => (doubleval($r['Abd'])) );
+		$temp[] = array('v' => (float) (trim($r['Push Up'])) );
+		$rows[] = array('c' => $temp);
+	}
 
-	// Values of each slice
-	$temp[] = array('v' => (doubleval($r['Abd'])) );
-	$temp[] = array('v' => (float) (trim($r['Push Up'])) );
-	$rows[] = array('c' => $temp);
-}
 
-
-$table['rows'] = $rows;
-$jsonTable2 = json_encode($table);
-//echo $jsonTable;
+	$table['rows'] = $rows;
+	$jsonTable2 = json_encode($table);
 ?>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -321,17 +320,17 @@ $jsonTable2 = json_encode($table);
     </script>
     
     <?php
-$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-mysql_select_db("moodle", $con); 
-// The Chart table contains two fields: weekly_task and percentage
-// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
-$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-
-$rows = array();
-//flag is not needed
-$flag = true;
-$table = array();
-$table['cols'] = array(
+	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+	mysql_select_db("moodle", $con); 
+	// The Chart table contains two fields: weekly_task and percentage
+	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+	
+	$rows = array();
+	//flag is not needed
+	$flag = true;
+	$table = array();
+	$table['cols'] = array(
 
     // Labels for your chart, these represent the column titles
     // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
@@ -340,24 +339,23 @@ $table['cols'] = array(
 	array('label' => 'SRIzq', 'type' => 'number'),
 	array('label' => 'TrunkLift', 'type' => 'number')
 
-);
+	);
 
-$rows = array();
-while($r = mysql_fetch_assoc($sth)) {
-    $temp = array();
-    // the following line will be used to slice the Pie chart
-    $temp[] = array('v' => (string) $r['Ano']); 
+	$rows = array();
+	while($r = mysql_fetch_assoc($sth)) {
+	    $temp = array();
+	    // the following line will be used to slice the Pie chart
+	    $temp[] = array('v' => (string) $r['Ano']); 
+	
+	    // Values of each slice
+	    $temp[] = array('v' => (doubleval($r['Sit&reach-D'])) ); 
+	    $temp[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
+	    $temp[] = array('v' => (float) (trim($r['Trunk Lift'])) );
+	    $rows[] = array('c' => $temp);
+	}
 
-    // Values of each slice
-    $temp[] = array('v' => (doubleval($r['Sit&reach-D'])) ); 
-    $temp[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
-    $temp[] = array('v' => (float) (trim($r['Trunk Lift'])) );
-    $rows[] = array('c' => $temp);
-}
-
-$table['rows'] = $rows;
-$jsonTable3 = json_encode($table);
-//echo $jsonTable;
+	$table['rows'] = $rows;
+	$jsonTable3 = json_encode($table)
 ?>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -393,42 +391,41 @@ $jsonTable3 = json_encode($table);
     </script>
     
      <?php
-$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-mysql_select_db("moodle", $con); 
-// The Chart table contains two fields: weekly_task and percentage
-// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
-$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-
-$rows = array();
-//flag is not needed
-$flag = true;
-$table = array();
-$table['cols'] = array(
+	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
+	mysql_select_db("moodle", $con); 
+	// The Chart table contains two fields: weekly_task and percentage
+	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
+	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+	
+	$rows = array();
+	//flag is not needed
+	$flag = true;
+	$table = array();
+	$table['cols'] = array(
 
     // Labels for your chart, these represent the column titles
     // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
     array('label' => 'Año', 'type' => 'string'),
     array('label' => 'Nivel', 'type' => 'number'),
 	array('label' => 'Vo2 Max', 'type' => 'number')
-);
+	);
 
-$rows = array();
+	$rows = array();
 
-while($r = mysql_fetch_assoc($sth)) {
-	$temp = array();
-	// the following line will be used to slice the Pie chart
-	$temp[] = array('v' => (string) $r['Ano']);
+	while($r = mysql_fetch_assoc($sth)) {
+		$temp = array();
+		// the following line will be used to slice the Pie chart
+		$temp[] = array('v' => (string) $r['Ano']);
+	
+		// Values of each slice
+		$temp[] = array('v' => (doubleval($r['Nivel'])) );
+		$temp[] = array('v' => (float) (trim($r['Vo2 max'])) );
+		$rows[] = array('c' => $temp);
 
-	// Values of each slice
-	$temp[] = array('v' => (doubleval($r['Nivel'])) );
-	$temp[] = array('v' => (float) (trim($r['Vo2 max'])) );
-	$rows[] = array('c' => $temp);
+	}
 
-}
-
-$table['rows'] = $rows;
-$jsonTable4 = json_encode($table);
-//echo $jsonTable;
+	$table['rows'] = $rows;
+	$jsonTable4 = json_encode($table);
 ?>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -465,7 +462,6 @@ $jsonTable4 = json_encode($table);
     
   </head>
   <body>
-
   <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
@@ -504,12 +500,9 @@ $jsonTable4 = json_encode($table);
       <div id="chart_div4"></div>
    </div>	
    </div>
-</div>
-
-   
-  </body>
+</div>   
+ </body>
 </html>
 <?php
-
 echo $OUTPUT->footer();
 ?> 
