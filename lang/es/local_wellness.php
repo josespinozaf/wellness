@@ -1,0 +1,3 @@
+<?php
+$string['titleasistencias']  = 'Asistencias';
+?>

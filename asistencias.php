@@ -1,4 +1,5 @@
 <?php
+global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
 
@@ -6,6 +7,39 @@ redirect_if_major_upgrade_required();
 
 $edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
 $reset  = optional_param('reset', null, PARAM_BOOL);
+
+// **Conectando a la base de datos**
+include ("connect.php");
+
+//** Query SQL
+$userid= $USER->id;
+$usermail= $USER->email;
+if(isset($_POST['sem2']) && !empty($_POST['sem2']) && $_POST['sem2']==1){
+$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/2'", $db);
+
+}
+else if(isset($_POST['sem3']) && !empty($_POST['sem3']) && $_POST['sem3']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2013/1'", $db);
+}
+else if(isset($_POST['sem4']) && !empty($_POST['sem4']) && $_POST['sem4']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2013/2'", $db);
+}
+else if(isset($_POST['sem5']) && !empty($_POST['sem5']) && $_POST['sem5']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2014/1'", $db);
+}
+else if(isset($_POST['sem6']) && !empty($_POST['sem6']) && $_POST['sem6']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2014/2'", $db);
+}
+else if(isset($_POST['sem7']) && !empty($_POST['sem7']) && $_POST['sem7']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2015/1'", $db);
+}
+else if(isset($_POST['sem8']) && !empty($_POST['sem8']) && $_POST['sem8']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2015/2'", $db);
+}
+else {
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
+}
+
 
 require_login();
 
@@ -65,19 +99,21 @@ echo $OUTPUT->header ();
 
       function drawTable() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('number', 'Salary');
-        data.addColumn('boolean', 'Full Time Employee');
+        data.addColumn('string', 'Periodo');
+        data.addColumn('string', 'Fecha');
+        data.addColumn('string', 'Hora Inicio');
+        data.addColumn('string', 'Hora Termino');
+        data.addColumn('string', 'Actividad');
+        data.addColumn('string', 'Asistencia');
+        <?php while ($row = mysql_fetch_array($result)) { ?>
         data.addRows([
-          ['Mike',  {v: 10000, f: '$10,000'}, true],
-          ['Jim',   {v:8000,   f: '$8,000'},  false],
-          ['Alice', {v: 12500, f: '$12,500'}, true],
-          ['Bob',   {v: 7000,  f: '$7,000'},  true]
-        ]);
+      ['<?php echo $row['Periodo']?>','<?php echo $row['Fecha']?>','<?php echo $row['HoraInicio']?>','<?php echo $row['HoraTermino']?>','<?php echo $row['Actividad']?>','<?php echo $row['Asistencia']?>'],
+       ]);
+<?php }?>
 
         var table = new google.visualization.Table(document.getElementById('table_div'));
 
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+        table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
       }
       </script>
     <script type="text/javascript">
@@ -131,12 +167,151 @@ echo $OUTPUT->header ();
     chart.draw(data, options);
   }
     </script>
+    </head>
+<body>
+
+
 </head>
+<body>
+
+<?php if(isset($_POST['sem2']) && !empty($_POST['sem2']) && $_POST['sem2']==1){
+$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/2'", $db);
+$asistenciasperiodo = 0;
+while ($row = mysql_fetch_array($result)) {
+	if ($row['Asistencia'] == '1'){
+		$asistenciasperiodo = $asistenciasperiodo + 1;
+	}
+	else if ($row['Asistencia'] == '0,5'){
+		$asistenciasperiodo = $asistenciasperiodo + 0.5;
+	}
+	else if ($row['Asistencia'] == '-1'){
+		$asistenciasperiodo = $asistenciasperiodo - 1;
+	}
+}
+echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";
+}
+else if(isset($_POST['sem3']) && !empty($_POST['sem3']) && $_POST['sem3']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2013/1'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else if(isset($_POST['sem4']) && !empty($_POST['sem4']) && $_POST['sem4']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2013/2'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else if(isset($_POST['sem5']) && !empty($_POST['sem5']) && $_POST['sem5']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2014/1'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else if(isset($_POST['sem6']) && !empty($_POST['sem6']) && $_POST['sem6']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2014/2'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else if(isset($_POST['sem7']) && !empty($_POST['sem7']) && $_POST['sem7']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2015/1'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else if(isset($_POST['sem8']) && !empty($_POST['sem8']) && $_POST['sem8']==1){
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2015/2'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+else {
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
+$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";}
+		 ?>
+		
 <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1">Registro</label>
        <div class="content1">
+<form name="Email Header" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<button type="submit" name="sem1" id="sem1" class="button" value="1">1er Semestre</button>
+<button type="submit" name="sem2" id="sem2" class="button" value="1">2do Semestre</button>
+<button type="submit" name="sem3" id="sem3" class="button" value="1">3er Semestre</button>
+<button type="submit" name="sem4" id="sem4" class="button" value="1">4to Semestre</button>
+<button type="submit" name="sem5" id="sem5" class="button" value="1">5to Semestre</button>
+<button type="submit" name="sem6" id="sem6" class="button" value="1">6to Semestre</button>
+<button type="submit" name="sem7" id="sem7" class="button" value="1">7mo Semestre</button>
+<button type="submit" name="sem8" id="sem8" class="button" value="1">8vo Semestre</button>
+
         <div id="table_div"></div>
         </div>
    </div>
@@ -156,9 +331,10 @@ echo $OUTPUT->header ();
    </div>
    
 </div>
+
+</body>
 </html>
 
-<?php
-
+<?php                        
 echo $OUTPUT->footer();
 ?>
