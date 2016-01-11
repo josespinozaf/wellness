@@ -54,6 +54,7 @@ $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title('Fitnessgram');
 $PAGE->set_heading($header);
+$PAGE->navbar->add(get_string('navfitnessgram','local_wellness'), new moodle_url('/local/wellness/fitnessgram.php'));
 
 echo $OUTPUT->header ();
 ?>

@@ -86,6 +86,7 @@ $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title(get_string('titleasistencias','local_wellness'));
 $PAGE->set_heading($header);
+$PAGE->navbar->add(get_string('navasistencias','local_wellness'), new moodle_url('/local/wellness/asistencias.php'));
 
 echo $OUTPUT->header ();
 ?>

@@ -52,6 +52,7 @@ $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title('Rutinas');
 $PAGE->set_heading($header);
+$PAGE->navbar->add(get_string('navrutinas','local_wellness'), new moodle_url('/local/wellness/rutinas.php'));
 
 echo $OUTPUT->header ();
 //echo $OUTPUT->custom_block_region('content');
