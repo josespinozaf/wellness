@@ -303,14 +303,14 @@ $asistenciasperiodo = 0;
        <label for="tab-1">Registro</label>
        <div class="content1">
 <form name="Email Header" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-<button type="submit" name="sem1" id="sem1" class="button" value="1">1er Semestre</button>
-<button type="submit" name="sem2" id="sem2" class="button" value="1">2do Semestre</button>
-<button type="submit" name="sem3" id="sem3" class="button" value="1">3er Semestre</button>
-<button type="submit" name="sem4" id="sem4" class="button" value="1">4to Semestre</button>
-<button type="submit" name="sem5" id="sem5" class="button" value="1">5to Semestre</button>
-<button type="submit" name="sem6" id="sem6" class="button" value="1">6to Semestre</button>
-<button type="submit" name="sem7" id="sem7" class="button" value="1">7mo Semestre</button>
-<button type="submit" name="sem8" id="sem8" class="button" value="1">8vo Semestre</button>
+<!-- <button type="submit" name="sem1" id="sem1" class="button" value="1">1er Semestre</button> -->
+<!-- <button type="submit" name="sem2" id="sem2" class="button" value="1">2do Semestre</button> -->
+<!-- <button type="submit" name="sem3" id="sem3" class="button" value="1">3er Semestre</button> -->
+<!-- <button type="submit" name="sem4" id="sem4" class="button" value="1">4to Semestre</button> -->
+<!-- <button type="submit" name="sem5" id="sem5" class="button" value="1">5to Semestre</button> -->
+<!-- <button type="submit" name="sem6" id="sem6" class="button" value="1">6to Semestre</button> -->
+<!-- <button type="submit" name="sem7" id="sem7" class="button" value="1">7mo Semestre</button> -->
+<!-- <button type="submit" name="sem8" id="sem8" class="button" value="1">8vo Semestre</button> -->
 
         <div id="table_div"></div>
         </div>
