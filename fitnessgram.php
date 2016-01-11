@@ -64,7 +64,7 @@ echo $OUTPUT->header ();
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
    
   <?php
-  include ("functions.php");
+  require_once("functions.php");
 $con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
 mysql_select_db("moodle", $con); 
 // The Chart table contains two fields: weekly_task and percentage
@@ -117,7 +117,6 @@ $jsonTable1 = json_encode($table);
     
 
     function drawChart() {
-
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(<?=$jsonTable1?>);
       var options = {
@@ -125,7 +124,6 @@ $jsonTable1 = json_encode($table);
           is3D: 'true',
           width: 800,
           height: 230,
-          
         };
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
@@ -141,18 +139,13 @@ $jsonTable1 = json_encode($table);
      <?php
 	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
 	mysql_select_db("moodle", $con); 
-	// The Chart table contains two fields: weekly_task and percentage
-	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
 	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
-	//flag is not needed
 	$flag = true;
 	$table = array();
 	$table['cols'] = array(
 
-    // Labels for your chart, these represent the column titles
-    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
     array('label' => 'Año', 'type' => 'string'),
     array('label' => 'Abdominales', 'type' => 'number'),
 	array('label' => 'Push Up', 'type' => 'number')
@@ -161,10 +154,8 @@ $jsonTable1 = json_encode($table);
 	$rows = array();
 	while($r = mysql_fetch_assoc($sth)) {
 		$temp = array();
-		// the following line will be used to slice the Pie chart
 		$temp[] = array('v' => (string) $r['Ano']);
 	
-		// Values of each slice
 		$temp[] = array('v' => (doubleval($r['Abd'])) );
 		$temp[] = array('v' => (float) (trim($r['Push Up'])) );
 		$rows[] = array('c' => $temp);
@@ -178,15 +169,11 @@ $jsonTable1 = json_encode($table);
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript">
 
-    // Load the Visualization API and the piechart package.
-    google.load('visualization', '1', {'packages':['corechart']});
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    
+    google.load('visualization', '1', {'packages':['corechart']});
 
     function drawChart() {
 
-      // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(<?=$jsonTable2?>);
       var options = {
            title: 'Año a Año',
@@ -195,8 +182,7 @@ $jsonTable1 = json_encode($table);
           height: 230,
           
         };
-      // Instantiate and draw our chart, passing in some options.
-      // Do not forget to check your div ID
+
       var formatter = new google.visualization.NumberFormat(
       {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
      formatter.format(data, 1); 
@@ -209,19 +195,14 @@ $jsonTable1 = json_encode($table);
     <?php
 	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
 	mysql_select_db("moodle", $con); 
-	// The Chart table contains two fields: weekly_task and percentage
-	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
 	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
-	//flag is not needed
 	$flag = true;
 	$table = array();
 	$table['cols'] = array(
 
-    // Labels for your chart, these represent the column titles
-    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
-    array('label' => 'Año', 'type' => 'string'),
+	array('label' => 'Año', 'type' => 'string'),
     array('label' => 'SRDer', 'type' => 'number'),
 	array('label' => 'SRIzq', 'type' => 'number'),
 	array('label' => 'TrunkLift', 'type' => 'number')
@@ -231,10 +212,8 @@ $jsonTable1 = json_encode($table);
 	$rows = array();
 	while($r = mysql_fetch_assoc($sth)) {
 	    $temp = array();
-	    // the following line will be used to slice the Pie chart
 	    $temp[] = array('v' => (string) $r['Ano']); 
-	
-	    // Values of each slice
+
 	    $temp[] = array('v' => (doubleval($r['Sit&reach-D'])) ); 
 	    $temp[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
 	    $temp[] = array('v' => (float) (trim($r['Trunk Lift'])) );
@@ -249,15 +228,10 @@ $jsonTable1 = json_encode($table);
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript">
 
-    // Load the Visualization API and the piechart package.
     google.load('visualization', '1', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
-    
 
     function drawChart() {
 
-      // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(<?=$jsonTable3?>);
       var options = {
            title: 'Año a Año',
@@ -266,8 +240,6 @@ $jsonTable1 = json_encode($table);
           height: 230,
           
         };
-      // Instantiate and draw our chart, passing in some options.
-      // Do not forget to check your div ID
       var formatter = new google.visualization.NumberFormat(
       {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
      formatter.format(data, 1); 
@@ -280,8 +252,6 @@ $jsonTable1 = json_encode($table);
      <?php
 	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
 	mysql_select_db("moodle", $con); 
-	// The Chart table contains two fields: weekly_task and percentage
-	// This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
 	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
@@ -290,8 +260,6 @@ $jsonTable1 = json_encode($table);
 	$table = array();
 	$table['cols'] = array(
 
-    // Labels for your chart, these represent the column titles
-    // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
     array('label' => 'Año', 'type' => 'string'),
     array('label' => 'Nivel', 'type' => 'number'),
 	array('label' => 'Vo2 Max', 'type' => 'number')
@@ -301,10 +269,8 @@ $jsonTable1 = json_encode($table);
 
 	while($r = mysql_fetch_assoc($sth)) {
 		$temp = array();
-		// the following line will be used to slice the Pie chart
 		$temp[] = array('v' => (string) $r['Ano']);
 	
-		// Values of each slice
 		$temp[] = array('v' => (doubleval($r['Nivel'])) );
 		$temp[] = array('v' => (float) (trim($r['Vo2 max'])) );
 		$rows[] = array('c' => $temp);
@@ -319,15 +285,11 @@ $jsonTable1 = json_encode($table);
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript">
 
-    // Load the Visualization API and the piechart package.
     google.load('visualization', '1', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
     
 
     function drawChart() {
 
-      // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(<?=$jsonTable4?>);
       var options = {
            title: 'Año a Año',
@@ -336,8 +298,6 @@ $jsonTable1 = json_encode($table);
           height: 230,
           
         };
-      // Instantiate and draw our chart, passing in some options.
-      // Do not forget to check your div ID
       var formatter = new google.visualization.NumberFormat(
       {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
      formatter.format(data, 1); 
@@ -347,8 +307,8 @@ $jsonTable1 = json_encode($table);
     google.setOnLoadCallback(drawChart);
     </script>
     
-  </head>
-  <body>
+</head>
+<body>
   <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>

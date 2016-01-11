@@ -1,14 +1,14 @@
 <html>
 <head>
 <?php
-
+//**Conexión base de datos**// 
 include ("connect.php");
-
-//** USUARIO
+//** USUARIO**//
 $userid= $USER->id;
 $usermail= $USER->email;
-// **Peticion al SQL**
 
+
+// **Peticion al SQL**//
 $result = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
@@ -28,38 +28,34 @@ $result4 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-	
-$result5 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
-	if (!$result) {
-		die("Error en la peticion SQL: " . mysql_error());
-	}
-	
-$result6 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
-		if (!$result) {
-		die("Error en la peticion SQL: " . mysql_error());
-}?>
+?>
+
+
+<!-- Tabla de antropometria -->
 <script type="text/javascript" >
-	google.load("visualization", "1.1", {packages:["table"]});
-	google.setOnLoadCallback(drawTable);
-	function drawTable() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Año');
-		data.addColumn('string', 'Talla');
-		data.addColumn('string', 'Peso');
-		data.addColumn('string', 'IMC');
-		data.addColumn('string', 'Suma MM');
-		data.addColumn('string', '% Grasa');
-	          <?php while ($row = mysql_fetch_array($result)) { ?>
-	          data.addRows([
-	          ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
-	          ]);
-	<?php }?>
-	        var table = new google.visualization.Table(document.getElementById('table_div1'));
-	
-	        table.draw(data, {showRowNumber: false, width: '80%', height: '80%'});
-	      }
+		google.load("visualization", "1.1", {packages:["table"]});
+		google.setOnLoadCallback(drawTable);
+		function drawTable() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Año');
+			data.addColumn('string', 'Talla');
+			data.addColumn('string', 'Peso');
+			data.addColumn('string', 'IMC');
+			data.addColumn('string', 'Suma MM');
+			data.addColumn('string', '% Grasa');
+		          <?php
+		          while ($row = mysql_fetch_array($result)) { ?>
+		          data.addRows([
+		          ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
+		          ]);
+		<?php }?>
+		        var table = new google.visualization.Table(document.getElementById('table_div1'));
+		
+		        table.draw(data, {showRowNumber: false, width: '80%', height: '80%'});
+		      }
 </script>
-	<script type="text/javascript" >
+<!-- Tabla de Fuerza	 -->
+<script type="text/javascript" >
 
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
@@ -76,11 +72,9 @@ $result6 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
         var table = new google.visualization.Table(document.getElementById('table_div2'));
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
-
-    </script>
-    
-    <script type="text/javascript" >
-
+</script>
+<!-- Tabla de Flexivilidad      -->
+<script type="text/javascript" >
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
       function drawTable() {
@@ -97,9 +91,9 @@ $result6 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
         var table = new google.visualization.Table(document.getElementById('table_div3'));
         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
       }
-    
-    </script>
-    <script type="text/javascript" >
+</script>
+<!-- Tabla de Resistencia -->
+<script type="text/javascript" >
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
       function drawTable() {
@@ -114,15 +108,17 @@ $result6 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
                           <?php }?>
                         var table = new google.visualization.Table(document.getElementById('table_div4'));
                         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
-                      }   
-      </script> 
-    
+          }   
+</script>
+<!-- Tabla de Asistencia -->
+                          
+<!-- Grafica Antropometria-->
+                          
+<!-- Grafica Fuerza-->
 	
+<!-- Grafica Flexivilidad-->	
 	
-	
-	
-	
-
+<!-- Grafica Resistencia-->
+                          
 </head>
-
 </html>
