@@ -65,15 +65,11 @@ echo $OUTPUT->header ();
    
   <?php
   require_once("functions.php");
-$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-mysql_select_db("moodle", $con); 
 // The Chart table contains two fields: weekly_task and percentage
 // This example will display a pie chart. If you need other charts such as a Bar chart, you will need to modify the code a little to make it work with bar chart and other charts
 $sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 
 $rows = array();
-//flag is not needed
-$flag = true;
 $table = array();
 $table['cols'] = array(
 
@@ -104,7 +100,7 @@ while($r = mysql_fetch_assoc($sth)) {
 
 $table['rows'] = $rows;
 $jsonTable1 = json_encode($table);
-//echo $jsonTable;
+
 ?>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -137,12 +133,9 @@ $jsonTable1 = json_encode($table);
     </script>
     
      <?php
-	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-	mysql_select_db("moodle", $con); 
-	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+	$sql = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
-	$flag = true;
 	$table = array();
 	$table['cols'] = array(
 
@@ -152,7 +145,7 @@ $jsonTable1 = json_encode($table);
 	);
 
 	$rows = array();
-	while($r = mysql_fetch_assoc($sth)) {
+	while($r = mysql_fetch_assoc($sql)) {
 		$temp = array();
 		$temp[] = array('v' => (string) $r['Ano']);
 	
@@ -193,12 +186,9 @@ $jsonTable1 = json_encode($table);
     </script>
     
     <?php
-	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-	mysql_select_db("moodle", $con); 
 	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
-	$flag = true;
 	$table = array();
 	$table['cols'] = array(
 
@@ -250,13 +240,9 @@ $jsonTable1 = json_encode($table);
     </script>
     
      <?php
-	$con=mysql_connect("localhost","root","") or die("Failed to connect with database!!!!");
-	mysql_select_db("moodle", $con); 
 	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
 	$rows = array();
-	//flag is not needed
-	$flag = true;
 	$table = array();
 	$table['cols'] = array(
 
