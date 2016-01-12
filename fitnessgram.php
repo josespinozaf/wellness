@@ -186,8 +186,7 @@ $jsonTable1 = json_encode($table);
     </script>
     
     <?php
-	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-	
+	$sth = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");	
 	$rows = array();
 	$table = array();
 	$table['cols'] = array(
@@ -295,14 +294,17 @@ $jsonTable1 = json_encode($table);
     
 </head>
 <body>
-  <div class="tabs">
+
+ <?php  
+ if (mysql_num_rows($result) > 0){?>
+   <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1">Antropometria</label>
-       <div class="content1">
+     <div class="content1">
      <div id="table_div1"></div>
        <br>
-        <h3><font color="white">Grafica</font></h3>   
+        <h3><font color="white"><?php get_string('grafico','local_wellness')?></font></h3>   
   		<div id="chart_div"></div>
       </div>
    </div>
@@ -334,6 +336,9 @@ $jsonTable1 = json_encode($table);
    </div>	
    </div>
 </div>   
+<?php }
+else { 
+	echo '<h3>No tienes datos aun disponibles</h3>';}?>
  </body>
 </html>
 <?php
