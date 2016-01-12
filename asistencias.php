@@ -95,14 +95,34 @@ echo $OUTPUT->header ();
         table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
       }
       </script>
+     
+    <?php
+	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
+	$asistenciasperiodo = 0;
+ while ($row = mysql_fetch_array($result)) { 
+       if ($row['Asistencia'] == '1'){
+       	$asistenciasperiodo = $asistenciasperiodo + 1;
+       }
+       else if ($row['Asistencia'] == '0,5'){
+       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
+       }
+       else if ($row['Asistencia'] == '-1'){
+       	$asistenciasperiodo = $asistenciasperiodo - 1;
+       }     	
+ }
+ $ultimopar= mysql_query("SELECT cantasist.totalasistencias FROM cantasist ORDER BY id DESC LIMIT 1");
+ while ($row = mysql_fetch_array($ultimopar)) { 
+       $asistenciasnecesarias= (int) $row['totalasistencias'];	
+ }
+		 ?>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Completadas', 45],
-          ['No Completadas', 55],
+          ['Completadas', <?php echo $asistenciasperiodo ?>],
+          ['No Completadas', <?php echo $asistenciasnecesarias-$asistenciasperiodo ?>],
          
         ]);
 
@@ -126,11 +146,11 @@ echo $OUTPUT->header ();
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-         ['Mes', 'Asistencias', 'Deberias Llevar'],
-         ['06',  8,      8],
-         ['07',  14,     15],
-         ['08',  18,      23],
-         ['09',  0,     25  ],
+         ['Semana', 'Asistencias', 'Deberias Llevar'],
+         ['01',  8,      8],
+         ['02',  14,     15],
+         ['03',  18,      23],
+         ['04',  0,     25  ],
          ['10',  0,    30]
       ]);
 
@@ -153,21 +173,7 @@ echo $OUTPUT->header ();
 </head>
 <body>
 
-<?php
-	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
-	$asistenciasperiodo = 0;
- while ($row = mysql_fetch_array($result)) { 
-       if ($row['Asistencia'] == '1'){
-       	$asistenciasperiodo = $asistenciasperiodo + 1;
-       }
-       else if ($row['Asistencia'] == '0,5'){
-       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
-       }
-       else if ($row['Asistencia'] == '-1'){
-       	$asistenciasperiodo = $asistenciasperiodo - 1;
-       }     	
- }
-		 ?>
+
 		
 <div class="tabs">
    <div class="tab">
