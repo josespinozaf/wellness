@@ -90,7 +90,7 @@ while($r = mysql_fetch_assoc($sth)) {
     $temp[] = array('v' => (string) $r['Ano']); 
 
     // Values of each slice
-    $temp[] = array('v' => (doubleval($r['Peso'])) ); 
+    $temp[] = array('v' => ((float)$r['Peso']) ); 
     $temp[] = array('v' => (float) (trim($r['IMC'])) );
     $temp[] = array('v' => (float) (trim($r['Talla'])) );
     $temp[] = array('v' => (float) (trim($r['%Grasa'])) );
@@ -124,7 +124,7 @@ $jsonTable1 = json_encode($table);
       // Instantiate and draw our chart, passing in some options.
       // Do not forget to check your div ID
       var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
      formatter.format(data, 1); 
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
      chart.draw(data, options);
@@ -177,7 +177,7 @@ $jsonTable1 = json_encode($table);
         };
 
       var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
      formatter.format(data, 1); 
       var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
      chart.draw(data, options);
@@ -230,7 +230,7 @@ $jsonTable1 = json_encode($table);
           
         };
       var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
      formatter.format(data, 1); 
       var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
      chart.draw(data, options);
@@ -284,7 +284,7 @@ $jsonTable1 = json_encode($table);
           
         };
       var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###,###'});
+      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
      formatter.format(data, 1); 
       var chart = new google.visualization.LineChart(document.getElementById('chart_div4'));
      chart.draw(data, options);
