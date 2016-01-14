@@ -24,15 +24,24 @@ $string['grafico'] = 'Graph';
 $string['ano'] = 'Year';
 $string['talla'] = 'Height';
 $string['peso'] = 'Weight';
-$string['imc'] = 'IMC';
+$string['imc'] = 'Body Mass Index';
+$string['imcs'] = 'BMI';
 $string['grasa'] = 'Fat Percentage';
+$string['grasas'] = 'Fat %';
 $string['abd'] = 'Abdominals';
-$string['pushup'] = 'Push ups';
-$string['sitandreachd'] = 'Right Sit and Reach';
-$string['sitandreachi'] = 'Left Sit and Reach';
+$string['abds'] = 'Abd';
+$string['pushup'] = 'Push Up';
+$string['pullup'] = 'Pull Up';
+$string['sitandreachd'] = 'Right foot elongation';
+$string['sitandreachds'] = 'Sit&Reach-R';
+$string['sitandreachi'] = 'Left foot elongation';
+$string['sitandreachis'] = 'Sit&Reach-L';
 $string['trunklift'] = 'Trunk Lift';
 $string['pacer'] = 'Field Runs';
+$string['pacers'] = 'Level';
 $string['vo2max'] = 'Aerobic Capacity';
+$string['vo2maxs'] = 'Vo2max';
+$string['nohayfitnessgram'] = 'You have not record Fitnessgram';
 
 //**Mis Asistencias**
 
@@ -51,21 +60,14 @@ $string['horainicio'] = 'Start Time';
 $string['horatermino'] = 'End Time';
 $string['actividad'] = 'Activity';
 $string['asistencia'] = 'Assist';
+$string['nohayasistencia'] = 'You have not attendance record';
 
 //**Eventos**
 
+//**Clases**
+$string['titleclases'] = 'Welcome to classes';
 
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
-$string[''] = '';
+//**Sala de Pesas**
+$string['titlesalapesas'] = 'Welcome to weight room';
+
 ?>
