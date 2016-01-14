@@ -172,9 +172,6 @@ echo $OUTPUT->header ();
 
 </head>
 <body>
-
-
-		
 <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
@@ -197,13 +194,10 @@ echo $OUTPUT->header ();
        <div class="content1">    
     <div id="chart_div" style="width: 900px; height: 400px;"></div>
     </div>
-   </div>
-   
+   </div>   
 </div>
-
 </body>
 </html>
-
 <?php                        
 echo $OUTPUT->footer();
 ?>

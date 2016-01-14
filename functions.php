@@ -42,12 +42,11 @@ if (!$result) {
 			data.addColumn('string', 'Talla');
 			data.addColumn('string', 'Peso');
 			data.addColumn('string', 'IMC');
-			data.addColumn('string', 'Suma MM');
 			data.addColumn('string', '% Grasa');
 		          <?php
 		          while ($row = mysql_fetch_array($result)) { ?>
 		          data.addRows([
-		          ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['Suma mm']?>','<?php echo $row['%Grasa']?>'],
+		          ['<?php echo $row['Ano']?>','<?php echo $row['Talla']?>','<?php echo $row['Peso']?>','<?php echo $row['IMC']?>','<?php echo $row['%Grasa']?>'],
 		          ]);
 		<?php }?>
 		        var table = new google.visualization.Table(document.getElementById('table_div1'));
@@ -113,15 +112,6 @@ if (!$result) {
                         table.draw(data, {showRowNumber: false, width: '70%', height: '70%'});
           }   
 </script>
-<!-- Tabla de Asistencia -->
-                          
-<!-- Grafica Antropometria-->
-                          
-<!-- Grafica Fuerza-->
-	
-<!-- Grafica Flexivilidad-->	
-	
-<!-- Grafica Resistencia-->
                           
 </head>
 </html>
