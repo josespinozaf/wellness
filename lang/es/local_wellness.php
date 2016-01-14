@@ -6,9 +6,12 @@ $string['titulopagina'] = 'DeportesUAI';
 
 $string['navpagprinc'] = 'Página Principal';
 $string['navrutinas'] = 'Rutinas';
+$string['navclases'] = 'Clases';
+$string['navsalapesas'] = 'Sala de Pesas';
 $string['navfitnessgram'] = 'Fitnessgram';
 $string['navasistencias'] = 'Asistencias';
 $string['naveventos'] = 'Eventos';
+
 
 //**Mis Rutinas**
 
