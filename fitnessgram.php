@@ -75,11 +75,11 @@ $table['cols'] = array(
 
     // Labels for your chart, these represent the column titles
     // Note that one column is in "string" format and another one is in "number" format as pie chart only required "numbers" for calculating percentage and string will be used for column title
-    array('label' => 'Año', 'type' => 'string'),
-    array('label' => 'Peso', 'type' => 'number'),
-	array('label' => 'IMC', 'type' => 'number'),
-	array('label' => 'Talla', 'type' => 'number'),
-	array('label' => '%Grasa', 'type' => 'number')
+    array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+    array('label' => get_string('peso','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('imcs','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('talla','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('grasas','local_wellness'), 'type' => 'number')
 
 );
 
@@ -139,9 +139,9 @@ $jsonTable1 = json_encode($table);
 	$table = array();
 	$table['cols'] = array(
 
-    array('label' => 'Año', 'type' => 'string'),
-    array('label' => 'Abdominales', 'type' => 'number'),
-	array('label' => 'Push Up', 'type' => 'number')
+    array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+    array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('pushups','local_wellness'), 'type' => 'number')
 	);
 
 	$rows = array();
@@ -191,10 +191,10 @@ $jsonTable1 = json_encode($table);
 	$table = array();
 	$table['cols'] = array(
 
-	array('label' => 'Año', 'type' => 'string'),
-    array('label' => 'SRDer', 'type' => 'number'),
-	array('label' => 'SRIzq', 'type' => 'number'),
-	array('label' => 'TrunkLift', 'type' => 'number')
+	array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+    array('label' => get_string('sitandreachds','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('sitandreachis','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('trunklifts','local_wellness'), 'type' => 'number')
 
 	);
 
@@ -245,9 +245,9 @@ $jsonTable1 = json_encode($table);
 	$table = array();
 	$table['cols'] = array(
 
-    array('label' => 'Año', 'type' => 'string'),
-    array('label' => 'Nivel', 'type' => 'number'),
-	array('label' => 'Vo2 Max', 'type' => 'number')
+    array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+    array('label' => get_string('pacers','local_wellness'), 'type' => 'number'),
+	array('label' => get_string('vo2maxs','local_wellness'), 'type' => 'number')
 	);
 
 	$rows = array();

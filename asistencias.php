@@ -177,7 +177,7 @@ echo $OUTPUT->header ();
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1"><?php echo get_string('tabasistencias','local_wellness')?></label>
        <div class="content1">
-       <h1><font color="white" ><?php echo get_string('cantidadasistencias','local_wellness').$asistenciasperiodo;?></font></h1>
+       <h3><font color="white" ><?php echo get_string('cantidadasistencias','local_wellness').$asistenciasperiodo;?></font></h3>
         <div id="table_div"></div>
         </div>
    </div>
