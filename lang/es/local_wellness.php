@@ -54,8 +54,8 @@ $string['tabasistencias'] = 'Registro Asistencias';
 $string['tabgraph1'] = 'Porcentaje completadas';
 $string['tabgraph2'] = 'Comparación Actual-Ideal';
 $string['titleasistencias'] = 'Asistencias';
-$string['titulograficoas1'] = 'Mis Asistencias';
-$string['titulograficoas2'] = 'Asistencias actual- ideal';
+$string['titulografico1'] = 'Mis Asistencias';
+$string['titulografico2'] = 'Asistencias actual- ideal';
 $string['ejex'] = 'Meses';
 $string['ejey'] = 'Asistencia';
 $string['periodo'] = 'Período';
@@ -65,7 +65,10 @@ $string['horatermino'] = 'Hora Término';
 $string['actividad'] = 'Actividad';
 $string['asistencia'] = 'Asistencia';
 $string['nohayasistencia'] = 'No tienes registro de asistencias';
-
+$string['completadas'] = 'Completadas';
+$string['nocompletadas'] = 'No Completadas';
+$string['task'] = 'Task';	
+$string['horascompletadas'] = 'Horas Completadas';
 //**Eventos**
 
 

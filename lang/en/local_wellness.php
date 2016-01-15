@@ -61,6 +61,10 @@ $string['horatermino'] = 'End Time';
 $string['actividad'] = 'Activity';
 $string['asistencia'] = 'Assist';
 $string['nohayasistencia'] = 'You have not attendance record';
+$string['completadas'] = 'Completed';
+$string['nocompletadas'] = 'No Completed';
+$string['task'] = 'Task';
+$string['horascompletadas'] = 'Completed Hours';
 
 //**Eventos**
 

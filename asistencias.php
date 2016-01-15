@@ -57,9 +57,9 @@ if (!$currentpage = my_get_page($userid, MY_PAGE_PRIVATE)) {
 // desde aqui se debe configurar la pag
 $params = array();
 $PAGE->set_context($context);
-$PAGE->set_url('/local/Asistencias/index.php', $params);
+$PAGE->set_url('/local/wellness/asistencias.php', $params);
 $PAGE->set_pagelayout('standard');
-$PAGE->set_pagetype('local-Asistencias-index');
+$PAGE->set_pagetype('local-wellness-asistencias');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title(get_string('titleasistencias','local_wellness'));
@@ -78,12 +78,12 @@ echo $OUTPUT->header ();
 
       function drawTable() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Periodo');
-        data.addColumn('string', 'Fecha');
-        data.addColumn('string', 'Hora Inicio');
-        data.addColumn('string', 'Hora Termino');
-        data.addColumn('string', 'Actividad');
-        data.addColumn('string', 'Asistencia');
+        data.addColumn('string', '<?php echo get_string('periodo','local_wellness')?>');
+        data.addColumn('string', '<?php echo get_string('fecha','local_wellness')?>');
+        data.addColumn('string', '<?php echo get_string('horainicio','local_wellness')?>');
+        data.addColumn('string', '<?php echo get_string('horatermino','local_wellness')?>');
+        data.addColumn('string', '<?php echo get_string('actividad','local_wellness')?>');
+        data.addColumn('string', '<?php echo get_string('asistencia','local_wellness')?>');
         <?php while ($row = mysql_fetch_array($result)) { ?>
         data.addRows([
       ['<?php echo $row['Periodo']?>','<?php echo $row['Fecha']?>','<?php echo $row['HoraInicio']?>','<?php echo $row['HoraTermino']?>','<?php echo $row['Actividad']?>','<?php echo $row['Asistencia']?>'],
@@ -120,14 +120,14 @@ echo $OUTPUT->header ();
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Completadas', <?php echo $asistenciasperiodo ?>],
-          ['No Completadas', <?php echo $asistenciasnecesarias-$asistenciasperiodo ?>],
+          ['<?php echo get_string('task','local_wellness')?>', '<?php echo get_string('horascompletadas','local_wellness')?>'],
+          ['<?php echo get_string('completadas','local_wellness')?>', <?php echo $asistenciasperiodo ?>],
+          ['<?php echo get_string('nocompletadas','local_wellness')?>', <?php echo $asistenciasnecesarias-$asistenciasperiodo ?>],
          
         ]);
 
         var options = {
-          title:'Mis Asistencias',
+          title:'<?php echo get_string('titulografico1','local_wellness');?>',
           is3D: true,
           slices: {
               0: { color: '#FE2E2E' },
@@ -155,9 +155,9 @@ echo $OUTPUT->header ();
       ]);
 
     var options = {
-      title : 'Asistencia ideal-actual',
-      vAxis: {title: 'Asistencia'},
-      hAxis: {title: 'Meses'},
+      title :'<?php echo get_string('titulografico2','local_wellness')?>',
+      vAxis: {title: '<?php echo get_string('ejey','local_wellness')?>'},
+      hAxis: {title: '<?php echo get_string('ejex','local_wellness')?>'},
       seriesType: 'bars',
     
     };
@@ -175,22 +175,22 @@ echo $OUTPUT->header ();
 <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
-       <label for="tab-1">Registro</label>
+       <label for="tab-1"><?php echo get_string('tabasistencias','local_wellness')?></label>
        <div class="content1">
-       <h1><font color="white" ><?php echo "Tus asistencias en este periodo dan un total de: $asistenciasperiodo";?></font></h1>
+       <h1><font color="white" ><?php echo get_string('cantidadasistencias','local_wellness').$asistenciasperiodo;?></font></h1>
         <div id="table_div"></div>
         </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-2" name="tab-group-1">
-       <label for="tab-2">Asistencias</label>
+       <label for="tab-2"><?php echo get_string('tabgraph1','local_wellness')?></label>
        <div class="content1">   
         <div id="piechart_3d" style="width: 900px; height: 400px;"></div>
    </div>
    </div>
      <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
-       <label for="tab-3">Comparación Actual-Ideal</label>
+       <label for="tab-3"><?php echo get_string('tabgraph2',local_wellness)?></label>
        <div class="content1">    
     <div id="chart_div" style="width: 900px; height: 400px;"></div>
     </div>
