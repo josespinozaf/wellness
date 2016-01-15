@@ -71,7 +71,7 @@ $data=mysql_fetch_row($result5);
           data.addColumn('string', 'Año');
           data.addColumn('string', 'Abd');
           
-          data.addColumn('string', '<?php if ($data['Sexo']='M'){echo 'Pull Ups';} else {echo 'Push Ups';}   ?>');
+          data.addColumn('string', '<?php if ($data['Sexo']=='F'){echo 'Pull Ups';} else {echo 'Push Ups';}   ?>');
        
           <?php
 			
