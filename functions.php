@@ -34,8 +34,7 @@ $result5 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-$data=mysql_fetch_row($result5);
-
+$data = mysql_fetch_array($result5);
 ?>
 
 
@@ -71,7 +70,7 @@ $data=mysql_fetch_row($result5);
           data.addColumn('string', '<?php echo get_string('ano','local_wellness')?>');
           data.addColumn('string', '<?php echo get_string('abds','local_wellness')?>');
           
-          data.addColumn('string', '<?php if ($data['Sexo']=='F'){echo get_string('pullups','local_wellness');} else {echo get_string('pushups','local_wellness');}   ?>');
+          data.addColumn('string', '<?php if ($data['Sexo']=='F'){echo get_string('pullups','local_wellness');} else if ($data['Sexo']=='M') {echo get_string('pushups','local_wellness');}   ?>');
        
           <?php
 			
