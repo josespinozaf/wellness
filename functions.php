@@ -29,6 +29,13 @@ $result4 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db)
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
+
+$result5 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'", $db);
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+$data=mysql_fetch_row($result5);
+
 ?>
 
 
@@ -63,12 +70,14 @@ if (!$result) {
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Año');
           data.addColumn('string', 'Abd');
-          data.addColumn('string', 'Push Up');
+          
+          data.addColumn('string', '<?php if ($data['Sexo']='M'){echo 'Pull Ups';} else {echo 'Push Ups';}   ?>');
+       
           <?php
 			
 			while ($row = mysql_fetch_array($result2)) { ?>
           data.addRows([
-        ['<?php echo $row['Ano']?>','<?php echo $row['Abd']?>','<?php echo $row['Push Up']?>'],
+        ['<?php echo $row['Ano']?>','<?php echo $row['Abd']?>','<?php if ($row['Sexo']=='M') echo $row['Push Up']; else {echo $row['Pull Up'];}?>'],
          ]);
 <?php }?>
         var table = new google.visualization.Table(document.getElementById('table_div2'));
