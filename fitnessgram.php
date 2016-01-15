@@ -137,21 +137,48 @@ $jsonTable1 = json_encode($table);
 	
 	$rows = array();
 	$table = array();
+	if ($data['Sexo']=='M'){
 	$table['cols'] = array(
 
     array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
     array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
 	array('label' => get_string('pushups','local_wellness'), 'type' => 'number')
 	);
-
-	$rows = array();
+	}
+	else if ($data['Sexo']=='F'){
+	$table['cols'] = array(
+	
+			array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+			array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
+			array('label' => get_string('pullups','local_wellness'), 'type' => 'number')
+	);
+	}
+	
+	if ($data['Sexo']=='F'){
+		$rows = array();
 	while($r = mysql_fetch_assoc($sql)) {
 		$temp = array();
 		$temp[] = array('v' => (string) $r['Ano']);
 	
 		$temp[] = array('v' => (doubleval($r['Abd'])) );
-		$temp[] = array('v' => (float) (trim($r['Push Up'])) );
+		
+		$temp[] = array('v' => (float) (trim($r['Pull Up'])) );
+		
 		$rows[] = array('c' => $temp);
+	}
+	}
+	else if ($data['Sexo']=='M'){
+		$rows = array();
+		while($r = mysql_fetch_assoc($sql)) {
+			$temp = array();
+			$temp[] = array('v' => (string) $r['Ano']);
+	
+			$temp[] = array('v' => (doubleval($r['Abd'])) );
+				
+			$temp[] = array('v' => (float) (trim($r['Push Up'])) );
+	
+			$rows[] = array('c' => $temp);
+		}
 	}
 
 
