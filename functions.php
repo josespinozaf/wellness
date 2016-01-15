@@ -45,11 +45,11 @@ $data=mysql_fetch_row($result5);
 		google.setOnLoadCallback(drawTable);
 		function drawTable() {
 			var data = new google.visualization.DataTable();
-			data.addColumn('string', 'Año');
-			data.addColumn('string', 'Talla');
-			data.addColumn('string', 'Peso');
-			data.addColumn('string', 'IMC');
-			data.addColumn('string', '% Grasa');
+			data.addColumn('string', '<?php echo get_string('ano','local_wellness')?>');
+			data.addColumn('string', '<?php echo get_string('talla','local_wellness')?>');
+			data.addColumn('string', '<?php echo get_string('peso','local_wellness')?>');
+			data.addColumn('string', '<?php echo get_string('imcs','local_wellness')?>');
+			data.addColumn('string', '<?php echo get_string('grasas','local_wellness')?>');
 		          <?php
 		          while ($row = mysql_fetch_array($result)) { ?>
 		          data.addRows([
@@ -68,10 +68,10 @@ $data=mysql_fetch_row($result5);
       google.setOnLoadCallback(drawTable);
       function drawTable() {
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Año');
-          data.addColumn('string', 'Abd');
+          data.addColumn('string', '<?php echo get_string('ano','local_wellness')?>');
+          data.addColumn('string', '<?php echo get_string('abds','local_wellness')?>');
           
-          data.addColumn('string', '<?php if ($data['Sexo']=='F'){echo 'Pull Ups';} else {echo 'Push Ups';}   ?>');
+          data.addColumn('string', '<?php if ($data['Sexo']=='F'){echo get_string('pullups','local_wellness');} else {echo get_string('pushups','local_wellness');}   ?>');
        
           <?php
 			
@@ -90,10 +90,10 @@ $data=mysql_fetch_row($result5);
       google.setOnLoadCallback(drawTable);
       function drawTable() {
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Año');
-          data.addColumn('string', 'Sit&Reach-D');
-          data.addColumn('string', 'Sit&Reach-I');
-          data.addColumn('string', 'Trunk Lift');
+          data.addColumn('string', '<?php echo get_string('ano','local_wellness')?>');
+          data.addColumn('string', '<?php echo get_string('sitandreachds','local_wellness')?>');
+          data.addColumn('string', '<?php echo get_string('sitandreachis','local_wellness')?>');
+          data.addColumn('string', '<?php echo get_string('trunklifts','local_wellness')?>');
           <?php while ($row = mysql_fetch_array($result3)) { ?>
           data.addRows([
         ['<?php echo $row['Ano']?>','<?php echo $row['Sit&reach-D']?>','<?php echo $row['Sit&reach-IZ']?>','<?php echo $row['Trunk Lift']?>'],
@@ -109,9 +109,9 @@ $data=mysql_fetch_row($result5);
       google.setOnLoadCallback(drawTable);
       function drawTable() {
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Año');
-          data.addColumn('string', 'Pacer');
-          	data.addColumn('string', 'Vo2 Max');
+          data.addColumn('string', '<?php echo get_string('ano','local_wellness')?>');
+          data.addColumn('string', '<?php echo get_string('pacers','local_wellness')?>');
+          	data.addColumn('string', '<?php echo get_string('vo2maxs','local_wellness')?>');
           <?php while ($row = mysql_fetch_array($result4)) { ?>
           data.addRows([
                         ['<?php echo $row['Ano']?>','<?php echo $row['Nivel']?>','<?php echo $row['Vo2 max']?>'],

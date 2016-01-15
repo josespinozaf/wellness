@@ -47,12 +47,12 @@ if (!$currentpage = my_get_page($userid, MY_PAGE_PRIVATE)) {
 // desde aqui se debe configurar la pag
 $params = array();
 $PAGE->set_context($context);
-$PAGE->set_url('/local/fitnessgram/fitnessgram.php', $params);
+$PAGE->set_url('/local/wellness/fitnessgram.php', $params);
 $PAGE->set_pagelayout('mydashboard');
-$PAGE->set_pagetype('local-fitnessgram-fitnessgram');
+$PAGE->set_pagetype('local-wellness-fitnessgram');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
-$PAGE->set_title('Fitnessgram');
+$PAGE->set_title(get_string('navfitnessgram','local_wellness'));
 $PAGE->set_heading($header);
 $PAGE->navbar->add(get_string('navfitnessgram','local_wellness'), new moodle_url('/local/wellness/fitnessgram.php'));
 
@@ -300,45 +300,62 @@ $jsonTable1 = json_encode($table);
    <div class="tabs">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
-       <label for="tab-1">Antropometria</label>
+       <label for="tab-1"><?php echo get_string('antropometria','local_wellness')?></label>
      <div class="content1">
-     <div id="table_div1"></div>
-       <br>
-        <h3><font color="white"><?php get_string('grafico','local_wellness')?></font></h3>   
+     <div id="table_div1"></div><br><font color="white">
+     <?php echo get_string('imcs','local_wellness').' = '.get_string('imc','local_wellness').'<br>';
+     	   echo get_string('grasas','local_wellness').' = '.get_string('grasa','local_wellness').'<br>'; 
+     	   ?></font>
+        <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>   
   		<div id="chart_div"></div>
       </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-2" name="tab-group-1">
-       <label for="tab-2">Fuerza</label>
+       <label for="tab-2"><?php echo get_string('fuerza','local_wellness')?></label>
        <div class="content1"> 
-     <div id="table_div2"></div>
-     <br> <h3><font color="white">Grafica</font></h3>
+     <div id="table_div2"></div><br>
+     <font color="white">
+     <?php echo get_string('abds','local_wellness').' = '.get_string('abd','local_wellness').'<br>';
+     	   echo get_string('pushups','local_wellness').' = '.get_string('pushup','local_wellness').'<br>'; 
+     	   echo get_string('pullups','local_wellness').' = '.get_string('pullup','local_wellness').'<br>';
+     	   ?></font>
+     <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>
      <div id="chart_div2"></div>
      </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
-       <label for="tab-3">Flexibilidad</label>
+       <label for="tab-3"><?php echo get_string('flexibilidad','local_wellness')?></label>
        <div class="content1"> 
      <div id="table_div3"></div>
-       <br>  <h3><font color="white">Grafica</font></h3>
+     <br>
+     <font color="white">
+     <?php echo get_string('sitandreachds','local_wellness').' = '.get_string('sitandreachd','local_wellness').'<br>';
+     	   echo get_string('sitandreachis','local_wellness').' = '.get_string('sitandreachi','local_wellness').'<br>'; 
+     	   echo get_string('trunklifts','local_wellness').' = '.get_string('trunklift','local_wellness').'<br>';
+     	   ?></font>
+      <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>
  		<div id="chart_div3"></div>
    </div>
    </div>
    <div class="tab">
        <input type="radio" id="tab-4" name="tab-group-1">
-       <label for="tab-4">Resistencia</label>
+       <label for="tab-4"><?php echo get_string('resistencia','local_wellness')?></label>
        <div class="content1">   
      <div id="table_div4"></div><br>
-      <h3><font color="white">Grafica</font></h3>
+     <font color="white"><h6>
+     <?php echo get_string('pacers','local_wellness').' = '.get_string('pacer','local_wellness').'<br>';
+     	   echo get_string('vo2maxs','local_wellness').' = '.get_string('vo2max','local_wellness').'<br>';?>
+     	   </h6>
+      <h3><?php echo get_string('grafico','local_wellness')?></font></h3>
       <div id="chart_div4"></div>
    </div>	
    </div>
 </div>   
 <?php }
 else { 
-	echo '<h3>No tienes datos aun disponibles</h3>';}?>
+	echo '<h3>'.get_string('nohayfitnessgram','local_wellness').'</h3>';}?>
  </body>
 </html>
 <?php
