@@ -116,7 +116,7 @@ $jsonTable1 = json_encode($table);
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(<?=$jsonTable1?>);
       var options = {
-           title: 'Año a Año',
+           title: '<?php echo get_string('grafico','local_wellness')?>',
           is3D: 'true',
           width: 800,
           height: 230,
@@ -169,7 +169,7 @@ $jsonTable1 = json_encode($table);
 
       var data = new google.visualization.DataTable(<?=$jsonTable2?>);
       var options = {
-           title: 'Año a Año',
+           title: '<?php echo get_string('grafico','local_wellness')?>',
           is3D: 'true',
           width: 800,
           height: 230,
@@ -223,7 +223,7 @@ $jsonTable1 = json_encode($table);
 
       var data = new google.visualization.DataTable(<?=$jsonTable3?>);
       var options = {
-           title: 'Año a Año',
+           title: '<?php echo get_string('grafico','local_wellness')?>',
           is3D: 'true',
           width: 800,
           height: 230,
@@ -277,7 +277,7 @@ $jsonTable1 = json_encode($table);
 
       var data = new google.visualization.DataTable(<?=$jsonTable4?>);
       var options = {
-           title: 'Año a Año',
+           title: '<?php echo get_string('grafico','local_wellness')?>',
           is3D: 'true',
           width: 800,
           height: 230,
@@ -302,11 +302,11 @@ $jsonTable1 = json_encode($table);
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1"><?php echo get_string('antropometria','local_wellness')?></label>
      <div class="content1">
-     <div id="table_div1"></div><br><font color="white">
+     <div id="table_div1"></div><br>
+     <h6><font color="white">
      <?php echo get_string('imcs','local_wellness').' = '.get_string('imc','local_wellness').'<br>';
      	   echo get_string('grasas','local_wellness').' = '.get_string('grasa','local_wellness').'<br>'; 
-     	   ?></font>
-        <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>   
+     	   ?></font></h6>   
   		<div id="chart_div"></div>
       </div>
    </div>
@@ -315,12 +315,11 @@ $jsonTable1 = json_encode($table);
        <label for="tab-2"><?php echo get_string('fuerza','local_wellness')?></label>
        <div class="content1"> 
      <div id="table_div2"></div><br>
-     <font color="white">
+     <h6><font color="white">
      <?php echo get_string('abds','local_wellness').' = '.get_string('abd','local_wellness').'<br>';
      	   echo get_string('pushups','local_wellness').' = '.get_string('pushup','local_wellness').'<br>'; 
      	   echo get_string('pullups','local_wellness').' = '.get_string('pullup','local_wellness').'<br>';
-     	   ?></font>
-     <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>
+     	   ?></font></h6>
      <div id="chart_div2"></div>
      </div>
    </div>
@@ -330,12 +329,11 @@ $jsonTable1 = json_encode($table);
        <div class="content1"> 
      <div id="table_div3"></div>
      <br>
-     <font color="white">
+     <h6><font color="white">
      <?php echo get_string('sitandreachds','local_wellness').' = '.get_string('sitandreachd','local_wellness').'<br>';
      	   echo get_string('sitandreachis','local_wellness').' = '.get_string('sitandreachi','local_wellness').'<br>'; 
      	   echo get_string('trunklifts','local_wellness').' = '.get_string('trunklift','local_wellness').'<br>';
-     	   ?></font>
-      <h3><font color="white"><?php echo get_string('grafico','local_wellness')?></font></h3>
+     	   ?></font></h6>
  		<div id="chart_div3"></div>
    </div>
    </div>
@@ -344,11 +342,9 @@ $jsonTable1 = json_encode($table);
        <label for="tab-4"><?php echo get_string('resistencia','local_wellness')?></label>
        <div class="content1">   
      <div id="table_div4"></div><br>
-     <font color="white"><h6>
+      <h6><font color="white">
      <?php echo get_string('pacers','local_wellness').' = '.get_string('pacer','local_wellness').'<br>';
-     	   echo get_string('vo2maxs','local_wellness').' = '.get_string('vo2max','local_wellness').'<br>';?>
-     	   </h6>
-      <h3><?php echo get_string('grafico','local_wellness')?></font></h3>
+     	   echo get_string('vo2maxs','local_wellness').' = '.get_string('vo2max','local_wellness').'<br><br>';?></font></h6>
       <div id="chart_div4"></div>
    </div>	
    </div>
