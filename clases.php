@@ -22,5 +22,8 @@ $PAGE->navbar->add(get_string('navclases','local_wellness'), new moodle_url('/lo
 
 echo $OUTPUT->header ();
 
+echo '<img src="http://espaciorosa.cl/construccion.jpg"></img>';
+
+
 echo $OUTPUT->footer();
 ?>

@@ -190,7 +190,7 @@ echo $OUTPUT->header ();
    </div>
      <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
-       <label for="tab-3"><?php echo get_string('tabgraph2',local_wellness)?></label>
+       <label for="tab-3"><?php echo get_string('tabgraph2','local_wellness')?></label>
        <div class="content1">    
     <div id="chart_div" style="width: 830px; height: 400px;"></div>
     </div>

@@ -17,10 +17,12 @@ $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title(get_string('titlesalapesas','local_wellness'));
 $PAGE->set_heading($header);
-$PAGE->navbar->add(get_string('navasistencias','local_wellness'), new moodle_url('/local/wellness/salapesas.php'));
+$PAGE->navbar->add(get_string('navsalapesas','local_wellness'), new moodle_url('/local/wellness/salapesas.php'));
 
 
 echo $OUTPUT->header ();
+
+echo '<img src="http://espaciorosa.cl/construccion.jpg"></img>';
 
 echo $OUTPUT->footer();
 ?>
