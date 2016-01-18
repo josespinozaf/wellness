@@ -324,7 +324,7 @@ $jsonTable1 = json_encode($table);
 
  <?php  
  if (mysql_num_rows($result) > 0){?>
-   <div class="tabs">
+   <div class="tabs2">
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label for="tab-1"><?php echo get_string('antropometria','local_wellness')?></label>

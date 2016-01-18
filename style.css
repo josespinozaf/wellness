@@ -1,12 +1,19 @@
 
 .tabs { /* es el rectángulo contenedor */
 margin: 0 auto;
-min-height:500px;
+min-height:850px;
 position: relative;
 max-width: 950px;
 border-radius: 0px 10px 0 0;
 }
 
+.tabs2 { /* es el rectángulo contenedor */
+margin: 0 auto;
+min-height:500px;
+position: relative;
+max-width: 950px;
+border-radius: 0px 10px 0 0;
+}
 
 .tab { /* cada una de las pestañas */
 float: left;

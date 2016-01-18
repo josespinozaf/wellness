@@ -15,7 +15,7 @@ include ("connect.php");
 $userid= $USER->id;
 $usermail= $USER->email;
 
-$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
+$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db);
 
 
 
@@ -185,14 +185,14 @@ echo $OUTPUT->header ();
        <input type="radio" id="tab-2" name="tab-group-1">
        <label for="tab-2"><?php echo get_string('tabgraph1','local_wellness')?></label>
        <div class="content1">   
-        <div id="piechart_3d" style="width: 900px; height: 400px;"></div>
+        <div id="piechart_3d" style="width: 830px; height: 400px;"></div>
    </div>
    </div>
      <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
        <label for="tab-3"><?php echo get_string('tabgraph2',local_wellness)?></label>
        <div class="content1">    
-    <div id="chart_div" style="width: 900px; height: 400px;"></div>
+    <div id="chart_div" style="width: 830px; height: 400px;"></div>
     </div>
    </div>   
 </div>
