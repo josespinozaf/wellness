@@ -266,7 +266,7 @@ echo $OUTPUT->header ();
        		<input type="radio" id="tab-1" name="tab-group-1" checked>
        		<label for="tab-1"><?php echo get_string('antropometria','local_wellness')?></label>
      		<div class="content1">
-     			<div id="table_div1"></div><br>
+     			<div id="tabla_antropometria"></div><br>
      			<h6><font color="white">
      			<?php   echo get_string('imcs','local_wellness').' = '.get_string('imc','local_wellness').'<br>';
      	   				echo get_string('grasas','local_wellness').' = '.get_string('grasa','local_wellness').'<br>'; 
@@ -278,7 +278,7 @@ echo $OUTPUT->header ();
        		<input type="radio" id="tab-2" name="tab-group-1">
        		<label for="tab-2"><?php echo get_string('fuerza','local_wellness')?></label>
        		<div class="content1"> 
-     			<div id="table_div2"></div><br>
+     			<div id="tabla_fuerza"></div><br>
     			 <h6><font color="white">
      			<?php echo get_string('abds','local_wellness').' = '.get_string('abd','local_wellness').'<br>';
      	   			  echo get_string('pushups','local_wellness').' = '.get_string('pushup','local_wellness').'<br>'; 
@@ -291,7 +291,7 @@ echo $OUTPUT->header ();
        		<input type="radio" id="tab-3" name="tab-group-1">
        		<label for="tab-3"><?php echo get_string('flexibilidad','local_wellness')?></label>
        		<div class="content1"> 
-     			<div id="table_div3"></div><br>
+     			<div id="tabla_flex"></div><br>
      			<h6><font color="white">
      			<?php echo get_string('sitandreachds','local_wellness').' = '.get_string('sitandreachd','local_wellness').'<br>';
      	   			  echo get_string('sitandreachis','local_wellness').' = '.get_string('sitandreachi','local_wellness').'<br>'; 
@@ -304,7 +304,7 @@ echo $OUTPUT->header ();
        		<input type="radio" id="tab-4" name="tab-group-1">
        		<label for="tab-4"><?php echo get_string('resistencia','local_wellness')?></label>
        		<div class="content1">   
-     			<div id="table_div4"></div><br>
+     			<div id="tabla_resist"></div><br>
       			<h6><font color="white">
      			<?php echo get_string('pacers','local_wellness').' = '.get_string('pacer','local_wellness').'<br>';
      	   			  echo get_string('vo2maxs','local_wellness').' = '.get_string('vo2max','local_wellness').'<br><br>';
