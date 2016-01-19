@@ -24,17 +24,15 @@ $PAGE->set_heading($header);
 $PAGE->navbar->add(get_string('navfitnessgram','local_wellness'), new moodle_url('/local/wellness/fitnessgram.php'));
 
 echo $OUTPUT->header ();
-
-
 ?>
 <html>
   <head>
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
-<?php
+	<?php
   	require_once("functions.php");
+  	//Grafico antropometria
 	$consulta = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-	
 	$rows = array();
 	$tabla = array();
 	$tabla['cols'] = array(
@@ -45,8 +43,7 @@ echo $OUTPUT->header ();
 			array('label' => get_string('grasas','local_wellness'), 'type' => 'number')
 		
 	);
-
-	$rows = array();
+	
 	while($r = mysql_fetch_assoc($consulta)) {
 		    $graf = array();
 		    $graf[] = array('v' => (string) $r['Ano']); 
@@ -59,173 +56,115 @@ echo $OUTPUT->header ();
 	}
 	$tabla['rows'] = $rows;
 	$graficotabla1 = json_encode($tabla);
-
-	?>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript">
-    google.load('visualization', '1', {'packages':['corechart']});
-
-    function drawChart() {
-      var data = new google.visualization.DataTable(<?=$graficotabla1?>);
-      var options = {
-           title: '<?php echo get_string('grafico','local_wellness')?>',
-          is3D: 'true',
-          width: 800,
-          height: 230,
-        };
-      var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
-     formatter.format(data, 1); 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-     chart.draw(data, options);
-    }
-    google.setOnLoadCallback(drawChart);
-    </script>   
-<?php
-	$sql = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	
-	$rows = array();
+	// GRAFICO FUERZA
+	$sql = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
+	$rows1 = array();
 	$tabla1 = array();
 	if ($data['Sexo']=='M'){
-	$tabla1['cols'] = array(
-		    array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
-		    array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
-			array('label' => get_string('pushups','local_wellness'), 'type' => 'number')
-	);
+		$tabla1['cols'] = array(
+				array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+				array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
+				array('label' => get_string('pushups','local_wellness'), 'type' => 'number')
+		);
 	}
 	else if ($data['Sexo']=='F'){
-	$tabla1['cols'] = array(
-			array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
-			array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
-			array('label' => get_string('pullups','local_wellness'), 'type' => 'number')
-	);
+		$tabla1['cols'] = array(
+				array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+				array('label' => get_string('abds','local_wellness'), 'type' => 'number'),
+				array('label' => get_string('pullups','local_wellness'), 'type' => 'number')
+		);
 	}
 	
 	if ($data['Sexo']=='F'){
-	$rows = array();
-	while($r = mysql_fetch_assoc($sql)) {
+		while($r = mysql_fetch_assoc($sql)) {
 			$graf1 = array();
 			$graf1[] = array('v' => (string) $r['Ano']);
 			$graf1[] = array('v' => (doubleval($r['Abd'])) );
 			$graf1[] = array('v' => (float) (trim($r['Pull Up'])) );
-			$rows[] = array('c' => $graf1);
-	}
+			$rows1[] = array('c' => $graf1);
+		}
 	}
 	else if ($data['Sexo']=='M'){
-	$rows = array();
-	while($r = mysql_fetch_assoc($sql)) {
+		while($r = mysql_fetch_assoc($sql)) {
 			$graf1 = array();
 			$graf1[] = array('v' => (string) $r['Ano']);
-			$graf1[] = array('v' => (doubleval($r['Abd'])) );				
-			$graf1[] = array('v' => (float) (trim($r['Push Up'])) );	
-			$rows[] = array('c' => $graf1);
+			$graf1[] = array('v' => (doubleval($r['Abd'])) );
+			$graf1[] = array('v' => (float) (trim($r['Push Up'])) );
+			$rows1[] = array('c' => $graf1);	
 	}
 	}
-	$tabla1['rows'] = $rows;
+	$tabla1['rows'] = $rows1;
 	$graficotabla2 = json_encode($tabla1);
-?>
-    <script type="text/javascript">
-
-    google.load('visualization', '1', {'packages':['corechart']});
-    function drawChart() {
-
-      var data = new google.visualization.DataTable(<?=$graficotabla2?>);
-      var options = {
-           title: '<?php echo get_string('grafico','local_wellness')?>',
-          is3D: 'true',
-          width: 800,
-          height: 230,          
-        };
-      var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
-     formatter.format(data, 1); 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
-     chart.draw(data, options);
-    }
-    google.setOnLoadCallback(drawChart);
-    </script>
-<?php
-	$sql1 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");	
+	
+	//Datos del grafico de flexibilidad
+	$sql1 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
 	$rows = array();
 	$tabla2 = array();
 	$tabla2['cols'] = array(
 			array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
-		    array('label' => get_string('sitandreachds','local_wellness'), 'type' => 'number'),
+			array('label' => get_string('sitandreachds','local_wellness'), 'type' => 'number'),
 			array('label' => get_string('sitandreachis','local_wellness'), 'type' => 'number'),
 			array('label' => get_string('trunklifts','local_wellness'), 'type' => 'number')
 	);
-
-	$rows = array();
 	while($r = mysql_fetch_assoc($sql1)) {
-		    $graf2 = array();
-		    $graf2[] = array('v' => (string) $r['Ano']); 
-		    $graf2[] = array('v' => (doubleval($r['Sit&reach-D'])) ); 
-		    $graf2[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
-		    $graf2[] = array('v' => (float) (trim($r['Trunk Lift'])) );
-		    $rows[] = array('c' => $graf2);
+		$graf2 = array();
+		$graf2[] = array('v' => (string) $r['Ano']);
+		$graf2[] = array('v' => (doubleval($r['Sit&reach-D'])) );
+		$graf2[] = array('v' => (float) (trim($r['Sit&reach-IZ'])) );
+		$graf2[] = array('v' => (float) (trim($r['Trunk Lift'])) );
+		$rows[] = array('c' => $graf2);
 	}
 	$tabla2['rows'] = $rows;
-	$graficotabla3 = json_encode($tabla2)
-?>
-    <script type="text/javascript">
-    google.load('visualization', '1', {'packages':['corechart']});
-    function drawChart() {
-      var data = new google.visualization.DataTable(<?=$graficotabla3?>);
-      var options = {
-           title: '<?php echo get_string('grafico','local_wellness')?>',
-          is3D: 'true',
-          width: 800,
-          height: 230,          
-        };
-      var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
-     formatter.format(data, 1); 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
-     chart.draw(data, options);
-    }
-    google.setOnLoadCallback(drawChart);
-    </script>   
-<?php
+	$graficotabla3 = json_encode($tabla2);
+	// Datos de grafico de resistencia
 	$sql2 = mysql_query("SELECT * FROM fitnessgram WHERE email='$usermail'");
-	
 	$rows = array();
 	$tabla3 = array();
 	$tabla3['cols'] = array(
-		    array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
-		    array('label' => get_string('pacers','local_wellness'), 'type' => 'number'),
+			array('label' => get_string('ano','local_wellness'), 'type' => 'string'),
+			array('label' => get_string('pacers','local_wellness'), 'type' => 'number'),
 			array('label' => get_string('vo2maxs','local_wellness'), 'type' => 'number')
 	);
-	$rows = array();
+
 	while($r = mysql_fetch_assoc($sql2)) {
-			$graf3 = array();
-			$graf3[] = array('v' => (string) $r['Ano']);		
-			$graf3[] = array('v' => (doubleval($r['Nivel'])) );
-			$graf3[] = array('v' => (float) (trim($r['Vo2 max'])) );
-			$rows[] = array('c' => $graf3);
+		$graf3 = array();
+		$graf3[] = array('v' => (string) $r['Ano']);
+		$graf3[] = array('v' => (doubleval($r['Nivel'])) );
+		$graf3[] = array('v' => (float) (trim($r['Vo2 max'])) );
+		$rows[] = array('c' => $graf3);
 	}
 	$tabla3['rows'] = $rows;
 	$graficotabla4 = json_encode($tabla3);
-?>
-    <script type="text/javascript">
-
+	?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
     google.load('visualization', '1', {'packages':['corechart']});
-    function drawChart() {
-
-      var data = new google.visualization.DataTable(<?=$graficotabla4?>);
+    function drawCharts() {
+      //Datos de los graficos  
+      var data = new google.visualization.DataTable(<?=$graficotabla1?>);
+      var data2 = new google.visualization.DataTable(<?=$graficotabla2?>);
+      var data3 = new google.visualization.DataTable(<?=$graficotabla3?>);
+      var data4 = new google.visualization.DataTable(<?=$graficotabla4?>);
       var options = {
-           title: '<?php echo get_string('grafico','local_wellness')?>',
-          is3D: 'true',
-          width: 800,
-          height: 230,          
+			       	  title: '<?php echo get_string('grafico','local_wellness')?>',
+			          is3D: 'true',
+			          width: 800,
+			          height: 230,
         };
-      var formatter = new google.visualization.NumberFormat(
-      {negativeColor: 'red', negativeParens: true, pattern: '###.###'});
-     formatter.format(data, 1); 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div4'));
-     chart.draw(data, options);
+      //Crear los graficos
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  	  var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+  	  var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
+  	  var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
+  	  //Dibujar los graficos
+  		chart.draw(data, options); 
+   	    chart2.draw(data2, options);
+   	 	chart3.draw(data3, options);
+   	 	chart4.draw(data4, options);
     }
-    google.setOnLoadCallback(drawChart);
-    </script>
+    google.setOnLoadCallback(drawCharts);
+</script>     
 </head>
 <body>
 <?php  
