@@ -1,78 +1,45 @@
 <?php
 global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
+require_once (dirname ( __FILE__ ) . '/../../config.php');
+require_once ($CFG->dirroot . '/my/lib.php');
 
-redirect_if_major_upgrade_required();
+redirect_if_major_upgrade_required ();
 
-$edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
-$reset  = optional_param('reset', null, PARAM_BOOL);
+$edit = optional_param ( 'edit', null, PARAM_BOOL ); // Turn editing on and off
+$reset = optional_param ( 'reset', null, PARAM_BOOL );
 
 // **Conectando a la base de datos**
 include ("connect.php");
 
-//** Query SQL
-$userid= $USER->id;
-$usermail= $USER->email;
+// ** Query SQL
+$userid = $USER->id;
+$usermail = $USER->email;
 
-$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db);
+$result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db );
 
-
-
-require_login();
-
-$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
-if ($hassiteconfig && moodle_needs_upgrading()) {
-	redirect(new moodle_url('/admin/index.php'));
-}
-
-$strmymoodle = get_string('myhome');
-
-if (isguestuser()) {  // Force them to see system default, no editing allowed
-	// If guests are not allowed my moodle, send them to front page.
-	if (empty($CFG->allowguestmymoodle)) {
-		redirect(new moodle_url('/', array('redirect' => 0)));
-	}
-
-	$userid = null;
-	$USER->editing = $edit = 0;  // Just in case
-	$context = context_system::instance();
-	$PAGE->set_blocks_editing_capability('moodle/my:configsyspages');  // unlikely :)
-	$header = "$SITE->shortname: $strmymoodle (GUEST)";
-	$pagetitle = $header;
-
-} else {        // We are trying to view or edit our own My Moodle page
-	$userid = $USER->id;  // Owner of the page
-	$context = context_user::instance($USER->id);
-	$PAGE->set_blocks_editing_capability('moodle/my:manageblocks');
-	$header = fullname($USER);
-	$pagetitle = $strmymoodle;
-}
-
-// Get the My Moodle page info.  Should always return something unless the database is broken.
-if (!$currentpage = my_get_page($userid, MY_PAGE_PRIVATE)) {
-	print_error('mymoodlesetup');
-}
+require_login ();
 
 // desde aqui se debe configurar la pag
-$params = array();
-$PAGE->set_context($context);
-$PAGE->set_url('/local/wellness/asistencias.php', $params);
-$PAGE->set_pagelayout('standard');
-$PAGE->set_pagetype('local-wellness-asistencias');
-$PAGE->blocks->add_region('content');
-$PAGE->set_subpage($currentpage->id);
-$PAGE->set_title(get_string('titleasistencias','local_wellness'));
-$PAGE->set_heading($header);
-$PAGE->navbar->add(get_string('navasistencias','local_wellness'), new moodle_url('/local/wellness/asistencias.php'));
+$params = array ();
+$PAGE->set_context ( $context );
+$PAGE->set_url ( '/local/wellness/asistencias.php', $params );
+$PAGE->set_pagelayout ( 'standard' );
+$PAGE->set_pagetype ( 'local-wellness-asistencias' );
+$PAGE->blocks->add_region ( 'content' );
+$PAGE->set_subpage ( $currentpage->id );
+$PAGE->set_title ( get_string ( 'titleasistencias', 'local_wellness' ) );
+$PAGE->set_heading ( $header );
+$PAGE->navbar->add ( get_string ( 'navasistencias', 'local_wellness' ), new moodle_url ( '/local/wellness/asistencias.php' ) );
 
 echo $OUTPUT->header ();
 ?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
+<!-- Tabla Asistencias -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
+<script type="text/javascript">
       google.load("visualization", "1.1", {packages:["table"]});
       google.setOnLoadCallback(drawTable);
 
@@ -86,7 +53,12 @@ echo $OUTPUT->header ();
         data.addColumn('string', '<?php echo get_string('asistencia','local_wellness')?>');
         <?php while ($row = mysql_fetch_array($result)) { ?>
         data.addRows([
-      ['<?php echo $row['Periodo']?>','<?php echo $row['Fecha']?>','<?php echo $row['HoraInicio']?>','<?php echo $row['HoraTermino']?>','<?php echo $row['Actividad']?>','<?php echo $row['Asistencia']?>'],
+      ['<?php echo $row['Periodo']?>',
+       '<?php echo $row['Fecha']?>',
+       '<?php echo $row['HoraInicio']?>',
+       '<?php echo $row['HoraTermino']?>',
+       '<?php echo $row['Actividad']?>',
+       '<?php echo $row['Asistencia']?>'],
        ]);
 <?php }?>
 
@@ -96,26 +68,26 @@ echo $OUTPUT->header ();
       }
       </script>
      
-    <?php
-	$result = mysql_query("SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
-	$asistenciasperiodo = 0;
- while ($row = mysql_fetch_array($result)) { 
-       if ($row['Asistencia'] == '1'){
-       	$asistenciasperiodo = $asistenciasperiodo + 1;
-       }
-       else if ($row['Asistencia'] == '0,5'){
-       	$asistenciasperiodo = $asistenciasperiodo + 0.5;
-       }
-       else if ($row['Asistencia'] == '-1'){
-       	$asistenciasperiodo = $asistenciasperiodo - 1;
-       }     	
- }
- $ultimopar= mysql_query("SELECT cantasist.totalasistencias FROM cantasist ORDER BY id DESC LIMIT 1");
- while ($row = mysql_fetch_array($ultimopar)) { 
-       $asistenciasnecesarias= (int) $row['totalasistencias'];	
- }
-		 ?>
-    <script type="text/javascript">
+    <?php //Codigo que suma asistencias del usuario.
+      			$result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db );
+				$asistenciasperiodo = 0;
+				while ( $row = mysql_fetch_array ( $result ) ) {
+					if ($row ['Asistencia'] == '1') {
+						$asistenciasperiodo = $asistenciasperiodo + 1;
+					} else if ($row ['Asistencia'] == '0,5') {
+						$asistenciasperiodo = $asistenciasperiodo + 0.5;
+					} else if ($row ['Asistencia'] == '-1') {
+						$asistenciasperiodo = $asistenciasperiodo - 1;
+					}
+				}
+				$ultimopar = mysql_query ( "SELECT cantasist.totalasistencias FROM cantasist ORDER BY id DESC LIMIT 1" );
+				while ( $row = mysql_fetch_array ( $ultimopar ) ) {
+					$asistenciasnecesarias = ( int ) $row ['totalasistencias'];
+				}
+				?>
+		 
+    <!-- Grafico Torta Asistencias "Completadas / No completadas" -->
+<script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -139,7 +111,9 @@ echo $OUTPUT->header ();
         chart.draw(data, options);
       }
     </script>
-    <script type="text/javascript">
+
+<!-- Grafico asistencias "Llevas/Deberias Llevar" -->
+<script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawVisualization);
 
@@ -166,38 +140,38 @@ echo $OUTPUT->header ();
     chart.draw(data, options);
   }
     </script>
-    </head>
+</head>
 <body>
 
 
 </head>
 <body>
-<div class="tabs">
-   <div class="tab">
-       <input type="radio" id="tab-1" name="tab-group-1" checked>
-       <label for="tab-1"><?php echo get_string('tabasistencias','local_wellness')?></label>
-       <div class="content1">
-       <h3><font color="white" ><?php echo get_string('cantidadasistencias','local_wellness').$asistenciasperiodo;?></font></h3>
-        <div id="table_div"></div>
-        </div>
-   </div>
-   <div class="tab">
-       <input type="radio" id="tab-2" name="tab-group-1">
-       <label for="tab-2"><?php echo get_string('tabgraph1','local_wellness')?></label>
-       <div class="content1">   
-        <div id="piechart_3d" style="width: 830px; height: 400px;"></div>
-   </div>
-   </div>
-     <div class="tab">
-       <input type="radio" id="tab-3" name="tab-group-1">
-       <label for="tab-3"><?php echo get_string('tabgraph2','local_wellness')?></label>
-       <div class="content1">    
-    <div id="chart_div" style="width: 830px; height: 400px;"></div>
-    </div>
-   </div>   
-</div>
+	<div class="tabs">
+		<div class="tab">
+			<input type="radio" id="tab-1" name="tab-group-1" checked> <label
+				for="tab-1"><?php echo get_string('tabasistencias','local_wellness')?></label>
+			<div class="content1">
+				<h3>
+					<font color="white"><?php echo get_string('cantidadasistencias','local_wellness').$asistenciasperiodo;?></font>
+				</h3>
+				<div id="table_div"></div>
+			</div>
+		</div>
+		<div class="tab">
+			<input type="radio" id="tab-2" name="tab-group-1"> <label for="tab-2"><?php echo get_string('tabgraph1','local_wellness')?></label>
+			<div class="content1">
+				<div id="piechart_3d" style="width: 830px; height: 400px;"></div>
+			</div>
+		</div>
+		<div class="tab">
+			<input type="radio" id="tab-3" name="tab-group-1"> <label for="tab-3"><?php echo get_string('tabgraph2','local_wellness')?></label>
+			<div class="content1">
+				<div id="chart_div" style="width: 830px; height: 400px;"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
-<?php                        
-echo $OUTPUT->footer();
+<?php
+echo $OUTPUT->footer ();
 ?>
