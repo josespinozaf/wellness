@@ -15,8 +15,6 @@ include ("connect.php");
 $userid = $USER->id;
 $usermail = $USER->email;
 
-$result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db );
-
 require_login ();
 
 // desde aqui se debe configurar la pag
@@ -37,6 +35,24 @@ echo $OUTPUT->header ();
 <head>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 
+<?php
+$result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db );
+$result2 = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db );
+$asistenciasperiodo = 0;
+while ( $row = mysql_fetch_array ( $result2 ) ) {
+	if ($row ['Asistencia'] == '1') {
+		$asistenciasperiodo = $asistenciasperiodo + 1;
+	} else if ($row ['Asistencia'] == '0,5') {
+		$asistenciasperiodo = $asistenciasperiodo + 0.5;
+	} else if ($row ['Asistencia'] == '-1') {
+		$asistenciasperiodo = $asistenciasperiodo - 1;
+	}
+}
+$ultimopar = mysql_query ( "SELECT cantasist.totalasistencias FROM cantasist ORDER BY id DESC LIMIT 1" );
+while ( $row = mysql_fetch_array ( $ultimopar ) ) {
+	$asistenciasnecesarias = ( int ) $row ['totalasistencias'];
+}
+?>
 <!-- Tabla Asistencias -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -61,31 +77,11 @@ echo $OUTPUT->header ();
        '<?php echo $row['Asistencia']?>'],
        ]);
 <?php }?>
-
         var table = new google.visualization.Table(document.getElementById('table_div'));
-
         table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
       }
       </script>
      
-    <?php //Codigo que suma asistencias del usuario.
-      			$result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db );
-				$asistenciasperiodo = 0;
-				while ( $row = mysql_fetch_array ( $result ) ) {
-					if ($row ['Asistencia'] == '1') {
-						$asistenciasperiodo = $asistenciasperiodo + 1;
-					} else if ($row ['Asistencia'] == '0,5') {
-						$asistenciasperiodo = $asistenciasperiodo + 0.5;
-					} else if ($row ['Asistencia'] == '-1') {
-						$asistenciasperiodo = $asistenciasperiodo - 1;
-					}
-				}
-				$ultimopar = mysql_query ( "SELECT cantasist.totalasistencias FROM cantasist ORDER BY id DESC LIMIT 1" );
-				while ( $row = mysql_fetch_array ( $ultimopar ) ) {
-					$asistenciasnecesarias = ( int ) $row ['totalasistencias'];
-				}
-				?>
-		 
     <!-- Grafico Torta Asistencias "Completadas / No completadas" -->
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -95,9 +91,7 @@ echo $OUTPUT->header ();
           ['<?php echo get_string('task','local_wellness')?>', '<?php echo get_string('horascompletadas','local_wellness')?>'],
           ['<?php echo get_string('completadas','local_wellness')?>', <?php echo $asistenciasperiodo ?>],
           ['<?php echo get_string('nocompletadas','local_wellness')?>', <?php echo $asistenciasnecesarias-$asistenciasperiodo ?>],
-         
-        ]);
-
+         ]);
         var options = {
           title:'<?php echo get_string('titulografico1','local_wellness');?>',
           is3D: true,
@@ -106,7 +100,6 @@ echo $OUTPUT->header ();
               1: { color: '#2E2EFE' }
             }
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
