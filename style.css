@@ -102,3 +102,6 @@ opacity: 1;
   border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+.google-visualization-table-td {
+text-align: center !important;
+}
