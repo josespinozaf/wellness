@@ -9,26 +9,25 @@ $usermail= $USER->email;
 
 echo $OUTPUT->header();
 
-$result = mysql_query("SELECT DISTINCT cantasist.*, asistencias2.*, fitnessgram.*
-		FROM asistencias2
-		INNER JOIN cantasist
-		INNER JOIN fitnessgram
-		WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db);
+$result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
+		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id WHERE mp.course = 1 and mc.module = 15 GROUP BY mp.name", $db);
 
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
 while ($row = mysql_fetch_array($result)) {
 	 
-	echo 'Asitencias: '.$row['Asistencia'];
+	echo 'Module: '.$row['module'];
 	echo "<br>";
-	echo 'Semana: '.$row['semana'];
+	echo 'Name: '.$row['name'];
 	echo "<br>";
-	echo 'RUT: '.$row['RUT'];
+	echo 'course: '.$row['course'];
 	echo "<br>";
-	echo 'Total necesario: '.$row['totalasistencias'];
+	echo 'id: '.$row['id'];
 	echo "<br>";
-}	
+	echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'>".$row['name']."</a>";
+	echo "<br>";
+	}	
 
 echo $OUTPUT->footer();
 	?>

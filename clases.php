@@ -2,6 +2,7 @@
 global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
+include ("connect.php");
 
 redirect_if_major_upgrade_required();
 
@@ -24,7 +25,19 @@ $PAGE->navbar->add(get_string('navclases','local_wellness'), new moodle_url('/lo
 
 echo $OUTPUT->header ();
 
-echo '<img src="http://espaciorosa.cl/construccion.jpg"></img>';
+$result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
+		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id WHERE mp.course = 1 and mc.module = 15 GROUP BY mp.name", $db);
+
+if (!$result) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+while ($row = mysql_fetch_array($result)) {
+
+	
+	echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'><img src='http://www.clubcamposevilla.com/news_images/section/201209191359370.Clasesdeportivas.jpg' border = '0' alt=".$row['name']." width='200' height='200'></img></a>";
+	echo "  ";
+}
+//echo '<img src="http://espaciorosa.cl/construccion.jpg"></img>';
 
 
 echo $OUTPUT->footer();
