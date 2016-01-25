@@ -31,12 +31,18 @@ $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
+
+$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp
+		INNER JOIN page_pix as pp ON mp.id = pp.pageid", $db);
+
 while ($row = mysql_fetch_array($result)) {
 
 	
 	echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'><img src='http://www.clubcamposevilla.com/news_images/section/201209191359370.Clasesdeportivas.jpg' border = '0' alt=".$row['name']." width='200' height='200'></img></a>";
 	echo "  ";
 }
+
+
 //echo '<img src="http://espaciorosa.cl/construccion.jpg"></img>';
 
 

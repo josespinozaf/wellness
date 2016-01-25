@@ -15,18 +15,33 @@ $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-while ($row = mysql_fetch_array($result)) {
+
+$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp
+		INNER JOIN page_pix as pp ON mp.id = pp.pageid", $db);
+
+$result1 = mysql_query("SELECT DISTINCT mp.* , mc.*, pp.* FROM mdl_page as mp
+		INNER JOIN page_pix as pp ON mp.id = pp.pageid AND mp.id = pp.id
+		INNER JOIN mdl_course_module as mc ON mp.course = mc.course AND mc.instance = mp.id
+		WHERE mp.course = 1 and mc.module = 15 GROUP BY mp.name
+		", $db);
+
+if (!$result1) {
+	die("Error en la peticion SQL: " . mysql_error());
+}
+
+while ($row = mysql_fetch_array($result1)) {
 	 
-	echo 'Module: '.$row['module'];
-	echo "<br>";
 	echo 'Name: '.$row['name'];
 	echo "<br>";
-	echo 'course: '.$row['course'];
+	echo 'Foto: '.$row['pix'];
 	echo "<br>";
+	//echo 'course: '.$row['course'];
+	//echo "<br>";
 	echo 'id: '.$row['id'];
 	echo "<br>";
-	echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'>".$row['name']."</a>";
-	echo "<br>";
+	//echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'>".$row['name']."</a>";
+	echo "<a href='/../../moodle/mod/page/view.php?id=".$row['id']."'><img src=".$row['pix']." border = '0' alt=".$row['name']." width='200' height='200'></img></a>";
+	
 	}	
 
 echo $OUTPUT->footer();
