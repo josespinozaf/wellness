@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <?php
 global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
@@ -32,8 +33,11 @@ foreach ($clases as $clase)
 {
 	foreach ($fotos as $foto)
 	{
-	if 	($clase['name'] == $foto['name']){		
-	echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'><img src=".$foto['pix']." border = '0' alt=".$clase['name']." width='200' height='200'></img></a><br>";
+	if 	($clase['name'] == $foto['name']){	
+		echo '<div class="img">';	
+		echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
+		echo "<img  src=".$foto['pix']."  alt=".$clase['name']." width='300' height='200'></img></a>";
+		echo '<div class="desc"><h6>'.$clase['name'].'</h3></div></div>';
 	}
 	}
 }
