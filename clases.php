@@ -36,8 +36,8 @@ foreach ($clases as $clase)
 	if 	($clase['name'] == $foto['name']){	
 		echo '<div class="img">';	
 		echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
-		echo "<img  src=".$foto['pix']."  alt=".$clase['name']." width='300' height='200'></img></a>";
-		echo '<div class="desc"><h6>'.$clase['name'].'</h3></div></div>';
+		echo "<img  src=".$foto['pix']."  alt=".$clase['name']."></img></a>";
+		echo '<div class="desc">'.$clase['name'].'</div></div>';
 	}
 	}
 }
