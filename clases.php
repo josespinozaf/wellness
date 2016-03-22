@@ -41,20 +41,6 @@ foreach ($clases as $clase)
 	}
 	}
 }
-		?>
-		
-<!DOCTYPE html>
-<html>
-<body>
-
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
-
-</body>
-</html>
-		<?php 
+ echo "<br><br><a href='/../../moodle/local/wellness/formulariofoto.php'>Agregar foto a clase</a>";
 echo $OUTPUT->footer();
 	?>
