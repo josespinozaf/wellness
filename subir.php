@@ -1,6 +1,8 @@
+
+<meta http-equiv="refresh" content="7; url=/../../moodle/local/wellness/clases.php" />
 <?php
 include ("connect.php");
-
+$nombre= $_REQUEST['nombre'];
 //comprobamos si ha ocurrido un error.
 if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
 	echo "ha ocurrido un error";
@@ -24,15 +26,17 @@ if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
                 //escapar los caracteres
                 $data = mysql_escape_string($data);
 
-		$resultado = @mysql_query("INSERT INTO imagenes (imagen, tipo_imagen) VALUES ('$data', '$tipo')") ;
+		$resultado = @mysql_query("INSERT INTO imagenes (nombre, imagen, tipo_imagen) VALUES ('$nombre','$data', '$tipo')"); 
 
 		if ($resultado){
-			echo "el archivo ha sido copiado exitosamente";
+			echo "Felicitaciones, la foto ha sido subida exitosamente. Esta pagina se redireccionará";
 		} else {
-			echo "ocurrio un error al copiar el archivo.";
+			echo "Oh, ocurrio un error al copiar el archivo.";
 		}
 	} else {
-		echo "archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
+		echo "Cuidado, archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
 	}
+	
+
 }
 ?>
