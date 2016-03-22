@@ -18,7 +18,7 @@ $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN page_pix as pp ON mp.id = pp.pageid", $db);
+$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
 $clases = array();
 $fotos = array();
 while ($clase =  mysql_fetch_assoc($result))
@@ -36,7 +36,7 @@ foreach ($clases as $clase)
 	if 	($clase['name'] == $foto['name']){	
 		echo '<div class="img">';	
 		echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
-		echo "<img  src=".$foto['pix']."  alt=".$clase['name']."></img></a>";
+		echo "<img  src='/../../moodle/local/wellness/imagen.php?nombre=".$clase['name']."' alt=".$clase['name']."></img></a>";
 		echo '<div class="desc">'.$clase['name'].'</div></div>';
 	}
 	}
