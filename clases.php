@@ -41,6 +41,11 @@ foreach ($clases as $clase)
 	}
 	}
 }
- echo "<br><br><a href='/../../moodle/local/wellness/formulariofoto.php'>Agregar foto a clase</a>";
+ echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
+ echo "<input type='submit' name='Agregar' value='Agregar foto a clase'>";
+ echo "<input type='submit' name='Cambiar' value='Cambiar foto a clase'>";
+ echo "</form>";
 echo $OUTPUT->footer();
 	?>
+	
+	

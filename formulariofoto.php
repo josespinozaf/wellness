@@ -9,8 +9,9 @@ $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 		WHERE mp.course = 1 and mc.module = 15
 		GROUP BY mp.name", $db);
 echo $OUTPUT->header(); 
-
+if (isset($_POST['Agregar'])){
 ?>
+
 <form action="subir.php" method="POST" enctype="multipart/form-data">
 <h3>Subir imagen de la clase:</h3>
 Nombre de la clase:
@@ -30,8 +31,33 @@ Nombre de la clase:
 <label for="imagen">Imagen:* <input type="file" name="imagen" id="imagen" /></label>
 <p>*Este archivo debe ser .jpg, .jpeg, .gif, .png</p>
 <br>
-<input type="submit" name="subir" value="Subir"/>
+<input type="submit" name="subiragregar" value="Subir"/>
 </form>
-<?php 
+<?php }
+if (isset($_POST['Cambiar'])){	
+?>
+<form action="subir.php" method="POST" enctype="multipart/form-data">
+<h3>Cambiar imagen de la clase:</h3>
+Nombre de la clase:
+<select name="nombre">
+  <?php
+  $clases = array();
+  while ($clase =  mysql_fetch_assoc($result))
+  {
+  	$clases[] = $clase;
+  }
+  foreach ($clases as $clase)
+  {
+  	echo "<option  value='".$clase['name'] ."'>".$clase['name'] ."</option>";
+  }
+  ?>
+</select><br>
+<label for="imagen">Imagen:* <input type="file" name="imagen" id="imagen" /></label>
+<p>*Este archivo debe ser .jpg, .jpeg, .gif, .png</p>
+<br>
+<input type="submit" name="subircambiar" value="Subir"/>
+</form>
+<?php
+} 
 echo $OUTPUT->footer();
 ?>
