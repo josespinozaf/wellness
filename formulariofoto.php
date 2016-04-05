@@ -68,7 +68,32 @@ if (isset($_POST['Cambiar'])){
 if (isset($_POST['AgregarRutina'])){
 ?>	
 		<form action="subir.php" method="POST" enctype="multipart/form-data">
-		<h3>Cambiar imagen de la clase:</h3>
+		<h3>Agregar imagen de la rutina:</h3>
+		Nombre de la clase:
+		<select name="nombre">
+				  <?php
+				  $rutinas = array();
+				  while ($rutina =  mysql_fetch_assoc($resultrutina))
+				  {
+				  	$rutinas[] = $rutina;
+				  }
+				  foreach ($rutinas as $rutina)
+				  {
+				  	echo "<option  value='".$rutina['name'] ."'>".$rutina['name'] ."</option>";
+				  }
+				  ?>
+		</select><br>
+		<label for="imagen">Imagen:* <input type="file" name="imagen" id="imagen" /></label>
+		<p>*Este archivo debe ser .jpg, .jpeg, .gif, .png</p>
+		<br>
+		<input type="submit" name="nn" value="Subir"/>
+</form>
+<?php 
+}
+if (isset($_POST['CambiarRutina'])){
+	?>
+		<form action="subir.php" method="POST" enctype="multipart/form-data">
+		<h3>Cambiar imagen de la rutina:</h3>
 		Nombre de la clase:
 		<select name="nombre">
 				  <?php
