@@ -18,32 +18,32 @@ $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-//$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
+$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_book as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
 $clases = array();
-//$fotos = array();
+$fotos = array();
 while ($clase =  mysql_fetch_assoc($result))
 {
 	$clases[] = $clase;
 }
-//while ($foto =  mysql_fetch_assoc($resultfoto))
-//{
-//	$fotos[] = $foto;
-//}
+while ($foto =  mysql_fetch_assoc($resultfoto))
+{
+	$fotos[] = $foto;
+}
 foreach ($clases as $clase)
 {
-	//foreach ($fotos as $foto)
-	//{
-	//if 	($clase['name'] == $foto['name']){	
+	foreach ($fotos as $foto)
+	{
+	if 	($clase['name'] == $foto['name']){	
 		echo '<div class="img">';	
-		echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
+		echo "<a href='/../../moodle/mod/book/view.php?id=".$clase['id']."'>";
 		echo "<img  src='/../../moodle/local/wellness/imagen.php?nombre=".$clase['name']."' alt=".$clase['name']."></img></a>";
 		echo '<div class="desc">'.$clase['name'].'</div></div>';
-	//}
-	//}
+	}
+	}
 }
  echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
- echo "<input type='submit' name='Agregar' value='Agregar foto a clase'>";
- echo "<input type='submit' name='Cambiar' value='Cambiar foto a clase'>";
+ echo "<input type='submit' name='Agregar' value='Agregar foto a rutina'>";
+ echo "<input type='submit' name='Cambiar' value='Cambiar foto a rutina'>";
  echo "</form>";
 echo $OUTPUT->footer();
 	?>

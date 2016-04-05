@@ -56,4 +56,7 @@ $PAGE->navbar->add(get_string('navrutinas','local_wellness'), new moodle_url('/l
 
 echo $OUTPUT->header ();
 //echo $OUTPUT->custom_block_region('content');
+
+
+
 echo $OUTPUT->footer();
