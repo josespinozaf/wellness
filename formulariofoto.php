@@ -86,7 +86,7 @@ if (isset($_POST['AgregarRutina'])){
 		<label for="imagen">Imagen:* <input type="file" name="imagen" id="imagen" /></label>
 		<p>*Este archivo debe ser .jpg, .jpeg, .gif, .png</p>
 		<br>
-		<input type="submit" name="nn" value="Subir"/>
+		<input type="submit" name="subiragregar" value="Subir"/>
 </form>
 <?php 
 }
@@ -111,7 +111,7 @@ if (isset($_POST['CambiarRutina'])){
 		<label for="imagen">Imagen:* <input type="file" name="imagen" id="imagen" /></label>
 		<p>*Este archivo debe ser .jpg, .jpeg, .gif, .png</p>
 		<br>
-		<input type="submit" name="nn" value="Subir"/>
+		<input type="submit" name="subircambiar" value="Subir"/>
 </form>
 <?php 
 }
