@@ -220,10 +220,18 @@ echo $OUTPUT->header ();
       			<div id="chart_div4"></div>
       		</div>
       	</div>
-</div>   
+</div>  
 <?php }
 else { 
-	echo '<h3>'.get_string('nohayfitnessgram','local_wellness').'</h3>';}?>
+	echo '<h3>'.get_string('nohayfitnessgram','local_wellness').'</h3>';}
+	?>
+	<!-- FORMULARIO PARA AGREGAR FITNESSGRAM -- SOLO ADMIN TIENE PERMISO -->
+	<br>
+	<p> **Si necesitas agregar un fitnessgram o buscar a un alumno</p>
+	<form action='/../../moodle/local/wellness/Dbfitnessgram.php' method='POST'>
+		<input type='submit' name='AgregarFIT' value='Agregar Fitnessgram'>
+		<input type='submit' name='BuscarFIT' value='Buscar Alumno'>
+	</form>
 </body>
 </html>
 <?php
