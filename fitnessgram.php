@@ -139,7 +139,8 @@ echo $OUTPUT->header ();
 	?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
-    google.load('visualization', '1', {'packages':['corechart']});
+    google.load('visualization', '1.1', {'packages':['corechart']});
+    
     function drawCharts() {
       //Datos de los graficos  
       var data = new google.visualization.DataTable(<?=$graficotabla1?>);
@@ -226,14 +227,16 @@ else {
 	echo '<h3>'.get_string('nohayfitnessgram','local_wellness').'</h3>';}
 	?>
 	<!-- FORMULARIO PARA AGREGAR FITNESSGRAM -- SOLO ADMIN TIENE PERMISO -->
+	<?php if (is_siteadmin()){?>
 	<br>
 	<p> **Si necesitas agregar un fitnessgram o buscar a un alumno</p>
 	<form action='/../../moodle/local/wellness/Dbfitnessgram.php' method='POST'>
 		<input type='submit' name='AgregarFIT' value='Agregar Fitnessgram'>
 		<input type='submit' name='BuscarFIT' value='Buscar Alumno'>
 	</form>
-</body>
-</html>
-<?php
+
+<?php };
 echo $OUTPUT->footer();
-?> 
+?>
+</body>
+</html> 

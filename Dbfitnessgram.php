@@ -63,7 +63,7 @@ if (isset($_POST['AgregarFIT'])){
 		 *Sexo:<br>
 		 <input name="sexo" type="radio" checked="checked" value="M"/>M<br>
 		 <input name="sexo" type="radio" value="F"/>F<br><br> 
-		 *Mail UAI: <input type="text" name="ApellidoMaterno" size="30"><br>
+		 *Mail UAI: <input type="text" name="mail" size="30"><br>
 		 *Año:     <input type=text name="año" onkeyUp="return ValNumero(this);" maxlength="5" size="6" value="0"/><br>
 		 *Semestre: <select name="semestre">
 		 <option>1</option>
@@ -74,12 +74,12 @@ if (isset($_POST['AgregarFIT'])){
 		 *Peso:    <input type=text name="peso" onkeyUp="return ValNumero(this);" maxlength="3" size="4" value="0"/><br>
 		 *IMC:     <input type=text name="IMC" onkeyUp="return ValNumero(this);" maxlength="5" size="6" value="0"/><br>
 		 *Suma mm:<input type=text name="sumamm" onkeyUp="return ValNumero(this);" maxlength="4" size="4" value="0"/><br>
-		 *%Grasa:  <input type=text name="año" onkeyUp="return ValNumero(this);" maxlength="3" size="4" value="0"/><br>
+		 *%Grasa:  <input type=text name="grasa" onkeyUp="return ValNumero(this);" maxlength="3" size="4" value="0"/><br>
 		 <h4><legend>Fuerza:</legend></h4>
 		 *Abd: 	   <input type=text name="ABD" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/><br>
 		 *Push Up: <input type=text name="PushUP" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/> Solo si es hombre<br> 
 		 *Pull Up: <input type=text name="PullUP" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/> Solo si es mujer<br>
-		<h4><legend>Flexibilidad:</legend>></h4>
+		<h4><legend>Flexibilidad:</legend></h4>
 		 *Sit&Reach-D: <input type=text name="Sit&Reach-D" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/><br>
 		 *Sit&Reach-I: <input type=text name="Sit&Reach-I" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/><br> 
 		 *Trunk Lift: <input type=text name="TrunkLift" onkeyUp="return ValNumero(this);" maxlength="3" size="3" value="0"/><br>

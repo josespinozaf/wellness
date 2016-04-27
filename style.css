@@ -129,3 +129,37 @@ opacity: 1;
 .google-visualization-table-td {
 text-align: center !important;
 }
+/*tabla de busqueda de alumnos*/
+tablefit {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+}
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
+.centrofit{
+  padding: 0.5rem;
+  background: #484848 ;
+  color: white;
+  text-align: center;
+  font-size: 21px;
+
+}
+
+#cuadrofit{
+	width: 90%;
+	background: #F8F8F8 ;
+	padding: 25px;
+	margin: 5px auto;
+	border: 3px solid #D8D8D8;
+}
+#titulofit{
+	width: 100%;
+	background: #282828;
+	color:white;
+
+}
