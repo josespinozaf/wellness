@@ -233,6 +233,7 @@ else {
 	<form action='/../../moodle/local/wellness/Dbfitnessgram.php' method='POST'>
 		<input type='submit' name='AgregarFIT' value='Agregar Fitnessgram'>
 		<input type='submit' name='BuscarFIT' value='Buscar Alumno'>
+		<input type='submit' name='BuscarAño' value='Buscar por año y sede'>
 	</form>
 
 <?php };

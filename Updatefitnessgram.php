@@ -104,4 +104,71 @@ if (isset($_POST['BuscarFIT'])){
 			</center>';
 	}
 	
-}?>			
+}
+if (isset($_POST['BuscarAño'])){
+	$año = $_REQUEST['año'];
+	$sede = $_REQUEST['sede'];
+	$queryrut="SELECT * FROM fitnessgram WHERE Ano='".$año."' AND Sede='".$sede."'";
+	$resultqueryrut=mysql_query($queryrut) or die (mysql_error());
+	if($resultqueryrut){
+		?>
+			<div id="cuadrofit">
+			<center><br>
+			<div id="titulofit">
+			<center><h1><?php echo 'Registros del Año '.$año.' de la sede '.$sede; ?></h1></center>
+			</div>
+			<table>
+			<thead>
+			<tr class="centrofit">
+			<td>Nombres</td>
+			<td>Apellido Paterno</td>
+			<td>Apellido Materno</td>
+			<td>Semestre</td>
+			<td>Altura</td>
+			<td>Peso</td>
+			<td>IMC</td>
+			<td>Suma mm</td>
+			<td>%grasa</td>
+			<td>Sit&reach-D</td>
+			<td>Sit&reach-IZ</td>
+			<td>Trunk Lift</td>
+			<td>Adb</td>
+			<td>Pull Up</td>
+			<td>Push Up</td>
+			<td>Nivel</td>
+			<td>Miles</td>
+			<td>Vo2 Max</td>
+			</tr>
+			<tbody><?php 
+			while($datos= mysql_fetch_array($resultqueryrut)) {
+				?><tr>
+								
+								<td><?php echo $datos['Nombres'];?></td>
+								<td><?php echo $datos['Apellido Paterno'];?></td>	
+								<td><?php echo $datos['Apellido Materno'];?></td>			
+								<td><?php echo $datos['Sem'];?>	</td>
+								<td><?php echo $datos['Talla'];?></td>
+								<td><?php echo $datos['Peso'];?></td>
+								<td><?php echo $datos['IMC'];?></td>
+								<td><?php echo $datos['Suma mm'];?>	</td>
+								<td><?php echo $datos['%Grasa'];?></td>
+								<td><?php echo $datos['Sit&reach-D'];?></td>
+								<td><?php echo $datos['Sit&reach-IZ'];?></td>
+								<td><?php echo $datos['Trunk Lift'];?></td>
+								<td><?php echo $datos['Abd'];?>	</td>
+								<td><?php echo $datos['Pull Up'];?></td>
+								<td><?php echo $datos['Push Up'];?></td>
+								<td><?php echo $datos['Nivel'];?></td>
+								<td><?php echo $datos['Miles'];?></td>
+								<td><?php echo $datos['Vo2 max'];?></td>
+								
+							</tr>
+							
+		<?php 	}
+		echo'</tbody>
+				</table>	
+				</center>';
+		}
+		
+	}
+?>			
