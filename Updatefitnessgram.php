@@ -3,7 +3,7 @@
 
 <?php
 include ("connect.php");
-
+require_login ();
 if (isset($_POST['AgregarFIT'])){
 	$Nombres = $_REQUEST['name'];
 	$Rut = $_REQUEST['RUT'];

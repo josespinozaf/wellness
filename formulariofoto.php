@@ -2,7 +2,7 @@
 global $USER, $CFG;
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
-
+require_login ();
 include ('connect.php');
 $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id

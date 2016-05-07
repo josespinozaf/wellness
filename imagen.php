@@ -1,4 +1,5 @@
 <?php
+require_login ();
 include ("connect.php");
 //si la variable imagen no ha sido definida nos dara un advertencia.
 //$id = $_GET['id'];
