@@ -1,5 +1,6 @@
 <meta http-equiv="refresh" content="20; url=/../../moodle/local/wellness/fitnessgram.php" />
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
 <?php
 include ("connect.php");
 
@@ -44,7 +45,8 @@ if (isset($_POST['AgregarFIT'])){
 	
 	
 }
-if (isset($_POST['BuscarFIT'])){
+if (isset($_POST['BuscarFIT'])){?>
+<?php 
 	$Rut = $_REQUEST['RUT'];
 	$DV = $_REQUEST['DV'];
 	$queryrut="SELECT * FROM fitnessgram WHERE RUT='".$Rut."' AND DV='".$DV."'";
@@ -77,6 +79,8 @@ if (isset($_POST['BuscarFIT'])){
 		<td>Vo2 Max</td>
 		</tr>
 		<tbody><?php 
+		$excel="";
+		$excel.="Año\tSemestre\tAltura\tPeso\tIMC\tSumamm\t%Grasa\tSit&reach-D\tSit&reach-IZ\tTrunkLift\tAdb\tPullUp\tPushUP\tNivel\tMiles\tVo2Max\n";
 		while($datos= mysql_fetch_array($resultqueryrut)) {
 			?><tr>
 							<td><?php echo $datos['Ano'];?></td>
@@ -98,11 +102,23 @@ if (isset($_POST['BuscarFIT'])){
 							
 						</tr>
 						
-	<?php 	}
+	<?php 		$excel.=$datos['Ano']."\t".$datos['Sem']."\t".$datos['Talla']."\t";
+				$excel.=$datos['Peso']."\t".$datos['IMC']."\t".$datos['Suma mm']."\t";
+				$excel.=$datos['%Grasa']."\t".$datos['Sit&reach-D']."\t".$datos['Sit&reach-IZ']."\t";
+				$excel.=$datos['Trunk Lift']."\t".$datos['Abd']."\t".$datos['Pull Up']."\t".$datos['Push Up']."\t";
+				$excel.=$datos['Nivel']."\t".$datos['Miles']."\t".$datos['Vo2 max']."\n";
+				}
+	
+	
 	echo'</tbody>
 			</table>	
 			</center>';
+	echo "<br><form action=generadorexcel.php method = POST>
+	<input type='hidden' name='export' value='.$excel.'/>
+	Descargar en excel <input type = submit value = Exportar></form>";
+		
 	}
+	
 	
 }
 if (isset($_POST['BuscarAño'])){
