@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="20; url=/../../moodle/local/wellness/fitnessgram.php" />
+<meta http-equiv="refresh" content="10; url=/../../moodle/local/wellness/fitnessgram.php" />
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 
 <?php
