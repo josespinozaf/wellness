@@ -40,6 +40,7 @@ if (isset($_POST['AgregarFIT'])){
 		echo"Desea ingresar otro?<br>";
 		echo"<form action='/../../moodle/local/wellness/Dbfitnessgram.php' method='POST'>
 		<input type='button' name='AgregarFIT' value='Agregar Fitnessgram'></center></form>";
+		echo"<a href='/../../moodle/local/wellness/fitnessgram.php'>Volver</a>";
 	}
 	
 	
@@ -115,7 +116,7 @@ if (isset($_POST['BuscarFIT'])){?>
 	echo "<br><form action=generadorexcel.php method = POST>
 	<input type='hidden' name='export' value='.$excel.'/>
 	Descargar en excel <input type = submit value = Exportar></form>";
-		
+	echo"<a href='/../../moodle/local/wellness/fitnessgram.php'>Volver</a>";
 	}
 	
 	
@@ -194,7 +195,7 @@ if (isset($_POST['BuscarAño'])){
 		echo "<br><form action=generadorexcel.php method = POST>
 		<input type='hidden' name='export' value='.$excel.'/>
 		Descargar en excel <input type ='Button' value = Exportar></form>";
-		}
+		echo"<a href='/../../moodle/local/wellness/fitnessgram.php' >Volver</a>";}
 		
 	}
 ?>			
