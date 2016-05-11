@@ -3,7 +3,6 @@
 
 <?php
 include ("connect.php");
-require_login ();
 if (isset($_POST['AgregarFIT'])){
 	$Nombres = $_REQUEST['name'];
 	$Rut = $_REQUEST['RUT'];
@@ -156,6 +155,8 @@ if (isset($_POST['BuscarAño'])){
 			<td>Vo2 Max</td>
 			</tr>
 			<tbody><?php 
+			$excel="";
+			$excel.="Nombres\tApellido Paterno\tApellido Materno\tSemestre\tAltura\tPeso\tIMC\tSumamm\t%Grasa\tSit&reach-D\tSit&reach-IZ\tTrunkLift\tAdb\tPullUp\tPushUP\tNivel\tMiles\tVo2Max\n";
 			while($datos= mysql_fetch_array($resultqueryrut)) {
 				?><tr>
 								
@@ -180,10 +181,19 @@ if (isset($_POST['BuscarAño'])){
 								
 							</tr>
 							
-		<?php 	}
+		<?php 	
+				$excel.=$datos['Nombres']."\t".$datos['Apellido Paterno']."\t".$datos['Apellido Materno']."\t".$datos['Sem']."\t".$datos['Talla']."\t";
+				$excel.=$datos['Peso']."\t".$datos['IMC']."\t".$datos['Suma mm']."\t";
+				$excel.=$datos['%Grasa']."\t".$datos['Sit&reach-D']."\t".$datos['Sit&reach-IZ']."\t";
+				$excel.=$datos['Trunk Lift']."\t".$datos['Abd']."\t".$datos['Pull Up']."\t".$datos['Push Up']."\t";
+				$excel.=$datos['Nivel']."\t".$datos['Miles']."\t".$datos['Vo2 max']."\n";
+			}
 		echo'</tbody>
 				</table>	
 				</center>';
+		echo "<br><form action=generadorexcel.php method = POST>
+		<input type='hidden' name='export' value='.$excel.'/>
+		Descargar en excel <input type ='Button' value = Exportar></form>";
 		}
 		
 	}
