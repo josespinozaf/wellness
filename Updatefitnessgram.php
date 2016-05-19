@@ -114,8 +114,10 @@ if (isset($_POST['BuscarFIT'])){?>
 			</table>	
 			</center>';
 	echo "<br><form action=generadorexcel.php method = POST>
-	<input type='hidden' name='export' value='.$excel.'/>
-	Descargar en excel <input type = submit value = Exportar></form>";
+	<input type='hidden' name='export' value='$excel'/>
+	<input type='hidden' name='rut' value='$Rut'/>
+	<input type='hidden' name='dv' value='$DV'/>
+	Descargar en excel <input type = submit name= 'ExportarRut' value = 'Exportar'></form>";
 	echo"<a href='/../../moodle/local/wellness/fitnessgram.php'>Volver</a>";
 	}
 	
@@ -124,7 +126,8 @@ if (isset($_POST['BuscarFIT'])){?>
 if (isset($_POST['BuscarAño'])){
 	$año = $_REQUEST['año'];
 	$sede = $_REQUEST['sede'];
-	$queryrut="SELECT * FROM fitnessgram WHERE Ano='".$año."' AND Sede='".$sede."'";
+	$semestre = $_REQUEST['semestre'];
+	$queryrut="SELECT * FROM fitnessgram WHERE Ano='".$año."' AND Sede='".$sede."' AND Sem='".$semestre."'";
 	$resultqueryrut=mysql_query($queryrut) or die (mysql_error());
 	if($resultqueryrut){
 		?>
@@ -193,8 +196,11 @@ if (isset($_POST['BuscarAño'])){
 				</table>	
 				</center>';
 		echo "<br><form action=generadorexcel.php method = POST>
-		<input type='hidden' name='export' value='.$excel.'/>
-		Descargar en excel <input type ='Button' value = Exportar></form>";
+		<input type='hidden' name='export' value='$excel'/>
+		<input type='hidden' name='sede' value='$sede'/>
+		<input type='hidden' name='ano' value='$año'/>
+		<input type='hidden' name='semestre' value='$semestre'/>
+		Descargar en excel <input type ='submit' name= 'ExportarSede' value = 'Exportar'></form>";
 		echo"<a href='/../../moodle/local/wellness/fitnessgram.php' >Volver</a>";}
 		
 	}

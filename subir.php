@@ -1,5 +1,5 @@
 
-<meta http-equiv="refresh" content="7; url=/../../moodle/local/wellness/clases.php" />
+<meta http-equiv="refresh" content="4; url=/../../moodle/local/wellness/clases.php" />
 <?php
 include ("connect.php");
 
@@ -7,7 +7,7 @@ $nombre= $_REQUEST['nombre'];
 
 //comprobamos si ha ocurrido un error.
 	if ( !isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] > 0){
-	echo "ha ocurrido un error";
+	echo "Ha ocurrido un error";
 																} 
 	else {
 	//ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.

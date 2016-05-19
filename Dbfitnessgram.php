@@ -113,10 +113,14 @@ if (isset($_POST['BuscarAño'])){
 		<form action="Updatefitnessgram.php" method="POST">
 		<h4><legend>Buscar Año y Sede:</legend></h4>
 		 *Año: <input type=text name="año" onkeyUp="return ValNumero(this);" maxlength="5" size="6" value="0"/><br>
+		 *Semestre:<select name="semestre">
+		 <option>1</option>
+		 <option>2</option>
+		 		</select><br>
 		 *Sede:<select name="sede">
 		 <option>Santiago</option>
 		 <option>Viña</option>
-		 		</select><br>
+		 </select><br>	 
 		 <input type="submit" name="BuscarAño" value="Buscar">
 		 </form>
 <?php }
