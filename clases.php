@@ -12,7 +12,7 @@ echo $OUTPUT->header();
 
 $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 1 and mc.module = 15
+		WHERE mp.course = 4 and mc.module = 15
 		GROUP BY mp.name", $db);
 
 if (!$result) {
