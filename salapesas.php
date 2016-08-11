@@ -48,14 +48,14 @@ if (!$currentpage = my_get_page($userid, MY_PAGE_PRIVATE)) {
 // desde aqui se debe configurar la pag
 $params = array();
 $PAGE->set_context($context);
-$PAGE->set_url('//local/rutinas/index.php', $params);
+$PAGE->set_url('/local/wellness/salapesas.php', $params);
 $PAGE->set_pagelayout('mydashboard');
-$PAGE->set_pagetype('local-rutinas-index');
+$PAGE->set_pagetype('local-salapesas-index');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title('Rutinas');
 $PAGE->set_heading($header);
-$PAGE->navbar->add(get_string('navrutinas','local_wellness'), new moodle_url('/local/wellness/rutinas.php'));
+$PAGE->navbar->add(get_string('navrutinas','local_wellness'), new moodle_url('/local/wellness/salapesas.php'));
 
 
 $userid= $USER->id;
@@ -63,6 +63,14 @@ $usermail= $USER->email;
 
 
 echo $OUTPUT->header ();
+
+if (is_siteadmin()){
+	echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
+	echo "<input type='submit' name='AgregarRutina' value='Agregar foto a rutina'>";
+	echo "<input type='submit' name='CambiarRutina' value='Cambiar foto a rutina'>";
+	echo "</form>";
+}
+
 
 $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
@@ -95,11 +103,6 @@ foreach ($clases as $clase)
 		}
 	}
 }
-echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
-echo "<input type='submit' name='AgregarRutina' value='Agregar foto a rutina'>";
-echo "<input type='submit' name='CambiarRutina' value='Cambiar foto a rutina'>";
-echo "</form>";
-
-
 
 echo $OUTPUT->footer();
+?>
