@@ -1,18 +1,13 @@
 <html>
 <body>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-Usuario:<input name="email" type="text" id="email"/>
-Password:<input name="password" type="text" id="password" />
-<input type='submit' name='enviar'>
-</form>
 <?php 
 session_start();
-if ($_POST) {
+
                 $token = 'KknDlkLKmmm909b998vb92368nJuijs6s544sd';
                 $tokenApp = $_SESSION["tokenApp"];
                
-                //$url = 'http://webapitest.uai.cl/wellness/login';
-                $url = 'http://private-74270a-uai2.apiary-mock.com/InformacionPersonal';
+                $url = 'http://webapitest.uai.cl/wellness/InformacionPersonal';
+                //$url = 'http://private-74270a-uai2.apiary-mock.com/InformacionPersonal';
                                               
                 echo "<br />Esta es la cadena: " . $token;
                 echo "<br />Esta es la url: " . $url;
@@ -22,7 +17,7 @@ if ($_POST) {
             									"token" => $token,
                                                "tokenApp" => $tokenApp                                               
             );
-                $data_string = json_encode($curl_post_data);      
+                $data_string = json_encode($curl_post_data);
                
                 $curl = curl_init();
                
@@ -43,9 +38,10 @@ if ($_POST) {
                 echo "El curl_response es (string completo):".$curl_response;
                               
                 $decoded = json_decode($curl_response);
-                echo "<br /><br />Nombre Completo devuelto por el servicio: " . $decoded->NombreCompleto;
-               
-}
+                echo "<br /><br />Nombre Completo devuelto por el servicio: " . $decoded->nombreCompleto;
+                echo "<br /><br />Rut devuelto por el servicio: " . $decoded->rut;
+                        
+
 ?>
 </body>
 </html>

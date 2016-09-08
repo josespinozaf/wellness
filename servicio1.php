@@ -39,8 +39,8 @@ if ($_POST) {
                 echo "El curl_response es (string complet):".$curl_response;
                               
                 $decoded = json_decode($curl_response);
-                $tokenApp = $decoded->tokenApp;
-                echo "<br /><br />TokenApp devuelto por el servicio: " . $decoded->tokenApp;
+                $tokenApp = $decoded->token;
+                echo "<br /><br />TokenApp devuelto por el servicio: " . $decoded->token;
                 echo "<a href='http://localhost:81/moodle/local/wellness/serviciochino.php'>Link</a>";
                 $_SESSION["tokenApp"] = $tokenApp;
                
