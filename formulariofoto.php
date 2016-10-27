@@ -6,12 +6,12 @@ require_once($CFG->dirroot . '/my/lib.php');
 include ('connect.php');
 $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 1 and mc.module = 15
+		WHERE mp.course = 4 and mc.module = 15
 		GROUP BY mp.name", $db);
 
 $resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
-		INNER JOIN mdl_book as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 1 and mc.module = 3
+		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
+		WHERE mp.course = 5 and mc.module = 15
 		GROUP BY mp.name", $db);
 
 echo $OUTPUT->header(); 
