@@ -36,6 +36,7 @@ echo $OUTPUT->header ();
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 
 <?php
+
 $result = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1' ORDER BY AsisId ASC", $db );
 $result2 = mysql_query ( "SELECT DISTINCT asistencias2.*, fitnessgram.RUT FROM asistencias2 INNER JOIN fitnessgram WHERE asistencias2.rut = fitnessgram.RUT AND fitnessgram.email = '$usermail' AND asistencias2.Periodo='S-SEM. 2012/1'", $db );
 $asistenciasperiodo = 0;
