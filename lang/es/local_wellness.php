@@ -9,10 +9,9 @@ $string['navrutinas'] = 'Rutinas';
 $string['navclases'] = 'Clases';
 $string['navsalapesas'] = 'Sala de Pesas';
 $string['navfitnessgram'] = 'Fitnessgram';
-$string['navasistencias'] = 'Asistencias';
 $string['naveventos'] = 'Eventos';
-
-
+$string['navcontacto'] = 'Contacto';
+$string['navrutinaaleatoria'] = 'Rutina Aleatoria';
 //**Mis Rutinas**
 
 //**Fitnessgram**
