@@ -19,9 +19,9 @@ $PAGE->set_pagelayout('mydashboard');
 $PAGE->set_pagetype('local-wellness-contacto');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
-$PAGE->set_title('Contacto');
+$PAGE->set_title(get_string('navcontacto','local_wellness'));
 $PAGE->set_heading($header);
-$PAGE->navbar->add('Contacto', new moodle_url('/local/wellness/contacto.php'));
+$PAGE->navbar->add(get_string('navcontacto','local_wellness'), new moodle_url('/local/wellness/contacto.php'));
 
 echo $OUTPUT->header ();
 
