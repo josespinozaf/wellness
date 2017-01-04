@@ -65,14 +65,14 @@ $usermail= $USER->email;
 echo $OUTPUT->header ();
 
 $result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
-		INNER JOIN mdl_book as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 1 and mc.module = 3
+		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
+		WHERE mp.course = 5 and mc.module = 15
 		GROUP BY mp.name", $db);
 
 if (!$result) {
 	die("Error en la peticion SQL: " . mysql_error());
 }
-$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_book as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
+$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
 $clases = array();
 $fotos = array();
 while ($clase =  mysql_fetch_assoc($result))
@@ -89,7 +89,7 @@ foreach ($clases as $clase)
 	{
 		if 	($clase['name'] == $foto['name']){
 			echo '<div class="img">';
-			echo "<a href='/../../moodle/mod/book/view.php?id=".$clase['id']."'>";
+			echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
 			echo "<img  src='/../../moodle/local/wellness/imagen.php?nombre=".$clase['name']."' alt=".$clase['name']."></img></a>";
 			echo '<div class="desc">'.$clase['name'].'</div></div>';
 		}

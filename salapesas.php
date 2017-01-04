@@ -97,7 +97,7 @@ foreach ($clases as $clase)
 	{
 		if 	($clase['name'] == $foto['name']){
 			echo '<div class="img">';
-			echo "<a href='/../../moodle/mod/book/view.php?id=".$clase['id']."'>";
+			echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
 			echo "<img  src='/../../moodle/local/wellness/imagen.php?nombre=".$clase['name']."' alt=".$clase['name']."></img></a>";
 			echo '<div class="desc">'.$clase['name'].'</div></div>';
 		}
