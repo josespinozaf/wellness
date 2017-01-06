@@ -1,56 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/wellness/db" VERSION="20151223" COMMENT="XMLDB file for Moodle Deportes UAI"
+<XMLDB PATH="local/wellness/db" VERSION="20170106" COMMENT="XMLDB file for Moodle Deportes UAI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="asistencias" COMMENT="Asistencias deportivas alumnos UAI">
+    <TABLE NAME="ejercicios" COMMENT="Ejercicios para rutina aleatoria">
       <FIELDS>
-        <FIELD NAME="sede" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="asisid" TYPE="int" LENGTH="7" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="rut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="dv" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
-        <FIELD NAME="nombres" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="apellidos" TYPE="char" LENGTH="17" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="fecha" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="horainicio" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="horatermino" TYPE="char" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="actividad" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="periodo" TYPE="char" LENGTH="13" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="nombre" TYPE="varchar" LENGTH="75" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="link_video" TYPE="varchar" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="categoria" TYPE="varchar" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="rut"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+ 
+    <TABLE NAME="imagenes" COMMENT="Ejercicios para rutina aleatoria">
+      <FIELDS>
+        <FIELD NAME="imagen_id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="imagen" TYPE="mediumblob" LENGTH="" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="tipo_imagen" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="nombre" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="imagen_id"/>
       </KEYS>
     </TABLE>
     
     <TABLE NAME="fitnessgram" COMMENT="Asistencias deportivas alumnos UAI">
       <FIELDS>
-        <FIELD NAME="rut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="dv" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
-        <FIELD NAME="apellidopaterno" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="apellidomaterno" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="nombres" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sexo" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sede" TYPE="char" LENGTH="15" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
-        <FIELD NAME="email" TYPE="char" LENGTH="25" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="talla" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="peso" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="imc" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sumademm" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="porcentajegrasa" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sitandreachd" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sitandreachi" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="trunklift" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="abd" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="pullup" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="pushup" TYPE="int" LENGTH="4" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="nivel" TYPE="int" LENGTH="5" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="miles" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="vo2max" TYPE="number" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+		<FIELD NAME="Ano" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sem" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="RUT" TYPE="int" LENGTH="8" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="DV" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="Apellido Paterno" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Apellido Materno" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Nombres" TYPE="varchar" LENGTH="25" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sexo" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sede" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false" COMMENT="digito verificador"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="26" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Talla" TYPE="char" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Peso" TYPE="char" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="IMC" TYPE="char" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Suma mm" TYPE="char" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="%Grasa" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sit&reach-D" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sit&reach-IZ" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Trunk Lift" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Abd" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Pull Up" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Push Up" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Nivel" TYPE="int" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Miles" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Vo2 max" TYPE="char" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="rut"/>
-      </KEYS>
     </TABLE>
   </TABLES>
 </XMLDB>
