@@ -80,45 +80,45 @@ function xmldb_local_wellness_upgrade($oldversion) {
         }
 
         // Define table fitnessgram to be created.
-        $table = new xmldb_table('fitnessgram');
+//         $table = new xmldb_table('fitnessgram');
         
-        // Adding fields to table fitnessgram.
-        $table->add_field('Ano', XMLDB_TYPE_INTEGER, '4', null, null, nulll, null);
-        $table->add_field('Sem', XMLDB_TYPE_INTEGER,'1', null, null, null, null);
-        $table->add_field('RUT', XMLDB_TYPE_INTEGER, '8', null, null, null, null);
-        $table->add_field('DV', XMLDB_TYPE_INTEGER,'1', null, null, null, null);
-        $table->add_field('Apellido Paterno', XMLDB_TYPE_CHAR, '15', null, null, null, null);
-        $table->add_field('Apellido Materno', XMLDB_TYPE_CHAR,'15', null, null, null, null);
-        $table->add_field('Nombres', XMLDB_TYPE_VARCHAR, '25', null, null, null, null);
-        $table->add_field('Sexo', XMLDB_TYPE_CHAR,'1', null, null, null, null);
-        $table->add_field('Sede', XMLDB_TYPE_CHAR, '15', null, null, null, null);
-        $table->add_field('email', XMLDB_TYPE_CHAR,'26', null, null, null, null);
-        $table->add_field('Talla', XMLDB_TYPE_CHAR, '4', null, null, null, null);
-        $table->add_field('Peso', XMLDB_TYPE_CHAR,'	4', null, null, null, null);
-        $table->add_field('IMC', XMLDB_TYPE_CHAR, '11', null, null, null, null);
-        $table->add_field('Suma mm', XMLDB_TYPE_CHAR,'4', null, null, null, null);
-        $table->add_field('%Grasa', XMLDB_TYPE_CHAR,'5', null, null, null, null);
-        $table->add_field('Sit&reach-D', XMLDB_TYPE_CHAR,'5', null, null, null, null);
-        $table->add_field('Sit&reach-IZ', XMLDB_TYPE_CHAR,'5', null, null, null, null);
-        $table->add_field('Trunk Lift', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
-        $table->add_field('Abd', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
-        $table->add_field('Pull Up', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
-        $table->add_field('Push Up', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
-        $table->add_field('Nivel', XMLDB_TYPE_INTEGER,'5', null, null, null, null);
-        $table->add_field('Miles', XMLDB_TYPE_CHAR,'5', null, null, null, null);
-        $table->add_field('Vo2 max', XMLDB_TYPE_CHAR,'11', null, null, null, null);
+//         // Adding fields to table fitnessgram.
+//         $table->add_field('id', XMLDB_TYPE_INTEGER, '11', null, null, XMLDB_SEQUENCE, null);
+//         $table->add_field('Ano', XMLDB_TYPE_INTEGER, '4', null, null, null, null);
+//         $table->add_field('Sem', XMLDB_TYPE_INTEGER,'1', null, null, null, null);
+//         $table->add_field('RUT', XMLDB_TYPE_INTEGER, '8', null, null, null, null);
+//         $table->add_field('DV', XMLDB_TYPE_INTEGER,'1', null, null, null, null);
+//         $table->add_field('Apellido Paterno', XMLDB_TYPE_CHAR, '15', null, null, null, null);
+//         $table->add_field('Apellido Materno', XMLDB_TYPE_CHAR,'15', null, null, null, null);
+//         $table->add_field('Nombres', XMLDB_TYPE_VARCHAR, '25', null, null, null, null);
+//         $table->add_field('Sexo', XMLDB_TYPE_CHAR,'1', null, null, null, null);
+//         $table->add_field('Sede', XMLDB_TYPE_CHAR, '15', null, null, null, null);
+//         $table->add_field('email', XMLDB_TYPE_CHAR,'26', null, null, null, null);
+//         $table->add_field('Talla', XMLDB_TYPE_CHAR, '4', null, null, null, null);
+//         $table->add_field('Peso', XMLDB_TYPE_CHAR,'	4', null, null, null, null);
+//         $table->add_field('IMC', XMLDB_TYPE_CHAR, '11', null, null, null, null);
+//         $table->add_field('Suma mm', XMLDB_TYPE_CHAR,'4', null, null, null, null);
+//         $table->add_field('%Grasa', XMLDB_TYPE_CHAR,'5', null, null, null, null);
+//         $table->add_field('Sitandreach-D', XMLDB_TYPE_CHAR,'5', null, null, null, null);
+//         $table->add_field('Sitandreach-IZ', XMLDB_TYPE_CHAR,'5', null, null, null, null);
+//         $table->add_field('Trunk Lift', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
+//         $table->add_field('Abd', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
+//         $table->add_field('Pull Up', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
+//         $table->add_field('Push Up', XMLDB_TYPE_INTEGER,'3', null, null, null, null);
+//         $table->add_field('Nivel', XMLDB_TYPE_INTEGER,'5', null, null, null, null);
+//         $table->add_field('Miles', XMLDB_TYPE_CHAR,'5', null, null, null, null);
+//         $table->add_field('Vo2 max', XMLDB_TYPE_CHAR,'11', null, null, null, null);
          
         
        
-        // Conditionally launch create table for fitnessgram.
-        if (!$dbman->table_exists($table)) {
-        	$dbman->create_table($table);
-        }
+//         // Conditionally launch create table for fitnessgram.
+//         if (!$dbman->table_exists($table)) {
+//         	$dbman->create_table($table);
+//         }
         
         // Wellness savepoint reached.
         upgrade_plugin_savepoint(true, 20170106, 'local', 'wellness');
                 
-        
     }
     
     return true;

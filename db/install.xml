@@ -7,19 +7,19 @@
     <TABLE NAME="ejercicios" COMMENT="Ejercicios para rutina aleatoria">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="nombre" TYPE="varchar" LENGTH="75" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="link_video" TYPE="varchar" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="categoria" TYPE="varchar" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nombre" TYPE="text" LENGTH="75" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="link_video" TYPE="text" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="categoria" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
  
-    <TABLE NAME="imagenes" COMMENT="Ejercicios para rutina aleatoria">
+    <TABLE NAME="imagenes" COMMENT="Imagenes dentro de wellness">
       <FIELDS>
         <FIELD NAME="imagen_id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="imagen" TYPE="mediumblob" LENGTH="" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="imagen" TYPE="binary" LENGTH="" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="tipo_imagen" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="nombre" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
@@ -28,15 +28,16 @@
       </KEYS>
     </TABLE>
     
-    <TABLE NAME="fitnessgram" COMMENT="Asistencias deportivas alumnos UAI">
+  <!--   <TABLE NAME="fitnessgram" COMMENT="Datos fisicos de los alumnos" NEXT="imagenes">
       <FIELDS>
+      	<FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="true"/>
 		<FIELD NAME="Ano" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Sem" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="digito verificador"/>
         <FIELD NAME="RUT" TYPE="int" LENGTH="8" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="DV" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" COMMENT="digito verificador"/>
         <FIELD NAME="Apellido Paterno" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Apellido Materno" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="Nombres" TYPE="varchar" LENGTH="25" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Nombres" TYPE="char" LENGTH="25" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Sexo" TYPE="char" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Sede" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false" COMMENT="digito verificador"/>
         <FIELD NAME="email" TYPE="char" LENGTH="26" NOTNULL="false" SEQUENCE="false"/>
@@ -45,8 +46,8 @@
         <FIELD NAME="IMC" TYPE="char" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Suma mm" TYPE="char" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="%Grasa" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="Sit&reach-D" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="Sit&reach-IZ" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sitandreach-D" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Sitandreach-IZ" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Trunk Lift" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Abd" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Pull Up" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
@@ -55,6 +56,9 @@
         <FIELD NAME="Miles" TYPE="char" LENGTH="5" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="Vo2 max" TYPE="char" LENGTH="11" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
-    </TABLE>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>      
+    </TABLE> -->
   </TABLES>
 </XMLDB>

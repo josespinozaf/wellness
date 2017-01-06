@@ -29,7 +29,7 @@ if (isset($_POST['AgregarFIT'])){
 	$Miles = $_REQUEST['Miles'];
 	$Vo2Max = $_REQUEST['Vo2max'];
 	$queryadd="INSERT INTO `fitnessgram`(`Ano`, `Sem`, `RUT`, `DV`, `Apellido Paterno`, `Apellido Materno`, `Nombres`, `Sexo`, `Sede`,
-			`email`, `Talla`, `Peso`, `IMC`, `Suma mm`, `%Grasa`, `Sit&reach-D`, `Sit&reach-IZ`, `Trunk Lift`, `Abd`, `Pull Up`, `Push Up`,
+			`email`, `Talla`, `Peso`, `IMC`, `Suma mm`, `%Grasa`, `Sitandreach-D`, `Sitandreach-IZ`, `Trunk Lift`, `Abd`, `Pull Up`, `Push Up`,
 			 `Nivel`, `Miles`, `Vo2 max`) 
 			VALUES (".$Año.",".$Semestre.",".$Rut.",".$DV.",'".$AP."','".$AM."','".$Nombres."','".$sexo."','".$sede."','".$mail."',
 			".$Altura.",".$Peso.",".$IMC.",".$Sumamm.",".$grasa.",".$SitD.",".$SitIZ.",".$TrunkLift.",".$Adb.",".$PullUp.",
