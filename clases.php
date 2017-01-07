@@ -65,7 +65,7 @@ $usermail= $USER->email;
 echo $OUTPUT->header();
 
 if(has_capability("local/wellness:seebutton", $context) ){
-	echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
+	echo "<form action='/local/wellness/formulariofoto.php' method='POST'>";
 	echo "<input type='submit' style='clear: left' name='Agregar' value='Agregar foto a clase'>";
 	echo "<input type='submit' name='Cambiar' value='Cambiar foto a clase'>";
 	echo "</form>";

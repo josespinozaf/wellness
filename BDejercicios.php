@@ -41,8 +41,9 @@ if (is_siteadmin()){
 		$name= $_REQUEST['nombre'];
 		$category=$_REQUEST['categoria'];
 		$link_video=$_REQUEST['link_video'];
-		$sql= "INSERT INTO `ejercicios`(`nombre`, `link_video`, `categoria`)
-				 VALUES ('".$name."','".$link_video."','".$category."')";
+		$intensity=$_REQUEST['intensidad'];
+		$sql= "INSERT INTO `ejercicios`(`nombre`, `link_video`, `categoria`, `intensidad`)
+				 VALUES ('".$name."','".$link_video."','".$category."','".$intensity."')";
 		$result=mysql_query($sql) OR die("Error:".mysql_error());;
 		if($result){
 			echo "Ha sido agregado con éxito.";

@@ -49,18 +49,21 @@ tr:nth-child(even) {
 <?php 
 include("connect.php");
 if (isset($_POST['Rutina_Aleatoria'])){
-	echo "<h4>Rutina Aleatoria</h4> <br>";?>
+	echo "<h4>Rutina Aleatoria</h4> <br>";
+	$intensidad= $_REQUEST['intensidad'];;?>
 	<table>
   <tr>
     <th>Ejercicio</th>
     <th>Categoria</th>
     <th>Link Video</th>
+    <th>Intensidad</th>
   </tr>
-<?php   $ej= mysql_query("SELECT * FROM `ejercicios` ORDER BY RAND() LIMIT 4");
+<?php   $ej= mysql_query("SELECT * FROM `ejercicios` WHERE `intensidad`='".$intensidad."' ORDER BY RAND() LIMIT 4");
 		while ($ejercicios=mysql_fetch_array($ej)){
   			echo "<tr> <td>".$ejercicios['nombre']."</td>";
-			echo "<td>".$ejercicios['link_video']."</td>";
-			echo "<td>".$ejercicios['id']."</td>";			
+  			echo "<td>".$ejercicios['categoria']."</td>";
+  			echo "<td>".$ejercicios['link_video']."</td>";
+			echo "<td>".$ejercicios['intensidad']."</td>";	
 			echo "</tr>";
 		}
 		echo "</table>";
@@ -69,24 +72,32 @@ if (isset($_POST['Rutina_Aleatoria'])){
 ?>
 <h3 align="center">Para crear una rutina aleatoria
 <form method="POST">
+<?php $result= mysql_query("SELECT DISTINCT `intensidad` FROM `ejercicios`")?>
+<!-- 	Formulario para elegir la intensidad de la rutina -->
+	 <p>Qué intensidad quieres?: </p><select name="intensidad">
+	<?php while ($datos= mysql_fetch_array($result))
+		echo "<option  value='".$datos['intensidad']."'>".$datos['intensidad']."</option>";?>
+	</select>  
   <input type="submit" value="Hacer Rutina" name="Rutina_Aleatoria" />
-  </form></h3>
+  </form>
+  </h3>
 <?php }
 if (is_siteadmin()){
 	if (isset($_POST['Agregar'])){?>
 <!-- 	Formulario para agregar ejercicio a BD -->
-	<form action='BDejercicios.php' method='POST'>
+	<form action='bdejercicios.php' method='POST'>
 	Nombre del ejercicio:<input type="text" name="nombre"/><br>
 	Categoría:<input type="text" name="categoria"/><br>
 	Link Video:<input type="text" name="link_video"/><br>
+	Intensidad:<input type="text" name="intensidad"/><br>
 	<input type='submit' name='Agregar_ejercicio' value='Agregar ejercicio'>
-	<a href='../../local/wellness/rutina_aleatoria.php' >Volver</a>
+	<a href='../local/wellness/rutina_aleatoria.php' >Volver</a>
 	</form>
 	<?php 	}
 	else if (isset($_POST['Eliminar'])){
 	$result= mysql_query("SELECT * FROM ejercicios")?>
 <!-- 	Formulario para eliminar un ejercicio de la BD		 -->
-	<form action="BDejercicios.php" method='POST'>
+	<form action="bdejercicios.php" method='POST'>
 	Cuál desea borrar?<select name="nombre">
 	<?php while ($datos= mysql_fetch_array($result))
 		echo "<option  value='".$datos['nombre']."'>".$datos['nombre']."</option>";?>

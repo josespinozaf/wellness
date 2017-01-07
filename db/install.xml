@@ -10,6 +10,7 @@
         <FIELD NAME="nombre" TYPE="text" LENGTH="75" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="link_video" TYPE="text" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="categoria" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="intensidad" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -27,7 +28,19 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="imagen_id"/>
       </KEYS>
     </TABLE>
-    
+     <TABLE NAME="imc" COMMENT="Imc de los alumnos">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="ano" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="estatura" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="peso" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="imc" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
   <!--   <TABLE NAME="fitnessgram" COMMENT="Datos fisicos de los alumnos" NEXT="imagenes">
       <FIELDS>
       	<FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="true"/>

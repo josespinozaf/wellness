@@ -121,6 +121,28 @@ function xmldb_local_wellness_upgrade($oldversion) {
                 
     }
     
+    if ($oldversion < 20170107) {
+    
+    	$table = new xmldb_table('imc');
+    	
+    	// Adding fields to table imc.
+    	$table->add_field('id', XMLDB_TYPE_INTEGER, '11', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    	$table->add_field('email', XMLDB_TYPE_CHAR, '25', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('email', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, null);	 
+    	$table->add_field('estatura', XMLDB_TYPE_INTEGER, '3', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('peso', XMLDB_TYPE_INTEGER, 3, null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('imc', XMLDB_TYPE_INTEGER, '8', null, XMLDB_NOTNULL, null, null);
+    	 
+    	// Adding keys to table imc.
+    	$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+    	
+    	// Conditionally launch create table for imc.
+    	if (!$dbman->table_exists($table)) {
+    		$dbman->create_table($table);
+    	}
+    	 
+    
+    }
     return true;
 }
 ?>
