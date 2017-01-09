@@ -31,7 +31,7 @@ include ("connect.php");
 ?>
 <html>
   <head>
-   
+   <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 	google.charts.load('current', {packages: ['corechart', 'line']});
@@ -54,15 +54,21 @@ include ("connect.php");
 				while($datos=mysql_fetch_array($result)){			
 ?>		
 	      data.addRows([
-	        <?php echo "[".$datos['ano'].",".$datos['imc' ]."],";?>   
+	        <?php echo "[".$datos['ano'].",".$datos['imc']."],";?>   
 	      ]);
 				<?php }?>
 	      var options = {
+	   		'width':700,
+            'height':300,
+            pointSize: 20,
+            pointShape: { type: 'star', sides: 4,  dent: 0.5}	,
 	        hAxis: {
-	          title: '<?php echo get_string('ano','local_wellness');?>'
+	          title: '<?php echo get_string('ano','local_wellness');?>',
+	          format: '####'
 	        },
 	        vAxis: {
-	          title: '<?php echo get_string('imcs','local_wellness');?>'
+	          title: '<?php echo get_string('imcs','local_wellness');?>',
+	          ticks: [0, 18.5, 25, 30, 35, 40, 45]	
 	        },
 	        backgroundColor: '#f1f8e9'
 	      };
@@ -109,17 +115,17 @@ include ("connect.php");
 			if($email){
 				$result=mysql_query("SELECT * FROM `imc` WHERE `email`='".$email."'", $db);
 				if ($result){
-					echo"<table style='border: 1px solid #000; width: 250px;'>
-									  <tr>
-										<th>Año</th>
-									    <th>IMC</th>
-									  </tr>";
+					echo"<table>
+								 <tr  class='centrofit'>
+										<th style='color:#000'>Año</th>
+									    <th style='color:#000'>IMC</th>
+								</tr>";
 					while($datos=mysql_fetch_array($result)){
 							echo"<tr><td>".$datos['ano']."</td>";
 							echo"<td>".$datos['imc']."</td></tr>";							
 														}	
 				} 
-				echo "<a href='imc.php'>Volver</a>";
+				echo "</table><a href='imc.php'>Volver</a>";
 			}
 		}
 		else{?>
@@ -131,6 +137,7 @@ include ("connect.php");
 		}else{?>
  	<div id="chart_div"></div>
  	<?php }?>
+ 	<img src="http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg">
   </body>
 </html>
 
