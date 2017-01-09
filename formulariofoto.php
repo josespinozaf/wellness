@@ -56,21 +56,21 @@ $PAGE->set_title('Clases');
 $PAGE->set_heading($header);
 $PAGE->navbar->add(get_string('navclases','local_wellness'), new moodle_url('/local/wellness/clases.php'));
 
-if (!has_capability("local/wellness:seebutton", $context) ){
-	print_error('ACCESS DENIED');
-}
-	include ('connect.php');
-	$result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
-			INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-			WHERE mp.course = 4 and mc.module = 15
-			GROUP BY mp.name", $db);
-	
-	$resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
+include ('connect.php');
+$result = mysql_query("SELECT DISTINCT mcm.* , mc.* FROM mdl_course_modules as mcm
+		INNER JOIN mdl_course as mc ON mcm.course = mc.id
+		WHERE mcm.module = 9
+		GROUP BY mc.fullname", $db);
+
+$resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 			INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
 			WHERE mp.course = 5 and mc.module = 15
 			GROUP BY mp.name", $db);
-	
-	echo $OUTPUT->header(); 
+
+echo $OUTPUT->header();
+
+
+if (has_capability("local/wellness:formclases", $context) ){
 	if (isset($_POST['Agregar'])){
 	?>
 	
@@ -86,7 +86,7 @@ if (!has_capability("local/wellness:seebutton", $context) ){
 					  }
 					  foreach ($clases as $clase)
 					  {
-					  	echo "<option  value='".$clase['name'] ."'>".$clase['name'] ."</option>";
+					  	echo "<option  value='".$clase['fullname'] ."'>".$clase['fullname'] ."</option>";
 					  }
 					  ?>
 			</select><br>
@@ -110,7 +110,7 @@ if (!has_capability("local/wellness:seebutton", $context) ){
 					  }
 					  foreach ($clases as $clase)
 					  {
-					  	echo "<option  value='".$clase['name'] ."'>".$clase['name'] ."</option>";
+					  	echo "<option  value='".$clase['fullname'] ."'>".$clase['fullname'] ."</option>";
 					  }
 					  ?>
 			</select><br>
@@ -171,6 +171,9 @@ if (!has_capability("local/wellness:seebutton", $context) ){
 	</form>
 <?php 
 	}
-
+	}
+	else {
+		print_error('ACCESS DENIED');
+	}
 echo $OUTPUT->footer();
 ?>
