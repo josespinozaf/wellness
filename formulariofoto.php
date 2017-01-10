@@ -69,8 +69,10 @@ $resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules
 
 echo $OUTPUT->header();
 
-
 if (has_capability("local/wellness:formclases", $context) ){
+	print_error('ACCESS DENIED');
+}
+	else {
 	if (isset($_POST['Agregar'])){
 	?>
 	
@@ -171,9 +173,6 @@ if (has_capability("local/wellness:formclases", $context) ){
 	</form>
 <?php 
 	}
-	}
-	else {
-		print_error('ACCESS DENIED');
 	}
 echo $OUTPUT->footer();
 ?>

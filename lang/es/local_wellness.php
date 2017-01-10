@@ -12,6 +12,8 @@ $string['navfitnessgram'] = 'Fitnessgram';
 $string['naveventos'] = 'Eventos';
 $string['navcontacto'] = 'Contacto';
 $string['navrutinaaleatoria'] = 'Rutina Aleatoria';
+$string['navdepartamento'] = 'Departamento';
+$string['navselecciones'] = 'Selecciones UAI';
 //**Mis Rutinas**
 
 //**Fitnessgram**
