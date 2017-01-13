@@ -1,17 +1,6 @@
 <?php
-global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
-
-redirect_if_major_upgrade_required();
-
-
-$edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
-$reset  = optional_param('reset', null, PARAM_BOOL);
-
-require_login();
-
-//** Configuración de la página **//
+//Configuracion de la pagina
+require_once (dirname ( __FILE__ ) . '/conf.php');
 $params = array();
 $PAGE->set_context($context);
 $PAGE->set_url('/local/wellness/contacto.php', $params);
@@ -23,6 +12,7 @@ $PAGE->set_title(get_string('navcontacto','local_wellness'));
 $PAGE->set_heading($header);
 $PAGE->navbar->add(get_string('navcontacto','local_wellness'), new moodle_url('/local/wellness/contacto.php'));
 
+//Header
 echo $OUTPUT->header ();
 
 if(isset($_REQUEST['Submit'])){

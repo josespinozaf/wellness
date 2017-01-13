@@ -1,18 +1,17 @@
 <?php
-//Configuracion de la pagina
 require_once (dirname ( __FILE__ ) . '/conf.php');
+
 $params = array();
 $PAGE->set_context($context);
-$PAGE->set_url('/local/wellness/imc.php', $params);
+$PAGE->set_url('/local/wellness/miimc.php', $params);
 $PAGE->set_pagelayout('mydashboard');
 $PAGE->set_pagetype('local-wellness-imc');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
-$PAGE->set_title(get_string('imcs','local_wellness'));
+$PAGE->set_title(get_string('miimc','local_wellness'));
 $PAGE->set_heading($header);
-$PAGE->navbar->add(get_string('imcs','local_wellness'), new moodle_url('/local/wellness/imc.php'));
+$PAGE->navbar->add(get_string('miimc','local_wellness'), new moodle_url('/local/wellness/miimc.php'));
 
-//Header
 echo $OUTPUT->header ();
 
 ?>
@@ -128,6 +127,5 @@ echo $OUTPUT->header ();
  	<img src="http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg">
   </body>
 </html>
-<?php
-echo $OUTPUT->footer();
-	?>
+
+				

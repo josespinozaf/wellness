@@ -130,36 +130,96 @@ opacity: 1;
 text-align: center !important;
 }
 /*tabla de busqueda de alumnos*/
-tablefit {
-  border-collapse: collapse;
-  width: 100%;
+
+tableimc {
+    border-collapse: collapse;
+    width: 100%;
 }
+
 th, td {
-  padding: 0.25rem;
-  border: 1px solid #ccc;
-}
-tbody tr:nth-child(odd) {
-  background: #eee;
-}
-.centrofit{
-  padding: 0.5rem;
-  background: #484848 ;
-  color: white;
-  text-align: center;
-  font-size: 15px;
-
+    text-align: center;
+    padding: 8px;
 }
 
-#cuadrofit{
-	width: 90%;
-	background: #F8F8F8 ;
-	padding: 20px;
-	margin: 5px auto;
-	border: 3px solid #D8D8D8;
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
 }
-#titulofit{
+
+/* Pagina Departamentos.php */
+
+.imgasd {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+.imgasd:hover {
+    border: 1px solid #777;
+}
+
+a.imgasd:hover {
+    border: 1px solid #777;
+}
+
+a:hover {
+    border: 1px solid #777;
+}
+
+img.imgasd {
+    width: 100%;
+    height: auto;
+}
+
+.imgasd img{
+    width: 100%;
+    height: auto;
+}
+
+.descasd {
+    padding: 15px;
+    text-align: center;
+}
+
+/*Pagina selecciones*/
+
+div.imgselec {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 30%;
+}
+
+div.imgselec:hover {
+    border: 1px solid #777;
+}
+
+div.imgselec img {
+    width: 400px;
+    height: 200px;
+}
+
+div.descselec {
+    padding: 15px;
+    text-align: center;
+    
+/*Pagina rutina aleatoria*/
+
+.tablerutal {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
 	width: 100%;
-	background: #282828;
-	color:white;
+}
 
+td.tdrutal, th.thrutal {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr.trrutal:nth-child(even) {
+	background-color: #dddddd;
 }

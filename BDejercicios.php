@@ -1,17 +1,6 @@
 <?php
-global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
+require_once (dirname ( __FILE__ ) . '/conf.php');
 
-redirect_if_major_upgrade_required();
-
-
-$edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
-$reset  = optional_param('reset', null, PARAM_BOOL);
-
-require_login();
-
-//** Configuración de la página **//
 $params = array();
 $PAGE->set_context($context);
 $PAGE->set_url('/local/wellness/BDejercicios.php', $params);
@@ -24,8 +13,8 @@ $PAGE->set_heading($header);
 $PAGE->navbar->add(get_string('navrutinaaleatoria','local_wellness'), new moodle_url('/local/wellness/rutina_aleatoria.php'));
 
 echo $OUTPUT->header ();
+
 if (is_siteadmin()){
-	include('connect.php');
 	if (isset($_POST['Eliminar_ejercicio'])){
 		$name= $_REQUEST['nombre'];
 		$sql= "DELETE FROM `ejercicios` WHERE `nombre`='".$name."'";
@@ -52,6 +41,7 @@ if (is_siteadmin()){
 		
 
 }
+echo "<form><input type='button' value='Volver' onClick='history.back();return true;'></form>";
 }
 echo $OUTPUT->footer;
 ?>

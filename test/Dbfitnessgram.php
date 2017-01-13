@@ -1,17 +1,7 @@
 <?php
-global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
 
-include ("connect.php");
+require_once (dirname ( __FILE__ ) . '/conf.php');
 
-// ** Query SQL
-$userid = $USER->id;
-$usermail = $USER->email;
-
-require_login ();
-
-// desde aqui se debe configurar la pag
 $params = array ();
 $PAGE->set_context ( $context );
 $PAGE->set_url ( '/local/wellness/Dbfitnessgram.php', $params );

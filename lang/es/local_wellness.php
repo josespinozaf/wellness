@@ -1,6 +1,7 @@
 <?php
 //**Pagina General**
 $string['titulopagina'] = 'DeportesUAI';
+$string['clasesyrutinas'] = 'Clases y Rutinas';
 
 //**Barra Navegacion**
 
@@ -14,6 +15,8 @@ $string['navcontacto'] = 'Contacto';
 $string['navrutinaaleatoria'] = 'Rutina Aleatoria';
 $string['navdepartamento'] = 'Departamento';
 $string['navselecciones'] = 'Selecciones UAI';
+$string['navimc'] = 'IMC UAI';
+$string['navmiimc'] = 'Mi IMC';
 //**Mis Rutinas**
 
 //**Fitnessgram**
@@ -26,8 +29,10 @@ $string['grafico'] = 'Gráfico con tus niveles v/s Año';
 $string['ano'] = 'Año';
 $string['talla'] = 'Altura';
 $string['peso'] = 'Peso';
+$string['imctitle'] = 'IMC';
 $string['imc'] = 'Indice Masa Corporal';
-$string['imcs'] = 'IMC';
+$string['imcs'] = 'IMC UAI';
+$string['miimc'] = 'MI IMC';
 $string['grasa'] = 'Porcentaje Grasa';
 $string['grasas'] = '% Grasa';
 $string['abd'] = 'Abdominales';

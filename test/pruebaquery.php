@@ -1,12 +1,5 @@
-<link rel="stylesheet" type="text/css" href="style.css" media="screen">
-<?php
-global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
-include ("connect.php");
-
-$userid= $USER->id;
-$usermail= $USER->email;
+<?php 
+require_once (dirname ( __FILE__ ) . '/conf.php');
 
 echo $OUTPUT->header();
 

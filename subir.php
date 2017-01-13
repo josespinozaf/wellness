@@ -1,4 +1,3 @@
-
 <meta http-equiv="refresh" content="4; url=/../../moodle/local/wellness/clases.php" />
 <?php
 include ("connect.php");
@@ -34,7 +33,7 @@ $nombre= $_REQUEST['nombre'];
 		                $resultadofotoexistente=mysql_query($fotoexistente) or die (mysql_error());
 		                if (mysql_num_rows($resultadofotoexistente)>0)
 		                {
-		                	echo 'Ya existe registro si desea cambiar la foto, apriete <a href="/../../moodle/local/wellness/clases.php">AQUÍ</a>'; 
+		                	echo 'Ya existe registro si desea cambiar la foto, apriete <a href="/../../moodle/local/wellness/clases.php">AQUI</a>'; 
 		                } else {
 						
 		                		$resultado = @mysql_query("INSERT INTO imagenes (nombre, imagen, tipo_imagen) VALUES ('$nombre','$data', '$tipo')"); 

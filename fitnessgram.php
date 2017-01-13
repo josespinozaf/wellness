@@ -1,17 +1,6 @@
 <?php
-global $USER, $CFG;
-require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot . '/my/lib.php');
+require_once (dirname ( __FILE__ ) . '/conf.php');
 
-redirect_if_major_upgrade_required();
-
-
-$edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off
-$reset  = optional_param('reset', null, PARAM_BOOL);
-
-require_login();
-
-//** Configuración de la página **//
 $params = array();
 $PAGE->set_context($context);
 $PAGE->set_url('/local/wellness/fitnessgram.php', $params);
