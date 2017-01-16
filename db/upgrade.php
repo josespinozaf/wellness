@@ -140,8 +140,9 @@ function xmldb_local_wellness_upgrade($oldversion) {
     	if (!$dbman->table_exists($table)) {
     		$dbman->create_table($table);
     	}
-    	 
-    
+    	// Wellness savepoint reached.
+    	upgrade_plugin_savepoint(true, 20170107, 'local', 'wellness');
+    	
     }
     return true;
 }
