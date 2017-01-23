@@ -17,11 +17,16 @@ echo $OUTPUT->header ();
 
 //Capabilities para botones
 if (has_capability ( "local/wellness:seebutton", $context )) {
-	echo "<form action='../wellness/formulariofoto.php' method='POST'>";
-	echo "<input type='submit' style='clear: left' name='Agregar' value='Agregar foto a clase'>";
-	echo "<input type='submit' name='Cambiar' value='Cambiar foto a clase'>";
-	echo "</form>";
-}
+	//include simplehtml_form.php
+	require_once('simplehtml_form.php');
+	
+	//Instantiate simplehtml_form
+	$mform = new simplehtml_form('formulariofoto.php');
+	
+	$mform->set_data($toform);
+	
+	$mform->display();
+	}
 
 //Query para las clases
 $result = $DB->get_recordset_sql("SELECT DISTINCT mc.* , pp.* FROM mdl_course as mc INNER JOIN imagenes as pp ON mc.fullname = pp.nombre");

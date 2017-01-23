@@ -6,7 +6,7 @@ include ("style.css");
 </style>
 <?php
 require_once (dirname ( __FILE__ ) . '/../../config.php');
-global $USER, $CFG, $DB, $db;
+global $USER, $CFG, $DB;
 require_once ($CFG->dirroot . '/my/lib.php');
 redirect_if_major_upgrade_required ();
 include ("connect.php");
