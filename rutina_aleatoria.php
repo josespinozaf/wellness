@@ -21,25 +21,18 @@ echo $OUTPUT->header ();
 if (isset ( $_POST ['Rutina_Aleatoria'] )) {
 	echo "<h4>Rutina Aleatoria</h4> <br>";
 	$intensidad = $_REQUEST ['intensidad'];
-	;
-	?>
-	<table class="tablerutal">
-		<tr class="trrutal">
-			<th class="thrutal">Ejercicio</th>
-			<th class="thrutal">Categoria</th>
-			<th class="thrutal">Link Video</th>
-			<th class="thrutal">Intensidad</th>
-		</tr>
-<?php
-	$ej = mysql_query ( "SELECT * FROM `ejercicios` WHERE `intensidad`='" . $intensidad . "' ORDER BY RAND() LIMIT 4" );
-	while ( $ejercicios = mysql_fetch_array ( $ej ) ) {
-		echo "<tr class='trrutal'> <td class='tdrutal'>" . $ejercicios ['nombre'] . "</td>";
-		echo "<td class='tdrutal'>" . $ejercicios ['categoria'] . "</td>";
-		echo "<td class='tdrutal'>" . $ejercicios ['link_video'] . "</td>";
-		echo "<td class='tdrutal'>" . $ejercicios ['intensidad'] . "</td>";
-		echo "</tr>";
-	}
-	echo "</table>";
+	
+	$ej = $DB->get_recordset_sql("SELECT * FROM `ejercicios` WHERE `intensidad`='" . $intensidad . "' ORDER BY RAND() LIMIT 4");
+$table = new html_table();
+$table->head = array('Ejercicio','Intensidad', 'Categoria', 'Link Video');
+foreach ($ej as $records) {
+	$nombre = $records->nombre;
+	$intensidad = $records->intensidad;
+	$categoria = $records->categoria;
+	$link = $records->link_video;
+	$table->data[] = array($nombre, $intensidad, $categoria,'<a href="'.$link.'">View</a>');
+}
+ echo html_writer::table($table);
 	echo "<form><br><input type='button' value='Otra Rutina' onClick='javascript:document.location.reload();'><input type='button' value='Volver' onClick='history.back();return true;'></form>";
 } else {
 	?>
@@ -90,7 +83,6 @@ if (is_siteadmin ()) {
 	</select><br> 
 	<input type="submit" name='Eliminar_ejercicio' value="Borrar" /> 
 	<input type="button" value="Volver" onClick="history.back();return true;">
-	</table>
 	</form>
 	<?php }else{?>
 	<form action='#' method='POST'>
@@ -100,26 +92,22 @@ if (is_siteadmin ()) {
 <?php
 	}
 	?>
-<!-- 	Tabla de ejercicios actuales -->
-<h3>Ejercicios actuales:</h3>	
-	<table class="tablerutal">
-		<tr class="trrutal">
-			<th class="thrutal">Ejercicio</th>
-			<th class="thrutal">Intensidad</th>
-			<th class="thrutal">Categoria</th>
-			<th class="thrutal">Link Video</th>
-		</tr>
+<h3>Ejercicios actuales:</h3>
 <?php
 //Datos de la tabla de ejercicios actuales
-	$eje = mysql_query ( "SELECT DISTINCT * FROM `ejercicios` ORDER BY `ejercicios`.`intensidad` ASC" );
-	while ( $ejercicios = mysql_fetch_array ( $eje ) ) {
-		echo "<tr class='trrutal'> <td class='tdrutal'>" . $ejercicios ['nombre'] . "</td>";
-		echo "<td class='tdrutal'>" . $ejercicios ['intensidad'] . "</td>";
-		echo "<td class='tdrutal'>" . $ejercicios ['categoria'] . "</td>";
-		echo "<td class='tdrutal'><a href=" . $ejercicios ['link_video'] . ">Link</a></td>";
-		echo "</tr>";
-	}
-	echo "</table>";
+$eje = $DB->get_recordset_sql("SELECT DISTINCT * FROM `ejercicios` ORDER BY `ejercicios`.`intensidad` ASC");
+$table = new html_table();
+$table->head = array('Ejercicio','Intensidad', 'Categoria', 'Link Video');
+foreach ($eje as $records) {
+	$nombre = $records->nombre;
+	$intensidad = $records->intensidad;
+	$categoria = $records->categoria;
+	$link = $records->link_video;
+	$table->data[] = array($nombre, $intensidad, $categoria,'<a href="'.$link.'">View</a>');
+}
+
+ echo html_writer::table($table);
+
 ?>
 <?php 
 }

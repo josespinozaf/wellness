@@ -5,7 +5,7 @@ $params = array();
 $PAGE->set_context($context);
 $PAGE->set_url('/local/wellness/selecciones.php', $params);
 $PAGE->set_pagelayout('mydashboard');
-$PAGE->set_pagetype('local-selecciones-index');
+$PAGE->set_pagetype('local-wellness-selecciones');
 $PAGE->blocks->add_region('content');
 $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title('Selecciones UAI');
