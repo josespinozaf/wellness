@@ -15,6 +15,8 @@ $PAGE->navbar->add(get_string('navclases','local_wellness'), new moodle_url('/lo
 $result = mysql_query("SELECT DISTINCT mcm.* , mc.* FROM mdl_course_modules as mcm
 		INNER JOIN mdl_course as mc ON mcm.course = mc.id
 		WHERE mcm.module = 9
+		AND mc.id > 1
+		AND mc.fullname != 'Wellness'
 		GROUP BY mc.fullname", $db);
 
 $resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
@@ -26,7 +28,7 @@ $resultrutina = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules
 echo $OUTPUT->header();
 
 //Capabilities
-if (has_capability("local/wellness:formclases", $context) ){
+if (!has_capability("local/wellness:formclases", $context) ){
 	print_error('ACCESS DENIED');
 }
 	else {

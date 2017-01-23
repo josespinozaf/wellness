@@ -1,6 +1,19 @@
-<meta http-equiv="refresh" content="4; url=/../../moodle/local/wellness/clases.php" />
+<meta http-equiv="refresh" content="2; url=/../../moodle/local/wellness/clases.php" />
 <?php
-include ("connect.php");
+//Config de la pagina
+require_once (dirname ( __FILE__ ) . '/conf.php');
+$params = array ();
+$PAGE->set_context ( $context );
+$PAGE->set_url ( '/local/wellness/subir.php', $params );
+$PAGE->set_pagelayout ( 'mydashboard' );
+$PAGE->set_pagetype ( 'local-subir-index' );
+$PAGE->blocks->add_region ( 'content' );
+$PAGE->set_subpage ( $currentpage->id );
+$PAGE->set_title('Clases');
+$PAGE->set_heading ( $header );
+
+//Header
+echo $OUTPUT->header ();
 
 $nombre= $_REQUEST['nombre'];
 
@@ -62,5 +75,5 @@ $nombre= $_REQUEST['nombre'];
 	}
 }
 
-
+echo $OUTPUT->footer();
 ?>
