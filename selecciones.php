@@ -14,64 +14,44 @@ $PAGE->navbar->add(get_string('navselecciones','local_wellness'), new moodle_url
 
 //Header
 echo $OUTPUT->header();
-?>
 
-<html>
-<body>
-<!-- Dislay Selecciones -->
-<div class="imgselec">
-  <a target="_blank" href="./pix/1.jpg">
-    <img src="./pix/basqueth.jpg" alt="1" width="500" height="300">
-  </a>
-  <div class="descselec"><b>Básquetbol Hombres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/basqueth.jpg', 'alt' => 1,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Básquetbol Hombres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/2.png">
-	<img src="./pix/basquetm.jpg" alt="2" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Básquetbol Mujeres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/basquetm.jpg', 'alt' => 2,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Básquetbol Mujeres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/3.jpg">
-    <img src="./pix/futbolitoh.png" alt="3" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Futbolito Hombres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/futbolitoh.png', 'alt' => 3,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Futbolito Hombres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/4.jpg">
-    <img src="./pix/futbolitom.jpg" alt="4" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Futbolito Mujeres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/futbolitom.jpg', 'alt' => 4,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Futbolito Mujeres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/5.jpg">
-    <img src="./pix/hockeym.jpg" alt="5" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Hockey Mujeres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/hockeym.jpg', 'alt' => 5,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Hockey Mujeres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/4.jpg">
-    <img src="./pix/voleim.jpg" alt="6" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Voleibol Hombres 2016</b></div>
-</div>
 
-<div class="imgselec">
-  <a target="_blank" href="./pix/4.jpg">
-    <img src="./pix/voleim.jpg" alt="7" width="500" height="200">
-  </a>
-  <div class="descselec"><b>Voleibol Mujeres 2016</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/voleim.jpg', 'alt' => 6,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Voleibol Hombres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
 
-</body>
-</html>
 
-<?php
+echo html_writer::start_tag('div',array('class'=>'imgselec'));
+echo html_writer::empty_tag('img', array('src' => './pix/voleim.jpg', 'alt' => 7,'width'=>500 ,'height'=>300));
+echo html_writer::tag('div','<b>Voleibol Mujeres 2016</b>',array('class'=> 'decselec'));
+echo html_writer::end_tag('div',array('class'=>'imgselec'));
+
 echo $OUTPUT->footer();
 	?>
 	

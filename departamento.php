@@ -14,57 +14,34 @@ $PAGE->navbar->add(get_string('navdepartamento','local_wellness'), new moodle_ur
 
 //Header
 echo $OUTPUT->header();
-?>
 
-<html>
 
-<body>
+echo html_writer::start_tag('div',array('class'=>'imgasd'));
+echo html_writer::empty_tag('img', array('src' => './pix/1.jpg', 'alt' => 1,'width'=>300 ,'height'=>200));
+echo html_writer::tag('div','Presidente Deportes UAI',array('class'=> 'descasd'));
+echo html_writer::tag('div','<b>Nombre Apellido</b>',array('class'=> 'descasd'));
+echo html_writer::end_tag('div',array('class'=>'imgasd'));
 
-<div class="imgasd">
-  <a target="_blank" href="./pix/1.jpg">
-    <img src="./pix/1.jpg" alt="1" width="300" height="200">
-  </a>
-  <div class="descasd">Presidente Deportes UAI</div>
-  <div class="descasd"><b>Jose Pablo Espinoza</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgasd'));
+echo html_writer::empty_tag('img', array('src' => './pix/2.png', 'alt' => 2,'width'=>300 ,'height'=>200));
+echo html_writer::tag('div','Sub-Presidente Deportes UAI',array('class'=> 'descasd'));
+echo html_writer::tag('div','<b>Nombre Apellido</b>',array('class'=> 'descasd'));
+echo html_writer::end_tag('div',array('class'=>'imgasd'));
 
-<div class="imgasd">
-  <a target="_blank" href="./pix/2.png">
-	<img src="./pix/2.png" alt="2" width="300" height="200">
-  </a>
-  <div class="descasd">Sub-Presidente Deportes UAI</div>
-  <div class="descasd"><b>Meiling Cárdenas</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgasd'));
+echo html_writer::empty_tag('img', array('src' => './pix/3.jpg', 'alt' => 3,'width'=>300 ,'height'=>200));
+echo html_writer::tag('div','Profesor Trekking',array('class'=> 'descasd'));
+echo html_writer::tag('div','<b>Nombre Apellido</b>',array('class'=> 'descasd'));
+echo html_writer::end_tag('div',array('class'=>'imgasd'));
 
-<div class="imgasd">
-  <a target="_blank" href="./pix/3.jpg">
-    <img src="./pix/3.jpg" alt="3" width="300" height="200">
-  </a>
-  <div class="descasd">Profesor Crosstraining</div>
-  <div class="descasd"><b>Sebastián Flores</b></div>
-</div>
+echo html_writer::start_tag('div',array('class'=>'imgasd'));
+echo html_writer::empty_tag('img', array('src' => './pix/4.jpg', 'alt' => 3,'width'=>300 ,'height'=>200));
+echo html_writer::tag('div','Profesora RPM',array('class'=> 'descasd'));
+echo html_writer::tag('div','<b>Nombre Apellido</b>',array('class'=> 'descasd'));
+echo html_writer::end_tag('div',array('class'=>'imgasd'));
 
-<div class="imgasd">
-  <a target="_blank" href="./pix/4.jpg">
-    <img src="./pix/4.jpg" alt="4" width="300" height="200">
-  </a>
-  <div class="descasd">Profesor Trekking</div>
-  <div class="descasd"><b>Manolo Cololo</b></div>
-</div>
-
-<div class="imgasd">
-  <a target="_blank" href="./pix/5.jpg">
-    <img src="./pix/5.jpg" alt="5" width="300" height="200">
-  </a>
-  <div class="descasd">Profesora RPM</div>
-  <div class="descasd"><b>Malala Lalala</b></div>
-</div>
-
-</body>
-</html>
-
-<?php
 echo $OUTPUT->footer();
-	?>
+
+?>
 	
 	
