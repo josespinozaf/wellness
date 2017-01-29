@@ -35,7 +35,7 @@ if(isset($_POST['email'])) {
 
 		echo "Disculpa, pero hay errores en tu formulario.. ";
 
-		echo "Estos errores aparecen a continuación.<br /><br />";
+		echo "Estos errores aparecen a continuaciï¿½n.<br /><br />";
 
 		echo $error."<br /><br />";
 
@@ -151,20 +151,6 @@ if(isset($_POST['email'])) {
 
 			mail($email_to, $email_subject, $email_message, $headers);
 
-			?>
- 
- 
- 
-<!-- include your own success html here -->
- 
- 
- 
-Thank you for contacting us. We will be in touch with you very soon.
- 
- 
- 
-<?php
- 
 }
  
 ?>
