@@ -29,7 +29,7 @@ echo $OUTPUT->header ();
 	      data.addColumn('number', '<?php echo get_string('imcs','local_wellness');?>');
 			<?php
 				// **Peticion al SQL**//
-				$result = $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`='".$usermail."'", $db);
+				$result = $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`='".$usermail."'");
 			
 				foreach($result as $rs){			
 ?>		      
@@ -135,9 +135,9 @@ if(has_capability('local/wellness:seebutton', $context)){
 		$form->display();
 	}
  }else{
- 	echo html_writer::tag('div',array('id'=> 'chart_div'));
+ 	echo "<div id='chart_div'></div>";
  	}
- 	echo html_writer::empty_tag('img', array('src' => 'http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg', 'alt' => 1,'width'=>500 ,'height'=>300));
+ 	echo "<img src='http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg'>";
  	?>
   </body>
 </html>
