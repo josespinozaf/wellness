@@ -103,10 +103,8 @@ if(has_capability('local/wellness:seebutton', $context)){
 			}
 			}
 		else if($submitsearch){
-			$form = new search_imc_form();
-			if ($datasearch= $form->get_data()){
-				print_object($datasearch);
-				echo "hola";
+			$formsearch = new search_imc_form();
+			if ($datasearch= $formsearch->get_data()){
 				$email=$datasearch->email;
 				$result= $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`=?",array($email));
 				
@@ -121,11 +119,11 @@ if(has_capability('local/wellness:seebutton', $context)){
 			
 			}
 			
-			if ($form->is_cancelled()){
+			if ($formsearch->is_cancelled()){
 				$url='local/wellness/imc.php';
 				redirect($url);
 			}else{
-				$form->display();
+				$formsearch->display();
 			}								
 		}
 		 		
