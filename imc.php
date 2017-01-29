@@ -29,14 +29,12 @@ echo $OUTPUT->header ();
 	      data.addColumn('number', '<?php echo get_string('imcs','local_wellness');?>');
 			<?php
 				// **Peticion al SQL**//
-				$result = mysql_query("SELECT * FROM `imc` WHERE `email`='".$usermail."'", $db);
-				if (!$result) {
-					die("Error en la peticion SQL: " . mysql_error());
-				}
-				while($datos=mysql_fetch_array($result)){			
-?>		
+				$result = $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`='".$usermail."'", $db);
+			
+				foreach($result as $rs){			
+?>		      
 	      data.addRows([
-	        <?php echo "[".$datos['ano'].",".$datos['imc']."],";?>   
+	        <?php echo "[".$rs->ano.",".$rs->imc."],";?>   
 	      ]);
 				<?php }?>
 	      var options = {
@@ -61,73 +59,88 @@ echo $OUTPUT->header ();
 	</script>
   </head>
   <body>
- 	<h2><?php echo get_string('imcs','local_wellness')?></h2>
-<?php if(has_capability('local/wellness:seebutton', $context)){
-		if(isset($_POST['AgregarIMC'])){?>
-			<form action="#" method="POST">
-			Email:<input type="text" name="email"/><br>
-			Año:<input type="text" name="ano"/><br>
-			Estatura en metros (1.11):<input type="text" name="estatura" /><br>
-			Peso en kg:<input type="text" name="peso" /><br>
-			<input type="submit" name="AgregarIMC2" value="Agregar"/>
-			<input type="button" value="Volver" onClick="history.back();return true;">
-			</form>
-		<?php 		
-		}else if(isset($_POST['BuscarIMC'])){?>
-			<form action="#" method="POST">
-				Email:<input type="text" name="email"/><br>
-				<input type="submit" name="BuscarIMC2" value="Buscar"/>
-				<input type="button" value="Volver" onClick="history.back();return true;">
-				</form>
-				
-		<?php 
-		}
-		else if(isset($_POST['AgregarIMC2'])){
-			$email=$_REQUEST['email'];
-			$ano=$_REQUEST['ano'];
-			$estatura=$_REQUEST['estatura'];
-			$peso=$_REQUEST['peso'];
-			$imc=$peso/($estatura*$estatura);
-			if($email && $ano && $estatura && $peso && $imc	){
-				$result=mysql_query("INSERT INTO `imc`(`email`, `ano`, `estatura`, `peso`, `imc`) 
-						VALUES ('".$email."','".$ano."','".$estatura."','".$peso."','".$imc."')", $db);
-				if($result) echo "Se ingreso con éxito.<br><a href='imc.php' class='btn'>Volver</a><br>";
-				else echo "Hubo un error.";
-			}else echo "Rellene todos los campos.";
-		}
-		else if(isset($_POST['BuscarIMC2'])){
-			$email=$_REQUEST['email'];
-			if($email){
-				$result=mysql_query("SELECT * FROM `imc` WHERE `email`='".$email."'", $db);
-				if ($result){					
-					echo"<table class='tableimc' style='width:100%'>
-								 <tr>
-										<th colspan='2' style='background-color: #4CAF50; color: white'>".$email."</th>
-								</tr>
-								 <tr>
-										<th>Año</th>
-									    <th>IMC</th>
-								</tr>";
-					while($datos=mysql_fetch_array($result)){
-							echo"<tr align='center'><td>".$datos['ano']."</td>";
-							echo"<td>".$datos['imc']."</td></tr>";							
-														}	
-				} 
-				echo "</table>";
+<?php 
+if(has_capability('local/wellness:seebutton', $context)){
+	 
+	require_once('forms/buttons_imc_form.php');
+	require_once('forms/add_imc_form.php');
+	require_once('forms/search_imc_form.php');
+	
+ 	$form= new buttons_imc_form();
+ 	if($data=$form->get_data()){
+		$submitadd=$data->submitadd;
+		$submitsearch=$data->submitsearch;
+		if($submitadd){
+			$addform= new add_imc_form();
+			if($dataadd= $addform->get_data()){
+				$email=$dataadd->email;
+				$ano=$dataadd->ano;
+				$estatura=$dataadd->estatura;
+				$peso=$dataadd->peso;
+				$imc=$peso/($estatura*$estatura);
+					
+				$newimc = new stdClass();
+				$newimc->email         = $email;
+				$newimc->ano		   = $ano;
+				$newimc->estatura	   = $estatura;
+				$newimc->peso		   = $peso;
+				$newimc->imc		   = $imc;
+				$insert = $DB->insert_record("imc", $newimc, false);
+				if($insert){
+					echo "Se ha ingresado exitosamente.";
+					}
+				else{
+					$url='local/wellness/clases.php';
+					redirect($url);
+				}
 			}
+			if($addform->is_cancelled()){
+				$url="local/wellness/imc.php";
+				redirect($url);
+			}
+			else{
+				$addform->display();
+			}
+			}
+		else if($submitsearch){
+			$form = new search_imc_form();
+			if ($datasearch= $form->get_data()){
+				print_object($datasearch);
+				echo "hola";
+				$email=$datasearch->email;
+				$result= $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`=?",array($email));
+				
+				$table = new html_table();
+				$table->head = array('Año','IMC');
+				foreach ($result as $records) {
+					$ano = $records->ano;
+					$imc = $records->imc;
+					$table->data[] = array($ano, $imc);
+				}
+				echo html_writer::table($table);
+			
+			}
+			
+			if ($form->is_cancelled()){
+				$url='local/wellness/imc.php';
+				redirect($url);
+			}else{
+				$form->display();
+			}								
 		}
-		else{?>
-			<form action="#" method="POST">
-			<input type="submit" name="AgregarIMC" value="Agregar IMC alumno"/>
-			<input type="submit" name="BuscarIMC" value="Buscar IMC alumno"/>
-			</form>
-			<?php }
-		}else{?>
- 	<div id="chart_div"></div>
- 	<?php }?>
- 	<img src="http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg">
+		 		
+ 	}
+	else{
+		$form->set_data($toform);
+		$form->display();
+	}
+ }else{
+ 	echo html_writer::tag('div',array('id'=> 'chart_div'));
+ 	}
+ 	echo html_writer::empty_tag('img', array('src' => 'http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg', 'alt' => 1,'width'=>500 ,'height'=>300));
+ 	?>
   </body>
 </html>
 <?php
 echo $OUTPUT->footer();
-	?>
+?>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 //Configuracion de la pagina
 require_once (dirname ( __FILE__ ) . '/conf.php');
 $params = array();
@@ -17,45 +18,62 @@ echo $OUTPUT->header ();
 
 //Capabilities
 if(has_capability("local/wellness:seebutton", $context) ){
-	echo "<form action='/../../moodle/local/wellness/formulariofoto.php' method='POST'>";
-	echo "<input type='submit' name='AgregarRutina' value='Agregar foto a rutina'>";
-	echo "<input type='submit' name='CambiarRutina' value='Cambiar foto a rutina'>";
-	echo "</form>";
-}
-//Query
-$result = mysql_query("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
-		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 5 and mc.module = 15
-		GROUP BY mp.name", $db);
 
-if (!$result) {
-	die("Error en la peticion SQL: " . mysql_error());
-}
-$resultfoto = mysql_query("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre", $db);
-
-//Display de rutinas
-$clases = array();
-$fotos = array();
-while ($clase =  mysql_fetch_assoc($result))
-{
-	$clases[] = $clase;
-}
-while ($foto =  mysql_fetch_assoc($resultfoto))
-{
-	$fotos[] = $foto;
-}
-foreach ($clases as $clase)
-{
-	foreach ($fotos as $foto)
-	{
-		if 	($clase['name'] == $foto['name']){
-			echo '<div class="img">';
-			echo "<a href='/../../moodle/mod/page/view.php?id=".$clase['id']."'>";
-			echo "<img  src='/../../moodle/local/wellness/imagen.php?nombre=".$clase['name']."' alt=".$clase['name']."></img></a>";
-			echo '<div class="desc">'.$clase['name'].'</div></div>';
+	//include simplehtml_form.php
+	require_once('forms/buttons_form.php');
+	require_once('forms/formulariofotorutinas_form.php');
+	
+	//Instantiate simplehtml_form
+	$mform = new buttons_form();
+	
+	if ($data = $mform->get_data()) {
+		$submitagregar= $data->submitagregar;
+		$submiteditar= $data->submiteditar;
+		if(isset($submitagregar)){
+			$formadd = new formulariofotorutinas_form();
+			if ($dataadd = $formadd->get_data()){
+				$nombre= $dataadd->selectrutinas;
+				$imagen= $dataadd->imagen;
+					
+			}else{
+				$formadd->display();
+			}
+		}
+		if (isset($submiteditar)){
+			$formeditar= new formulariofotorutinas_form();
+			if ($dataeditar = $formeditar->get_data()){
+				$nombre= $dataeditar->selectrutinas;
+				$imagen= $dataeditar->imagen;
+					
+			}else{
+				$formeditar->display();
+			}
 		}
 	}
+	else{
+		$mform->set_data($toform);
+	
+		$mform->display();
+	}
 }
+
+// //Query
+$result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
+		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
+		WHERE mp.course = 2 and mc.module = 15
+		GROUP BY mp.name");
+
+foreach ($result as $rs)
+{
+	echo '<div class="img">';
+	echo "<a href='../../mod/page/view.php?id=".$rs->id."'>";
+	echo "<img  src='../../local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->name."></img></a>";
+	echo '<div class="desc">'.$rs->name.'</div></div>';
+		
+}
+echo $x;
+$result->close();
+$resultfoto->close();
 
 echo $OUTPUT->footer();
 ?>
