@@ -14,18 +14,18 @@ class formulariofoto_form extends moodleform {
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
 		foreach($result as $rs){
-			$options[] = $rs->fullname;
+			$options[$rs->fullname] = $rs->fullname;
 		}
+		
 		$result->close();
 		$mform = $this->_form; // Don't forget the underscore!
 	
 		$mform->addElement('header', 'header', 'Agregar una foto a clase');
 		
-		$mform->addElement('select', 'selectclases', 'Seleccione una clase: ', $options);
+		$mform->addElement('select', 'selectclases', 'Seleccione una clase: ',$options);
 		
-		$mform->addElement('file', 'imagen','Subir imagen: *Este archivo debe ser .jpg, .jpeg, .gif, .png');
+		$mform->addElement('filepicker', 'imagen','Subir imagen: *Este archivo debe ser .jpg, .jpeg, .png', null,array('maxbytes' => 512000, 'accepted_types' => array('*.png', '*.jpg', '*.jpeg')));
 		
-// 		$mform->addElement('submit', 'submitadd','Subir');
 		$this->add_action_buttons();
 
 	}
