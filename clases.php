@@ -18,107 +18,82 @@ echo $OUTPUT->header ();
 //Capabilities para botones
 if (has_capability ( "local/wellness:seebutton", $context )) {
 	//include simplehtml_form.php
-	require_once('forms/buttons_form.php');
+	echo html_writer::tag('a','Agregar foto',array('href'=>'?action=agregar', 'class'=>'btn'));
+	echo ' ';
+	echo html_writer::tag('a','Buscar foto',array('href'=>'?action=buscar', 'class'=>'btn'));
+	echo html_writer::tag('br');
+	$action=$_GET['action']; 
+	if ($action=='agregar'){
 	require_once('forms/formulariofoto_form.php');
-	
 	//Instantiate simplehtml_form
-	$mform = new buttons_form();
 	
-	if ($data = $mform->get_data()) {
-		$submitagregar= $data->submitagregar;
-		$submiteditar= $data->submiteditar;
-		if(isset($submitagregar)){
-			$formadd = new formulariofoto_form();
-			if ($dataadd = $formadd->get_data()){
-				$nombre= $dataadd->selectclases;
-				$imagen= $dataadd->imagen;
+	$formadd = new formulariofoto_form();
+	if ($formadd->is_cancelled()){
+		die;
+	}
+	if ($dataadd = $formadd->get_data()){
 
-				//comprobamos si ha ocurrido un error.
-				if ( !isset($imagen) || $imagen["error"] > 0){
-					echo "Ha ocurrido un error";
-				}
-				else {
-					//ahora vamos a verificar si el tipo de archivo es un tipo de imagen permitido.
-					//y que el tamano del archivo no exceda los 16MB
-					$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
-					$limite_kb = 16384;
+		$nombre= $dataadd->selectclases;
+		$imagen= $dataadd->imagen;
+		$tipo_imagen= $imagen['type'];
 				
-					if (in_array($imagen['type'], $permitidos) && $imagen['size'] <= $limite_kb * 1024){
-				
-						//este es el archivo temporal
-						$imagen_temporal  = $imagen['tmp_name'];
-						//este es el tipo de archivo
-						$tipo = $imagen['type'];
-						//leer el archivo temporal en binario
-						$fp = fopen($imagen_temporal, 'r+b');
-						$data = fread($fp, filesize($imagen_temporal));
-						fclose($fp);
-				
-						//escapar los caracteres
-						$data = mysql_escape_string($data);
-						if (isset($_POST['subiragregar'])){
-							//Existencia de foto
-							$fotoexistente="SELECT * FROM imagenes WHERE nombre='".$nombre."'";
-							$resultadofotoexistente=$DB->get_records_sql($fotoexistente);
-							if (mysql_num_rows($resultadofotoexistente)>0)
-							{
-								echo 'Ya existe registro si desea cambiar la foto, apriete <a href="/../../moodle/local/wellness/clases.php">AQUI</a>';
-							} else {
-				
-								$resultado = @mysql_query("INSERT INTO imagenes (nombre, imagen, tipo_imagen) VALUES ('$nombre','$data', '$tipo')");
-				
-								if ($resultado){
-									echo "Felicitaciones, la foto ha sido subida exitosamente. Esta pagina se redireccionará";
-								}
-								else {
-									echo "Oh, ocurrio un error al copiar el archivo.";
-								}
-							}
-						}
-						if (isset($_POST['subircambiar'])){
-							$resultado = @mysql_query("UPDATE imagenes SET imagen= '$data', tipo_imagen='$tipo' WHERE nombre='".$nombre."'");
-				
-							if ($resultado){
-								echo "Felicitaciones, la foto ha sido cambiada exitosamente. Esta pagina se redireccionará";
-							}
-							else {
-								echo "Oh, ocurrio un error al copiar el archivo.";
-							}
-						}
-					}
-					else {
-						echo "Cuidado, archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
-					}
-				}
-				
-			}else{		
+		$newimg= new stdClass();
+		$newimg->nombre = $nombre;
+		$newimg->imagen = $imagen;
+		$newimg->tipo_imagen= $tipo_imagen;
+		$subir = $DB->insert_record('imagenes',$newimg, false); 
+		if($subir){
+			echo "Se ha ingresado exitosamente.";
+		}
+		else{
+			echo "Error con base de datos.";
 			$formadd->display();
-			}
 		}
-		if (isset($submiteditar)){
-			$formeditar= new formulariofoto_form();
-			if ($dataeditar = $formeditar->get_data()){
-				$nombre= $dataeditar->selectclases;
-				$imagen= $dataeditar->imagen;
-			
-			}else{
-				$formeditar->display();
-			}
+	}else{		
+		$formadd->display();
+	}
+	}
+	if ($action=='buscar'){
+	require_once('forms/formulariofotoeditar_form.php');
+
+	$formedit= new formulariofotoeditar_form();
+	
+	if ($dataedit= $formedit->get_data()){
+		$nombre= $dataadd->selectclases;
+		$imagen= $dataadd->imagen;
+	 	$tipo_imagen= $imagen['type'];
+	 	 
+	 	$id= $DB->get_record_sql('SELECT imagen_id FROM mdl_imagenes WHERE nombre=?',array($nombre));
+	 	 
+		$update_array = new stdClass();
+		$update_array->imagen_id = $id;
+		$update_array->nombre= $nombre;
+		$update_array->imagen = $imagen;
+		$update_array->tipo_imagen = $imagen['type'];
+		$sql=$DB->update_record('imagenes',$update_array, false);
+		if(!$sql)
+		{
+			echo "Could not update";
 		}
+		else
+		{
+			echo "Successful";
+		}
+		
 	}
 	else{
-	$mform->set_data($toform);
-	
-	$mform->display();
+		$formedit->display();
 	}
-}
+	}
+}	
 //Query para las clases
-$result = $DB->get_recordset_sql("SELECT DISTINCT mc.* , pp.* FROM mdl_course as mc INNER JOIN imagenes as pp ON mc.fullname = pp.nombre");
+$result = $DB->get_recordset_sql("SELECT DISTINCT mc.* , pp.* FROM mdl_course as mc INNER JOIN mdl_imagenes as pp ON mc.fullname = pp.nombre");
+
 
 foreach ($result as $rs){
 			echo '<div class="img">';
 			echo "<a href='../../course/view.php?id=".$rs->id."'>";
-			echo "<img  src='../../local/wellness/imagen.php?nombre=".$rs->fullname."' alt=". $rs->fullname."></img></a>";
+			echo "<img  src='../../local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->fullname."></img></a>";
 			echo '<div class="desc">'.$rs->fullname.'</div></div>';
 		}
 $result->close();
