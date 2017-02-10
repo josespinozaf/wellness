@@ -31,11 +31,11 @@
      <TABLE NAME="imc" COMMENT="Imc de los alumnos">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="email" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="ano" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="estatura" TYPE="int" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="peso" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="imc" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="email" TYPE="text" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="ano" TYPE="text" LENGTH="4" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="estatura" TYPE="text" LENGTH="3" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="peso" TYPE="text" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="imc" TYPE="text" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

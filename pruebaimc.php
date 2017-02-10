@@ -66,17 +66,16 @@ if(has_capability('local/wellness:seebutton', $context)){
 	require_once('forms/add_imc_form.php');
 	require_once('forms/search_imc_form.php');
 	
- 	$form= new buttons_imc_form();
- 	if($data=$form->get_data()){
-		$submitadd=$data->submitadd;
-		$submitsearch=$data->submitsearch;
-		if($submitadd){
 			$addform= new add_imc_form();
-			if($dataadd= $addform->get_data()){
-				$email=$dataadd->email;
-				$ano=$dataadd->ano;
-				$estatura=$dataadd->estatura;
-				$peso=$dataadd->peso;
+			if ($addform->is_cancelled()){
+			echo "CANCELADO";
+			}
+			else if($fromform= $addform->get_data()){
+// 				print_r($fromform);
+				$email=$fromform->email;
+				$ano=$fromform->ano;
+				$estatura=$fromform->estatura;
+				$peso=$fromform->peso;
 				$imc=$peso/($estatura*$estatura);
 					
 				$newimc = new stdClass();
@@ -85,12 +84,13 @@ if(has_capability('local/wellness:seebutton', $context)){
 				$newimc->estatura	   = $estatura;
 				$newimc->peso		   = $peso;
 				$newimc->imc		   = $imc;
-				$newimcingresado = array($newimc);
-				if($insert){
-				$insert = $DB->insert_record('imc', $newimcingresado, false);
+				$subir = $DB->insert_record("imc", $newimc, false);
+				if($subir){
 					echo "Se ha ingresado exitosamente.";
 					}
 				else{
+					echo "ERROR";
+					$addform->display();
 					$url='local/wellness/clases.php';
 					redirect($url);
 				}
@@ -98,44 +98,12 @@ if(has_capability('local/wellness:seebutton', $context)){
 			if($addform->is_cancelled()){
 				$url="local/wellness/imc.php";
 				redirect($url);
+				echo 'El formulario se ha cancelado.';
 			}
 			else{
 				$addform->display();
 			}
 			}
-		else if($submitsearch){
-			$formsearch = new search_imc_form();
-			if ($datasearch= $formsearch->get_data()){
-				$email=$datasearch->email;
-				$result= $DB->get_records_sql("SELECT * FROM `imc` WHERE `email`=?",array($email));
-				
-				$table = new html_table();
-				$table->head = array('Año','IMC');
-				foreach ($result as $records) {
-					$ano = $records->ano;
-					$imc = $records->imc;
-					$table->data[] = array($ano, $imc);
-				}
-				echo html_writer::table($table);
-			
-			}
-			
-			if ($formsearch->is_cancelled()){
-				$url='local/wellness/imc.php';
-				redirect($url);
-			}else{
-				$formsearch->display();
-			}								
-		}
-		 		
- 	}
-	else{
-		$form->set_data($toform);
-		$form->display();
-	}
- }else{
- 	echo "<div id='chart_div'></div>";
- 	}
  	echo "<img src='http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg'>";
  	?>
   </body>

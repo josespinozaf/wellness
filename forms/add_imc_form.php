@@ -28,6 +28,7 @@ class add_imc_form extends moodleform {
 	}
 	//Custom validation should be added here
 	function validation($data, $files) {
+		return array();
 		$error=array();
 		$email= $data['email'];
 		$estatura= $data['estatura'];
