@@ -68,7 +68,13 @@ if(has_capability('local/wellness:seebutton', $context)){
 	
 			$addform= new add_imc_form();
 			if ($addform->is_cancelled()){
-			echo "CANCELADO";
+			echo 'El formulario se ha cancelado.';
+// 			$url="local/wellness/pruebaimc.php";
+// 			redirect($url);
+			//debugging("form cancelled");
+			die;
+			
+			
 			}
 			else if($fromform= $addform->get_data()){
 // 				print_r($fromform);
@@ -89,16 +95,9 @@ if(has_capability('local/wellness:seebutton', $context)){
 					echo "Se ha ingresado exitosamente.";
 					}
 				else{
-					echo "ERROR";
+					echo "Error con base de datos.";
 					$addform->display();
-					$url='local/wellness/clases.php';
-					redirect($url);
 				}
-			}
-			if($addform->is_cancelled()){
-				$url="local/wellness/imc.php";
-				redirect($url);
-				echo 'El formulario se ha cancelado.';
 			}
 			else{
 				$addform->display();

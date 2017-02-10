@@ -9,7 +9,6 @@ require_once (dirname ( __FILE__ ) . '/../../config.php');
 global $USER, $CFG, $DB;
 require_once ($CFG->dirroot . '/my/lib.php');
 redirect_if_major_upgrade_required ();
-include ("connect.php");
 $edit = optional_param ( 'edit', null, PARAM_BOOL ); // Turn editing on and off
 $reset = optional_param ( 'reset', null, PARAM_BOOL );
 
