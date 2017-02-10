@@ -9,7 +9,7 @@ class add_imc_form extends moodleform {
 		
 		$mform = $this->_form; // Don't forget the underscore!
 	
-		$mform->addElement('header', 'header', 'IMC Alumno');
+		$mform->addElement('header', 'header', 'Agregar IMC Alumno');
 
  		$mform->addElement('text', 'email', 'Mail alumno:');
  		$mform->setType('email', PARAM_NOTAGS);
@@ -17,14 +17,18 @@ class add_imc_form extends moodleform {
 		$mform->addElement('text', 'ano', 'Año:','maxlength="4" size="4" ');
 		$mform->setType('ano', PARAM_NOTAGS);
 		
-		$mform->addElement('text', 'estatura', 'Estatura en metros (1.11):');
+		$mform->addElement('text', 'estatura', 'Estatura en centimetros (170cm):');
 		$mform->setType('estatura', PARAM_NOTAGS);
 		
 		$mform->addElement('text', 'peso', 'Peso en kg:');
 		$mform->setType('peso', PARAM_NOTAGS);
 		
-		$this->add_action_buttons();
-				
+		$buttonarray=array();
+		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Agregar IMC');
+		$buttonarray[] = &$mform->createElement('reset', 'resetbutton', 'Resetear');
+		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
+		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+		$mform->closeHeaderBefore('buttonar');
 	}
 	//Custom validation should be added here
 	function validation($data, $files) {

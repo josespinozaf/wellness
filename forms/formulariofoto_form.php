@@ -25,7 +25,8 @@ class formulariofoto_form extends moodleform {
 		
 		$mform->addElement('file', 'imagen','Subir imagen: *Este archivo debe ser .jpg, .jpeg, .gif, .png');
 		
-		$mform->addElement('submit', 'submitadd','Subir');
+// 		$mform->addElement('submit', 'submitadd','Subir');
+		$this->add_action_buttons();
 
 	}
 	//Custom validation should be added here

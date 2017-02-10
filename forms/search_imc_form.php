@@ -8,11 +8,15 @@ class search_imc_form extends moodleform {
 		global $CFG;
 		
 		$mform = $this->_form; // Don't forget the underscore!
-		$mform->addElement('header', 'header', 'IMC Alumno');
+		$mform->addElement('header', 'header', 'Buscar IMC Alumno');
 		$mform->addElement('text', 'email', 'Mail alumno:');
 		$mform->setType('email', PARAM_NOTAGS);
 
-		$this->add_action_buttons();
+		$buttonarray=array();
+		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Buscar IMC');
+		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
+		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+		$mform->closeHeaderBefore('buttonar');
 	}
 	//Custom validation should be added here
 	function validation($data, $files) {

@@ -61,13 +61,11 @@ echo $OUTPUT->header ();
   <body>
 <?php 
 if(has_capability('local/wellness:seebutton', $context)){
-	echo html_writer::link('agregarimc.php','AGREGAR IMC', array('class'=>'btn', 'type'=>'submit', 'id'=>'agregarimc', 'name'=>'agregarimc'),null);
-	echo ' ';
-	echo html_writer::link('buscarimc.php','BUSCAR IMC', array('class'=>'btn', 'type'=>'submit', 'id'=>'buscarimc', 'name'=>'buscarimc'),null);
-    echo '<br>';
- }else{
- 	echo "<div id='chart_div'></div>";
- 	}
+	 
+	echo html_writer::link('pruebaimcagregarimc.php','AGREGAR IMC', array('class'=>'btn', 'type'=>'submit', 'id'=>'agregarimc', 'name'=>'agregarimc'),null);
+	echo html_writer::link('pruebaimcbuscarimc.php','BUSCAR IMC', array('class'=>'btn', 'type'=>'submit', 'id'=>'buscarimc', 'name'=>'buscarimc'),null);
+//	echo html_writer::start_tag('div',array('class'=>'agregarimc'));
+}
  	echo "<img src='http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg'>";
  	?>
   </body>

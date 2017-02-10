@@ -62,46 +62,35 @@ echo $OUTPUT->header ();
 <?php 
 if(has_capability('local/wellness:seebutton', $context)){
 	 
-	require_once('forms/buttons_imc_form.php');
 	require_once('forms/add_imc_form.php');
 	require_once('forms/search_imc_form.php');
-	
-			$addform= new add_imc_form();
-			if ($addform->is_cancelled()){
-			echo 'El formulario se ha cancelado.';
-// 			$url="local/wellness/pruebaimc.php";
-// 			redirect($url);
-			//debugging("form cancelled");
-			die;
+
+			$formsearch = new search_imc_form();
+			if ($datasearch= $formsearch->get_data()){
+				$email=$datasearch->email;
+				$result= $DB->get_records_sql("SELECT * FROM `mdl_imc` WHERE `email`=?",array($email));
 			
-			
-			}
-			else if($fromform= $addform->get_data()){
-// 				print_r($fromform);
-				$email=$fromform->email;
-				$ano=$fromform->ano;
-				$estatura=$fromform->estatura;
-				$peso=$fromform->peso;
-				$imc=$peso/($estatura*$estatura);
+				$table = new html_table();
+				$table->head = array('Año', 'Estatura (cm)','Peso (Kg)', 'IMC');
+				foreach ($result as $records) {
 					
-				$newimc = new stdClass();
-				$newimc->email         = $email;
-				$newimc->ano		   = $ano;
-				$newimc->estatura	   = $estatura;
-				$newimc->peso		   = $peso;
-				$newimc->imc		   = $imc;
-				$subir = $DB->insert_record("imc", $newimc, false);
-				if($subir){
-					echo "Se ha ingresado exitosamente.";
-					}
-				else{
-					echo "Error con base de datos.";
-					$addform->display();
+					$ano = $records->ano;
+					$imc = $records->imc;
+					$estatura = $records->estatura;
+					$peso = $records->peso;
+					$table->data[] = array($ano, $estatura, $peso, $imc);
 				}
+				echo html_writer::table($table);
+					
 			}
-			else{
-				$addform->display();
+				
+			if ($formsearch->is_cancelled()){
+				$url='local/wellness/imc.php';
+				redirect($url);
+			}else{
+				$formsearch->display();
 			}
+			echo html_writer::end_tag('div',array('class'=>'buscarimc'));
 			}
  	echo "<img src='http://www.deporlovers.com/wp-content/uploads/2015/12/%C3%ADndice-de-masa-corporal.jpg'>";
  	?>
