@@ -22,7 +22,7 @@ class add_imc_form extends moodleform {
 		
 		$mform->addElement('text', 'peso', 'Peso en kg:');
 		$mform->setType('peso', PARAM_NOTAGS);
-		
+			
 		$buttonarray=array();
 		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Agregar IMC');
 		$buttonarray[] = &$mform->createElement('reset', 'resetbutton', 'Resetear');

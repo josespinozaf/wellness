@@ -58,22 +58,34 @@ if(has_capability("local/wellness:seebutton", $context) ){
 }
 
 // //Query
-$result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
-		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-		WHERE mp.course = 2 and mc.module = 15
+// $resultfoto = $DB->get_recordset_sql("SELECT DISTINCT mp.* , pp.* FROM mdl_page as mp INNER JOIN imagenes as pp ON mp.name = pp.nombre");
+
+// $result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
+// 		INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
+// 		WHERE mp.course = 5 and mc.module = 15
+// 		GROUP BY mp.name");
+
+$result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
+		INNER JOIN mdl_page as mp ON cm.instance = mp.id
+		INNER JOIN mdl_imagenes as im ON mp.name = im.nombre
+		WHERE mp.course = 5
 		GROUP BY mp.name");
+
+
 
 foreach ($result as $rs)
 {
-	echo '<div class="img">';
-	echo "<a href='../../mod/page/view.php?id=".$rs->id."'>";
-	echo "<img  src='../../local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->name."></img></a>";
-	echo '<div class="desc">'.$rs->name.'</div></div>';
+	$imagen = $rs->imagen;
+ 	echo '<div class="img">';
+ 	echo "<a href='../../mod/page/view.php?id=".$rs->id."'>";
+//	echo "<img src='/../../moodle/local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->name."></img></a>";
+	echo '<img src="data:image/jpeg;base64,'.base64_encode( $imagen ).'"/></img></a>';
+// 	<img src="data:image/jpeg;base64,'.base64_encode( $imagen ).'"/>
+ 	echo '<div class="desc">'.$rs->name.'</div></div>';
 		
 }
-echo $x;
+
 $result->close();
-$resultfoto->close();
 
 echo $OUTPUT->footer();
 ?>
