@@ -19,7 +19,7 @@ class formulariofoto_form extends moodleform {
 		
 		$result->close();
 		$mform = $this->_form; // Don't forget the underscore!
-	
+		
 		$mform->addElement('header', 'header', 'Agregar una foto a clase');
 		
 		$mform->addElement('select', 'selectclases', 'Seleccione una clase: ',$options);

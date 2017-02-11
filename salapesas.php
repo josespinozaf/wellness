@@ -20,27 +20,36 @@ echo $OUTPUT->header ();
 if(has_capability("local/wellness:seebutton", $context) ){
 
 	//include simplehtml_form.php
-	require_once('forms/buttons_form.php');
 	require_once('forms/formulariofotorutinas_form.php');
+	require_once('forms/formulariofotoeditar_form.php');
 	
 	//Instantiate simplehtml_form
-	$mform = new buttons_form();
 	
-	if ($data = $mform->get_data()) {
-		$submitagregar= $data->submitagregar;
-		$submiteditar= $data->submiteditar;
-		if(isset($submitagregar)){
 			$formadd = new formulariofotorutinas_form();
 			if ($dataadd = $formadd->get_data()){
 				$nombre= $dataadd->selectrutinas;
 				$imagen= $dataadd->imagen;
+				$tipo_imagen= $imagen['type'];
+								
+				$newimg= new stdClass();
+				$newimg->nombre = $nombre;
+				$newimg->imagen = $imagen;
+				$newimg->tipo_imagen= $tipo_imagen;
+				$subir = $DB->insert_record('imagenes',$newimg, false);
+				if($subir){
+					echo "Se ha ingresado exitosamente.";
+				}
+				else{
+					echo "Error con base de datos.";
+					$formadd->display();
+				}
+				
 					
 			}else{
 				$formadd->display();
 			}
-		}
-		if (isset($submiteditar)){
-			$formeditar= new formulariofotorutinas_form();
+			
+			$formeditar= new formulariofotoeditar_form();
 			if ($dataeditar = $formeditar->get_data()){
 				$nombre= $dataeditar->selectrutinas;
 				$imagen= $dataeditar->imagen;
@@ -48,13 +57,6 @@ if(has_capability("local/wellness:seebutton", $context) ){
 			}else{
 				$formeditar->display();
 			}
-		}
-	}
-	else{
-		$mform->set_data($toform);
-	
-		$mform->display();
-	}
 }
 
 // //Query
