@@ -3,14 +3,14 @@
 //moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
-class formulariofotorutinas_form extends moodleform {
+class formulariofotorutinaseditar_form extends moodleform {
 	//Add elements to form
 	public function definition() {
 		global $CFG, $DB;
 
 		$sql= "SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 								  INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-								  WHERE mp.course = 2 and mc.module = 15
+								  WHERE mp.course = 5 and mc.module = 15
 								  GROUP BY mp.name";
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
@@ -20,21 +20,18 @@ class formulariofotorutinas_form extends moodleform {
 		$result->close();
 		$mform = $this->_form; // Don't forget the underscore!
 
-		$mform->addElement('header', 'header', 'Agregar una foto a rutina');
+		$mform->addElement('header', 'header', 'Editar una foto a rutina');
 
 		$mform->addElement('select', 'selectrutinas', 'Seleccione una rutinas: ', $options);
 
 		$mform->addElement('filepicker', 'imagen','Subir imagen: *Este archivo debe ser .jpg, .jpeg, .png', null,array('maxbytes' => 512000, 'accepted_types' => array('*.png', '*.jpg', '*.jpeg')));
 		
 		$buttonarray=array();
-		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Agregar foto');
+		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Editar foto');
 		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
 		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 		$mform->addElement('hidden', 'end');
 		$mform->closeHeaderBefore('end');
-		
-		
-		
 	}
 	//Custom validation should be added here
 	function validation($data, $files) {

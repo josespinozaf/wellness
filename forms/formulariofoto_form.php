@@ -26,7 +26,13 @@ class formulariofoto_form extends moodleform {
 		
 		$mform->addElement('filepicker', 'imagen','Subir imagen: *Este archivo debe ser .jpg, .jpeg, .png', null,array('maxbytes' => 512000, 'accepted_types' => array('*.png', '*.jpg', '*.jpeg')));
 		
-		$this->add_action_buttons();
+		$buttonarray=array();
+		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Agregar foto');
+		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
+		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+		$mform->addElement('hidden', 'end');
+		$mform->closeHeaderBefore('end');
+
 
 	}
 	//Custom validation should be added here
