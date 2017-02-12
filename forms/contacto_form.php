@@ -23,7 +23,13 @@ class contacto_form extends moodleform {
 		$mform->addElement('textarea', 'comments', 'Comentarios/Preguntas*','maxlength=1000 cols=25 rows=6');
 		$mform->setType('comments', PARAM_NOTAGS);
 		
-		$mform->addElement('submit', 'submit','Enviar');
+		$buttonarray=array();
+		$buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Enviar');
+		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
+		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+		$mform->addElement('hidden', 'end');
+		$mform->closeHeaderBefore('end');
+		
 		
 	}
 	//Custom validation should be added here
