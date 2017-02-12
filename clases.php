@@ -23,15 +23,16 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 		if ($formadd->is_cancelled()){
 			die;
 		}
+
+		$nombre_imagen=$formadd->get_new_filename('imagen');
 		if ($dataadd = $formadd->get_data()){
-	
 			$nombre= $dataadd->selectclases;
 			$imagen= $dataadd->imagen;
 			
 			$newimg= new stdClass();
 			$newimg->nombre = $nombre;
 			$newimg->imagen = $imagen;
-			$newimg->tipo_imagen= $tipo_imagen;
+			$newimg->nombre_imagen= $nombre_imagen;
 			$subir = $DB->insert_record('imagenes',$newimg); 
 			if($subir){
 				echo "Se ha ingresado exitosamente.";
@@ -48,12 +49,12 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 		require_once('forms/formulariofotoeditar_form.php');
 	
 		$formedit= new formulariofotoeditar_form();
-		
+
 		if ($dataedit= $formedit->get_data()){
 			$nombre= $dataadd->selectclases;
 			$imagen= $dataadd->imagen;
-		 	$tipo_imagen= $imagen['type'];
-		 	 
+		 	$tipo_imagen= mime_content_type('php.gif');
+	
 		 	$id= $DB->get_record_sql('SELECT imagen_id FROM mdl_imagenes WHERE nombre=?',array($nombre));
 		 	
 			$update_array = new stdClass();

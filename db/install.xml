@@ -21,7 +21,7 @@
       <FIELDS>
         <FIELD NAME="imagen_id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="imagen" TYPE="binary" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="tipo_imagen" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="nombre_imagen" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="nombre" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
