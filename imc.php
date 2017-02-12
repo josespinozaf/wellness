@@ -61,15 +61,10 @@ echo $OUTPUT->header ();
   <body>
 <?php 
 if(has_capability('local/wellness:seebutton', $context)){
-	echo html_writer::link('?action=agregar','AGREGAR IMC', array('class'=>'btn', 'id'=>'agregarimc', 'name'=>'agregarimc'),null);
-	echo ' ';
-	echo html_writer::link('?action=buscar','BUSCAR IMC', array('class'=>'btn', 'id'=>'buscarimc', 'name'=>'buscarimc'),null);
-    echo '<br>';
-	$action= $_GET['action'];
-	if ($action=='agregar'){
     require_once('forms/add_imc_form.php');
+
     $addform= new add_imc_form();
-    
+ 
     if ($addform->is_cancelled()){
     	$url='imc.php';
     	redirect($url);
@@ -98,43 +93,42 @@ if(has_capability('local/wellness:seebutton', $context)){
    			echo "Error con base de datos.";
     		$addform->display();
     		}
-    	}
-    	else{
-    		$addform->display();
-    	}
-	}
-	if ($action=='buscar'){		
-		require_once('forms/search_imc_form.php');
-		$formsearch = new search_imc_form();
+    }
+    else{
+    	$addform->display();
+    }
+
+	require_once('forms/search_imc_form.php');
+	$formsearch = new search_imc_form();
 		
-		if ($formsearch->is_cancelled()){
-			$url='imc.php';
-			redirect($url);
-			echo 'El formulario se ha cancelado.';
-			die;	
+	if ($formsearch->is_cancelled()){
+		$url='imc.php';
+		redirect($url);
+		echo 'El formulario se ha cancelado.';
+		die;	
 		}
-		if ($datasearch= $formsearch->get_data()){
-			$email=$datasearch->email;
-			$result= $DB->get_records_sql("SELECT * FROM `mdl_imc` WHERE `email`=?",array($email));
-			
-			$table = new html_table();
-			$table->head = array('Año', 'Estatura (cm)','Peso (Kg)', 'IMC');
-			foreach ($result as $records) {
-					
-				$ano = $records->ano;
-				$imc = $records->imc;
-				$estatura = $records->estatura;
-				$peso = $records->peso;
-				$table->data[] = array($ano, $estatura, $peso, $imc);
-			}
+	if ($datasearch= $formsearch->get_data()){
+		$email=$datasearch->email;
+		$result= $DB->get_records_sql("SELECT * FROM `mdl_imc` WHERE `email`=?",array($email));
+				
+		$table = new html_table();
+		$table->head = array('Año', 'Estatura (cm)','Peso (Kg)', 'IMC');
+		foreach ($result as $records) {
+				
+			$ano = $records->ano;
+			$imc = $records->imc;
+			$estatura = $records->estatura;
+			$peso = $records->peso;
+			$table->data[] = array($ano, $estatura, $peso, $imc);
+		}
 		echo html_writer::table($table);
 					
-}
+	}
 	else{
 			$formsearch->display();
-			}
-	}
+		}
 }
+
  else{
  	echo "<div id='chart_div'></div>";
  	}
