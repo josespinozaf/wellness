@@ -35,7 +35,7 @@ if(has_capability("local/wellness:seebutton", $context) ){
 				$newimg->nombre = $nombre;
 				$newimg->imagen = $imagen;
 				$newimg->tipo_imagen= $tipo_imagen;
-				$subir = $DB->insert_record('imagenes',$newimg, false);
+				$subir = $DB->insert_record('imagenes',$newimg);
 				if($subir){
 					echo "Se ha ingresado exitosamente.";
 				}

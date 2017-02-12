@@ -27,12 +27,11 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	
 			$nombre= $dataadd->selectclases;
 			$imagen= $dataadd->imagen;
-			$tipo_imagen= $imagen['type'];
-					
+			
 			$newimg= new stdClass();
 			$newimg->nombre = $nombre;
 			$newimg->imagen = $imagen;
-			$newimg->tipo_imagen= 'clacla';
+			$newimg->tipo_imagen= $tipo_imagen;
 			$subir = $DB->insert_record('imagenes',$newimg); 
 			if($subir){
 				echo "Se ha ingresado exitosamente.";
@@ -79,29 +78,18 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	}
 
 //Query para las clases
-$result = $DB->get_recordset_sql("SELECT DISTINCT mc.* , pp.* FROM mdl_course as mc INNER JOIN mdl_imagenes as pp ON mc.fullname = pp.nombre");
-
 $result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
 		INNER JOIN mdl_page as mp ON cm.instance = mp.id
 		INNER JOIN mdl_imagenes as im ON mp.name = im.nombre
 		WHERE mp.course = 4
 		GROUP BY mp.name");
-
-// foreach ($result as $rs){
-// 			echo '<div class="img">';
-// 			echo "<a href='../../course/view.php?id=".$rs->id."'>";
-// 			echo "<img  src='../../local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->fullname."></img></a>";
-// 			echo '<div class="desc">'.$rs->fullname.'</div></div>';
-// 		}
 		
 		foreach ($result as $rs)
 		{
 			$imagen = $rs->imagen;
 			echo '<div class="img">';
 			echo "<a href='../../mod/page/view.php?id=".$rs->id."'>";
-			//	echo "<img src='/../../moodle/local/wellness/imagen.php?nombre=".$rs->name."' alt=". $rs->name."></img></a>";
 			echo '<img src="data:image/jpeg;base64,'.base64_encode( $imagen ).'"/></img></a>';
-			// 	<img src="data:image/jpeg;base64,'.base64_encode( $imagen ).'"/>
 			echo '<div class="desc">'.$rs->name.'</div></div>';
 		
 		}
