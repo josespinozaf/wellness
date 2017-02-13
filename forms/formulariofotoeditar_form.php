@@ -8,13 +8,11 @@ class formulariofotoeditar_form extends moodleform {
 	public function definition() {
 		global $CFG, $DB;
 		
-		$sql= "SELECT DISTINCT mcm.* , mc.* FROM mdl_course_modules as mcm
-				INNER JOIN mdl_course as mc ON mcm.course = mc.id
-				WHERE mcm.module = 5 GROUP BY mc.fullname";
+		$sql= "SELECT DISTINCT * FROM mdl_imagenes";
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
 		foreach($result as $rs){
-			$options[$rs->fullname] = $rs->fullname;
+			$options[$rs->nombre] = $rs->nombre;
 		}
 		
 		$result->close();

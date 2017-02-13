@@ -17,67 +17,61 @@ echo $OUTPUT->header ();
 
 //Capabilities para botones
 if (has_capability ( "local/wellness:seebutton", $context )) {
-		require_once('forms/formulariofoto_form.php');
-		$formadd = new formulariofoto_form();
-	
-		if ($formadd->is_cancelled()){
+	// Inicio de formulario para agregar foto
+	require_once('forms/formulariofoto_form.php');
+	$formadd = new formulariofoto_form();
+	//Url para redirección 
+	$url='clases.php';
+	if ($formadd->is_cancelled()){
+		die;
+	}
+	$nombre_imagen=$formadd->get_new_filename('imagen');
+	if ($dataadd = $formadd->get_data()){
+		$nombre= $dataadd->selectclases;
+		$imagen= $dataadd->imagen;
+		$newimg= new stdClass();
+		$newimg->nombre = $nombre;
+		$newimg->imagen = $imagen;
+		$newimg->nombre_imagen= $nombre_imagen;
+		$subir = $DB->insert_record('imagenes',$newimg); 
+		if($subir){
+			echo "Se ha ingresado exitosamente.";
+			redirect($url);
 			die;
 		}
-
-		$nombre_imagen=$formadd->get_new_filename('imagen');
-		if ($dataadd = $formadd->get_data()){
-			$nombre= $dataadd->selectclases;
-			$imagen= $dataadd->imagen;
-			
-			$newimg= new stdClass();
-			$newimg->nombre = $nombre;
-			$newimg->imagen = $imagen;
-			$newimg->nombre_imagen= $nombre_imagen;
-			$subir = $DB->insert_record('imagenes',$newimg); 
-			if($subir){
-				echo "Se ha ingresado exitosamente.";
-			}
-			else{
-				echo "Error con base de datos.";
-				$formadd->display();
-			}
-		}else{		
+		else{
+			echo "Error con base de datos.";
 			$formadd->display();
 		}
+	}else{		
+		$formadd->display();
+	}
+	// Inicio de formulario para editar foto
+	require_once('forms/formulariofotoeditar_form.php');
 	
-		
-		require_once('forms/formulariofotoeditar_form.php');
-	
-		$formedit= new formulariofotoeditar_form();
-
-		if ($dataedit= $formedit->get_data()){
-			$nombre= $dataadd->selectclases;
-			$imagen= $dataadd->imagen;
-		 	$tipo_imagen= mime_content_type('php.gif');
-	
-		 	$id= $DB->get_record_sql('SELECT imagen_id FROM mdl_imagenes WHERE nombre=?',array($nombre));
-		 	
-			$update_array = new stdClass();
-			$update_array->imagen_id = $id;
-			$update_array->nombre= $nombre;
-			$update_array->imagen = $imagen;
-			$update_array->tipo_imagen = $imagen['type'];
-			$sql=$DB->update_record('imagenes',$update_array, false);
-			if(!$sql)
-			{
-				echo "Could not update";
-			}
-			else
-			{
-				echo "Successful";
-			}
-			
+	$formedit= new formulariofotoeditar_form();
+	$nombre_imagen1=$formedit->get_new_filename('imagen');
+	if ($dataedit= $formedit->get_data()){
+		$nombre= $dataedit->selectclases;
+		$imagen= $dataedit->imagen;
+	 	$sql="UPDATE `mdl_imagenes` SET `imagen`=?,`nombre_imagen`=?
+	 			WHERE `nombre`=?";
+	 	$update=$DB->execute($sql,array($imagen,$nombre_imagen1,$nombre));
+		if(!$update){
+			echo "No se pudo actualizar.";
+			redirect($url);
+			die;				
 		}
 		else{
-			$formedit->display();
+			echo "Éxito!";
+			redirect($url);
+			die;
 		}
 	}
-
+	else{
+		$formedit->display();
+	}
+}
 //Query para las clases
 $result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
 		INNER JOIN mdl_page as mp ON cm.instance = mp.id
