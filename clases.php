@@ -63,6 +63,7 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 			die;				
 		}
 		else{
+			echo "Éxito! con la imagen ".$nombre_imagen1;
 			redirect($url);
 			die;
 		}
