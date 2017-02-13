@@ -35,7 +35,7 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 		$newimg->nombre_imagen= $nombre_imagen;
 		$subir = $DB->insert_record('imagenes',$newimg); 
 		if($subir){
-			echo "Se ha ingresado exitosamente.";
+			echo "Se ha ingresado exitosamente la imagen ".$nombre_imagen;
 			redirect($url);
 			die;
 		}
@@ -63,7 +63,6 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 			die;				
 		}
 		else{
-			echo "Éxito!";
 			redirect($url);
 			die;
 		}
