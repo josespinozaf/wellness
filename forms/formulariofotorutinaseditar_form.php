@@ -31,6 +31,7 @@ class formulariofotorutinaseditar_form extends moodleform {
 		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
 		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 		$mform->addElement('hidden', 'end');
+		$mform->setType('end', PARAM_NOTAGS);
 		$mform->closeHeaderBefore('end');
 	}
 	//Custom validation should be added here

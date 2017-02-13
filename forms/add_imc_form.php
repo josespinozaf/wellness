@@ -28,7 +28,9 @@ class add_imc_form extends moodleform {
 		$buttonarray[] = &$mform->createElement('reset', 'resetbutton', 'Resetear');
 		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
 		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
-		$mform->closeHeaderBefore('buttonar');
+		$mform->addElement('hidden', 'end');
+		$mform->setType('end', PARAM_NOTAGS);
+		$mform->closeHeaderBefore('end');
 	}
 	//Custom validation should be added here
 	function validation($data, $files) {

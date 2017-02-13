@@ -15,7 +15,7 @@ class contacto_form extends moodleform {
 		$mform->setType('first_name', PARAM_NOTAGS);
 		
 		$mform->addElement('text', 'apellido', 'Apellido alumno*','maxlength=50 size=30');
-		$mform->setType('first_name', PARAM_NOTAGS);
+		$mform->setType('apellido', PARAM_NOTAGS);
 		
 		$mform->addElement('text', 'email', 'Mail alumno*','maxlength=50 size=30');
 		$mform->setType('email', PARAM_NOTAGS);
@@ -28,6 +28,7 @@ class contacto_form extends moodleform {
 		$buttonarray[] = &$mform->createElement('cancel', 'cancel', 'Cancelar');
 		$mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 		$mform->addElement('hidden', 'end');
+		$mform->setType('end', PARAM_NOTAGS);
 		$mform->closeHeaderBefore('end');
 		
 		
