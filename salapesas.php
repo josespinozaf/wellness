@@ -18,45 +18,56 @@ echo $OUTPUT->header ();
 
 //Capabilities
 if(has_capability("local/wellness:seebutton", $context) ){
-
+	$url='salapesas.php';
 	//include simplehtml_form.php
 	require_once('forms/formulariofotorutinas_form.php');
-	require_once('forms/formulariofotoeditar_form.php');
+	require_once('forms/formulariofotorutinaseditar_form.php');
 	
 	//Instantiate simplehtml_form
 	
-			$formadd = new formulariofotorutinas_form();
-			if ($dataadd = $formadd->get_data()){
+	$formadd = new formulariofotorutinas_form();
+	$nombre_imagen=$formadd->get_new_filename('imagen');
+	if ($dataadd = $formadd->get_data()){
 				$nombre= $dataadd->selectrutinas;
 				$imagen= $dataadd->imagen;
-				$tipo_imagen= $imagen['type'];
-								
 				$newimg= new stdClass();
 				$newimg->nombre = $nombre;
 				$newimg->imagen = $imagen;
-				$newimg->tipo_imagen= $tipo_imagen;
-				$subir = $DB->insert_record('imagenes',$newimg);
+				$newimg->nombre_imagen= $nombre_imagen;
+				$subir = $DB->insert_record('imagenes',$newimg); 
 				if($subir){
-					echo "Se ha ingresado exitosamente.";
-				}
-				else{
-					echo "Error con base de datos.";
-					$formadd->display();
-				}
-				
-					
-			}else{
-				$formadd->display();
+					echo "Se ha ingresado exitosamente la imagen ".$nombre_imagen;
+					redirect($url);
+					die;
 			}
-			
-			$formeditar= new formulariofotoeditar_form();
-			if ($dataeditar = $formeditar->get_data()){
-				$nombre= $dataeditar->selectrutinas;
-				$imagen= $dataeditar->imagen;
-					
-			}else{
-				$formeditar->display();
-			}
+			else{
+			echo "Error con base de datos.";
+			$formadd->display();
+		}
+	}else{
+		$formadd->display();
+	}
+		
+	$formeditar= new formulariofotorutinaseditar_form();
+	$nombre_imagen1=$formeditar->get_new_filename('imagen');
+	if ($dataeditar = $formeditar->get_data()){
+		$nombre= $dataeditar->selectrutinas;
+		$imagen= $dataeditar->imagen;
+		$sql="UPDATE `mdl_imagenes` SET `imagen`=?,`nombre_imagen`=?
+	 			WHERE `nombre`=?";
+		$update=$DB->execute($sql,array($imagen,$nombre_imagen1,$nombre));
+		if(!$update){
+			echo "No se pudo actualizar.";
+			die;
+		}
+		else{
+			echo "Éxito! con la imagen ".$nombre_imagen1;
+			redirect($url);
+			die;
+		}
+	}else{
+		$formeditar->display();
+	}
 }
 
 // //Query

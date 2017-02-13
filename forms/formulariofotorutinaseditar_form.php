@@ -36,7 +36,7 @@ class formulariofotorutinaseditar_form extends moodleform {
 	//Custom validation should be added here
 	function validation($data, $files) {
 		$error=array();
-		$selectrutinas= $data['selectcrutinas'];
+		$selectrutinas= $data['selectrutinas'];
 		$imagen= $data['imagen'];
 		if (empty($selectrutinas)){
 			$error['selectrutinas']="No existe seleccion de rutina";

@@ -10,7 +10,7 @@ class formulariofoto_form extends moodleform {
 		
 		$sql= "SELECT DISTINCT mcm.* , mc.* FROM mdl_course_modules as mcm
 				INNER JOIN mdl_course as mc ON mcm.course = mc.id
-				WHERE mcm.module = 9 GROUP BY mc.fullname";
+				WHERE mcm.module = 5 GROUP BY mc.fullname";
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
 		foreach($result as $rs){
