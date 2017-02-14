@@ -6,13 +6,16 @@ require_once("$CFG->libdir/formslib.php");
 class formulariofotoeditar_form extends moodleform {
 	//Add elements to form
 	public function definition() {
-		global $CFG, $DB;
+		global $CFG, $DB;	
+
+		$sql= "SELECT DISTINCT mcm.* , mc.* FROM mdl_course_modules as mcm
+				INNER JOIN mdl_course as mc ON mcm.course = mc.id
+				WHERE mcm.module = 9 AND mcm.section > 2 GROUP BY mc.fullname";
 		
-		$sql= "SELECT DISTINCT * FROM mdl_imagenes";
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
 		foreach($result as $rs){
-			$options[$rs->nombre] = $rs->nombre;
+			$options[$rs->fullname] = $rs->fullname;
 		}
 		
 		$result->close();

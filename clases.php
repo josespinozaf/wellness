@@ -73,19 +73,19 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	}
 }
 //Query para las clases
-$result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
-		INNER JOIN mdl_page as mp ON cm.instance = mp.id
-		INNER JOIN mdl_imagenes as im ON mp.name = im.nombre
-		WHERE mp.course = 4
-		GROUP BY mp.name");
+$result = $DB->get_recordset_sql("SELECT DISTINCT mc.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
+		INNER JOIN mdl_course as mc ON cm.instance = mc.id-3
+		INNER JOIN mdl_imagenes as im ON mc.fullname = im.nombre
+		WHERE cm.module = 9
+		GROUP BY mc.id");
 		
 		foreach ($result as $rs)
 		{
 			$imagen = $rs->imagen;
 			echo '<div class="img">';
-			echo "<a href='../../mod/page/view.php?id=".$rs->id."'>";
+			echo "<a href='../../course/view.php?id=".$rs->id."'>";
 			echo '<img src="data:image/jpeg;base64,'.base64_encode( $imagen ).'"/></img></a>';
-			echo '<div class="desc">'.$rs->name.'</div></div>';
+			echo '<div class="desc">'.$rs->fullname.'</div></div>';
 		
 		}
 $result->close();

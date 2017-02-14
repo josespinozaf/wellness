@@ -81,7 +81,7 @@ if(has_capability("local/wellness:seebutton", $context) ){
 $result = $DB->get_recordset_sql("SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
 		INNER JOIN mdl_page as mp ON cm.instance = mp.id
 		INNER JOIN mdl_imagenes as im ON mp.name = im.nombre
-		WHERE mp.course = 5
+		WHERE mp.course = 2
 		GROUP BY mp.name");
 
 

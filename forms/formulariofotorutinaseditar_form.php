@@ -10,7 +10,7 @@ class formulariofotorutinaseditar_form extends moodleform {
 
 		$sql= "SELECT DISTINCT mp.* , mc.* FROM mdl_course_modules as mc
 								  INNER JOIN mdl_page as mp ON mc.course = mp.course AND mc.instance = mp.id
-								  WHERE mp.course = 5 and mc.module = 15
+								  WHERE mp.course = 2 and mc.module = 15
 								  GROUP BY mp.name";
 		$result= $DB-> get_recordset_sql($sql);
 		$options= array();
