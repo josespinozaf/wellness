@@ -26,9 +26,9 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 		die;
 	}
 	$nombre_imagen=$formadd->get_new_filename('imagen');
+	$imagen =  $formadd->get_file_content('imagen');
 	if ($dataadd = $formadd->get_data()){
 		$nombre= $dataadd->selectclases;
-		$imagen= $dataadd->imagen;
 		$newimg= new stdClass();
 		$newimg->nombre = $nombre;
 		$newimg->imagen = $imagen;
@@ -51,9 +51,9 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	
 	$formedit= new formulariofotoeditar_form();
 	$nombre_imagen1=$formedit->get_new_filename('imagen');
+	$imagen =  $formedit->get_file_content('imagen');
 	if ($dataedit= $formedit->get_data()){
 		$nombre= $dataedit->selectclases;
-		$imagen= $dataedit->imagen;
 	 	$sql="UPDATE `mdl_imagenes` SET `imagen`=?,`nombre_imagen`=?
 	 			WHERE `nombre`=?";
 	 	$update=$DB->execute($sql,array($imagen,$nombre_imagen1,$nombre));
