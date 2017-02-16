@@ -19,7 +19,7 @@ echo $OUTPUT->header ();
 <body>
 <?php
 if (isset ( $_POST ['Rutina_Aleatoria'] )) {
-	echo "<h4>Rutina Aleatoria</h4> <br>";
+	echo html_writer::tag('p','<h4>Rutina Aleatoria</h4>');
 	$intensidad = $_REQUEST ['intensidad'];
 	
 	$ej = $DB->get_recordset_sql("SELECT * FROM `ejercicios` WHERE `intensidad`='" . $intensidad . "' ORDER BY RAND() LIMIT 4");
@@ -39,14 +39,14 @@ if (isset ( $_POST ['Rutina_Aleatoria'] )) {
 <h3 align="center">
 			Para crear una rutina aleatoria
 			<form method="POST">
-<?php $result= mysql_query("SELECT DISTINCT `intensidad` FROM `ejercicios`")?>
+<?php $result= $DB->get_records_sql("SELECT DISTINCT `intensidad` FROM `ejercicios`")?>
 <!-- 	Formulario para elegir la intensidad de la rutina -->
 				<p>Qué intensidad quieres?:</p>
 				<select name="intensidad">
 <?php
 	
-	while ( $datos = mysql_fetch_array ( $result ) )
-		echo "<option  value='" . $datos ['intensidad'] . "'>" . $datos ['intensidad'] . "</option>";
+	foreach ($result as $rs)
+		echo "<option  value='" .$rs->intensidad. "'>" . $rs->intensidad. "</option>";
 	?>
 	</select> <input type="submit" value="Hacer Rutina"
 					name="Rutina_Aleatoria" />
@@ -64,21 +64,21 @@ if (is_siteadmin ()) {
 			Link Video:<input type="text" name="link_video" /><br> 
 			Intensidad:<select name="intensidad">
 <?php
-		$result = mysql_query ( "SELECT DISTINCT `intensidad` FROM `ejercicios`" );
-		while ( $datos = mysql_fetch_array ( $result ) )
-			echo "<option  value='" . $datos ['intensidad'] . "'>" . $datos ['intensidad'] . "</option>";
+		$result = $DB->get_records_sql( "SELECT DISTINCT `intensidad` FROM `ejercicios`" );
+		foreach ($result as $rs)
+			echo "<option  value='" . $rs->intensidad. "'>" . $rs->intensidad. "</option>";
 		?>	</select><br> 
 		<input type='submit' name='Agregar_ejercicio' value='Agregar ejercicio'> 
 		<input type="button" value="Volver" onClick="history.back();return true;">
 		</form>
 <?php
 	} else if (isset ( $_POST ['Eliminar'] )) {
-		$result = mysql_query ( "SELECT * FROM ejercicios" )?>
+		$result = $DB->get_records_sql("SELECT * FROM ejercicios");?>
 		<form action='bdejercicios.php' method='POST'>
 			Cuál desea borrar?<select name="nombre">
 <?php
-		while ( $datos = mysql_fetch_array ( $result ) )
-			echo "<option  value='" . $datos ['nombre'] . "'>" . $datos ['nombre'] . "</option>";
+		foreach($result as $rs)
+			echo "<option  value='" . $rs->nombre. "'>" . $rs->nombre. "</option>";
 		?>
 	</select><br> 
 	<input type="submit" name='Eliminar_ejercicio' value="Borrar" /> 
