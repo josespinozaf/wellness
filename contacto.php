@@ -35,6 +35,7 @@ if ($data= $form->get_data()){
 	$form->display();
 }
 
+// Footer
 echo $OUTPUT->footer();
 
 ?> 

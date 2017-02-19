@@ -20,9 +20,11 @@
 * @subpackage wellness
 * @copyright  2016 MSC
 * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+* @author     José Pablo Espinoza Farías
+* @author     Sebastián Flores Chong
 */
 defined('MOODLE_INTERNAL') || die;
-$plugin->version  = 2017010600;   // The (date) version of this plugin
+$plugin->version  = 2017021900;   // The (date) version of this plugin
 $plugin->requires = 2015111600;   // Requires this Moodle version
 $plugin->component = 'local_wellness';
 
