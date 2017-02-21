@@ -16,7 +16,6 @@ $string ['navrutinaaleatoria'] = 'Rutina Aleatoria';
 $string ['navdepartamento'] = 'Departamento';
 $string ['navselecciones'] = 'Selecciones UAI';
 $string ['navimc'] = 'IMC UAI';
-$string ['navrutinaaleatoria'] = 'Rutina Aleatoria';
 
 // **Eventos**
 
