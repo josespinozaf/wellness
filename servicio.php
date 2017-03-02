@@ -1,8 +1,10 @@
 <?php 
+// Configuracion de la pagina
+require_once (dirname ( __FILE__ ) . '/conf.php');
+
 $url= "https://webapi.uai.cl/wellness/asistenciasAlumno";
 $token = "KknDlkLKmmm909b998vb92368nJuijs6s544sd";
-//cambiar por user->mail
-$email = "cselman@alumnos.uai.cl";
+$email =$usermail;
 
 $ch = curl_init();
 
@@ -18,8 +20,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $server_output = curl_exec ($ch);
 if($server_output){
-	//var_dump($server_output);
-	$decoded = json_decode($server_output);	
+	$decoded = json_decode($server_output,true);
+	//print_r($decoded['asistencias']);
+	
 }else{
 	print_r(curl_error($ch));
 }

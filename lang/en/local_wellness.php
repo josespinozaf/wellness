@@ -9,7 +9,7 @@ $string ['navpagprinc'] = 'Principal Page';
 $string ['navsalapesas'] = 'Routines';
 $string ['navclases'] = 'Classes';
 $string ['navsalapesas'] = 'Weights Room';
-$string ['navfitnessgram'] = 'Fitnessgram';
+$string ['navasistencias'] = 'My assists';
 $string ['naveventos'] = 'Events';
 $string ['navcontacto'] = 'Contact';
 $string ['navrutinaaleatoria'] = 'Random Routine';
@@ -57,6 +57,17 @@ $string ['unoaseis'] = '1 to 6';
 $string ['cientovadoscua'] = '120 to 240 sec';
 $string ['repnivel'] = 'The repetitions are according to your level and are of 4 rounds, see your level of repetitions below.';
 $string ['volver'] = 'Back';
+$string ['calentamiento']= '*Start your workout with a warm-up of 10 min on treadmills, ellipticals, bicycles, bike-hand, bike-hand-foot';
+$string ['core']='*Do core work for 5 min.';
+$string ['vueltacalma']='*Calm return for 5 min.';
+
+// **Asistencias**
+$string['fecha']='Date';
+$string['horainicio']='Start Time';
+$string['horatermino']='End Time';
+$string['actividad']='Activity';
+$string['asistencia']='Assistance';
+
 
 // **IMC**
 $string ['imcs'] = 'UAI BMI';
