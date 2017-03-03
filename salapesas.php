@@ -88,10 +88,11 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	}
 }
 // Query
-$result = $DB->get_recordset_sql ( "SELECT DISTINCT mp.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
+$result = $DB->get_recordset_sql ( "SELECT DISTINCT cm.id, im.* FROM mdl_course_modules as cm
 		INNER JOIN mdl_page as mp ON cm.instance = mp.id
 		INNER JOIN mdl_imagenes as im ON mp.name = im.nombre
 		WHERE mp.course = 2
+		AND cm.module = 15
 		GROUP BY mp.name" );
 
 foreach ( $result as $rs ) {
@@ -99,7 +100,7 @@ foreach ( $result as $rs ) {
 	echo '<div class="img">';
 	echo "<a href='../../mod/page/view.php?id=" . $rs->id . "'>";
 	echo '<img src="data:image/jpeg;base64,' . base64_encode ( $imagen ) . '"/></img></a>';
-	echo '<div class="desc">' . $rs->name . '</div></div>';
+	echo '<div class="desc">' . $rs->nombre . '</div></div>';
 }
 
 $result->close ();
