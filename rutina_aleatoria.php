@@ -27,6 +27,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 	}
 	if ($formsend = $form->get_data ()) {
 		echo html_writer::tag ( 'p', '<h4>Rutina Aleatoria</h4>' );
+		echo html_writer::tag ( 'p', get_string('calentamiento','local_wellness'));
 		$intensidad = $formsend->intensidad;
 		$categoria = $formsend->categoria;
 		// Tabla con rutina aleatoria
@@ -54,6 +55,8 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			);
 		}
 		echo html_writer::table ( $table );
+		echo html_writer::tag ( 'p', get_string('core','local_wellness'));
+		echo html_writer::tag ( 'p', get_string('vueltacalma','local_wellness'));
 		echo html_writer::tag ( 'p', get_string ( 'repnivel', 'local_wellness' ) );
 		echo html_writer::tag ( 'a', get_string ( 'volver', 'local_wellness' ), array (
 				'class' => 'btn',

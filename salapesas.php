@@ -19,6 +19,13 @@ echo $OUTPUT->header ();
 // Capabilities
 if (has_capability ( "local/wellness:seebutton", $context )) {
 	$url = 'salapesas.php';
+	//boton al banco de rutinas
+	echo html_writer::link ( '/mod/page/view.php?id=2', 'Editar rutinas sala de pesas', array (
+			'class' => 'btn',
+			'id' => 'editar_rutina',
+			'name' => 'editar_rutina'
+	), null ) . " ";
+	
 	// incluir formularios
 	require_once ('forms/formulariofotorutinas_form.php');
 	require_once ('forms/formulariofotorutinaseditar_form.php');
