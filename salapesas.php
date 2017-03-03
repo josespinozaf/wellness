@@ -18,7 +18,7 @@ echo $OUTPUT->header ();
 
 // Capabilities
 if (has_capability ( "local/wellness:seebutton", $context )) {
-	$url = 'salapesas.php';
+	
 	//boton al banco de rutinas
 	echo html_writer::link ( '/mod/page/view.php?id=2', 'Editar rutinas sala de pesas', array (
 			'class' => 'btn',
@@ -30,9 +30,15 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	require_once ('forms/formulariofotorutinas_form.php');
 	require_once ('forms/formulariofotorutinaseditar_form.php');
 	
-	// Crear instancias
+	// Se inicia formulario
 	
 	$formadd = new formulariofotorutinas_form ();
+	
+	// Url de redireccion
+	$url = 'salapesas.php';
+	if ($formadd->is_cancelled ()) {
+		die ();
+	}
 	$nombre_imagen = $formadd->get_new_filename ( 'imagen' );
 	$imagen = $formadd->get_file_content ( 'imagen' );
 	if ($dataadd = $formadd->get_data ()) {
@@ -57,6 +63,9 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	$formeditar = new formulariofotorutinaseditar_form ();
 	$nombre_imagen1 = $formeditar->get_new_filename ( 'imagen' );
 	$imagen = $formeditar->get_file_content ( 'imagen' );
+	if ($formeditar->is_cancelled ()) {
+		die ();
+	}
 	if ($dataeditar = $formeditar->get_data ()) {
 		$nombre = $dataeditar->selectrutinas;
 		$sql = "UPDATE `imagenes` SET `imagen`=?,`nombre_imagen`=?
