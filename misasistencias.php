@@ -25,15 +25,19 @@ $table->head = array (
 		get_string ( 'asistencia', 'local_wellness' )
 );
 
+echo "Tienes ".$decoded['asistenciasValidas']." asistencias validas.";
 foreach($decoded['asistencias'] as $valor){
 	foreach($valor as $as){
-		$fecha= $as['Dia'].'/'.$as['Mes'];;
-		$horainicio = $as['HoraInicio'];
-		$horatermino = $as['HoraTermino'];
+		list($fechainicio, $horainicio) = explode("T", $as['HoraInicio']);
+		list($fechatermino, $horatermino) = explode("T", $as['HoraTermino']);
 		$actividad = $as['Deporte'];
-		$asistencia = $as['IsCastigo'];
+		if($as['IsCastigo']==1){
+			$asistencia= get_string ( 'fafacross', 'local_wellness' );
+		}else{
+			$asistencia= get_string ( 'fafacheck', 'local_wellness' );
+		}
 		$table->data [] = array (
-				$fecha,
+				$fechainicio,
 				$horainicio,
 				$horatermino,
 				$actividad,
@@ -42,4 +46,5 @@ foreach($decoded['asistencias'] as $valor){
 	}
 }
 echo html_writer::table ( $table );
+echo $OUTPUT->footer();
 ?>

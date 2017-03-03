@@ -67,6 +67,8 @@ $string['horainicio']='Start Time';
 $string['horatermino']='End Time';
 $string['actividad']='Activity';
 $string['asistencia']='Assistance';
+$string['fafacheck']='<i class="fa fa-check" aria-hidden="true"></i>';
+$string['fafacross']='<i class="fa fa-times" aria-hidden="true"></i>';
 
 
 // **IMC**
