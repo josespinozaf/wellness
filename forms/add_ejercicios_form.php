@@ -13,12 +13,29 @@ class add_ejercicios_form extends moodleform {
 		$mform->addElement('text', 'nombre', 'Nombre del ejercicio:');
 		$mform->setType('nombre', PARAM_NOTAGS);
 		
-		$mform->addElement('text', 'categoria', 'Categoría:');
-		$mform->setType('categoria', PARAM_NOTAGS);
+		$optionsC = array('Aeróbico'=>'Aeróbico', 'Calentamiento'=>'Calentamiento', 'Core'=>'Core', 'Fuerza/Resistencia'=>'Fuerza/Resistencia', 'Trabajo General'=>'Trabajo General');
+		$mform->addElement('select', 'categoria', 'Categoría:', $optionsC);
+// 		$mform->setType('categoria', PARAM_NOTAGS);
 		
-		$mform->addElement('text', 'intensidad', 'Intensidad:');
-		$mform->setType('intensidad', PARAM_NOTAGS);
+		$optionsI = array('Avanzado'=>'Avanzado', 'Intermedio'=>'Intermedio', 'Básico'=>'Básico');
+		$mform->addElement('select', 'intensidad', 'Intensidad:', $optionsI);
+// 		$mform->setType('intensidad', PARAM_NOTAGS);
 		
+		$mform->addElement('text', 'rep1', 'Repeticiones Serie 1:');
+		$mform->setType('rep1', PARAM_NOTAGS);
+		
+		$mform->addElement('text', 'rep2', 'Repeticiones Serie 2:');
+		$mform->setType('rep2', PARAM_NOTAGS);
+		
+		$mform->addElement('text', 'rep3', 'Repeticiones Serie 3:');
+		$mform->setType('rep3', PARAM_NOTAGS);
+		
+		$mform->addElement('text', 'rep4', 'Repeticiones Serie 4:');
+		$mform->setType('rep4', PARAM_NOTAGS);
+		
+		$mform->addElement('text', 'rep5', 'Repeticiones Serie 5:');
+		$mform->setType('rep5', PARAM_NOTAGS);
+
 		$mform->addElement('text', 'link', 'Link del video:');
 		$mform->setType('link', PARAM_RAW);
 		

@@ -49,10 +49,17 @@ function xmldb_local_wellness_upgrade($oldversion) {
         $table = new xmldb_table('ejercicios');
 
         // Adding fields to table ejercicios.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '11', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('nombre', XMLDB_TYPE_VARCHAR, '75', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('link_video', XMLDB_TYPE_VARCHAR, '100', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('categoria', XMLDB_TYPE_VARCHAR, '75', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('nombre', XMLDB_TYPE_TEXT, '75', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('link_video', XMLDB_TYPE_TEXT, '100', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('categoria', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('intensidad', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('rep1', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('rep2', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('rep3', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('rep4', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('rep5', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        
 
         // Adding keys to table ejercicios.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -65,10 +72,10 @@ function xmldb_local_wellness_upgrade($oldversion) {
         // Define table imagenes to be created.
         $table = new xmldb_table('imagenes');
         
-        // Adding fields to table ejercicios.
+        // Adding fields to table imagenes.
         $table->add_field('imagen_id', XMLDB_TYPE_INTEGER, '11', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('imagen', XMLDB_TYPE_MEDIUMBLOB, null, null, null, null);
-        $table->add_field('tipo_imagen', XMLDB_TYPE_CHAR, '30', null, null, null, null);
+        $table->add_field('imagen', XMLDB_TYPE_BINARY, '1', null, null, null, null);
+        $table->add_field('nombre_imagen', XMLDB_TYPE_CHAR, '100', null, null, null, null);
         $table->add_field('nombre', XMLDB_TYPE_TEXT,'medium', null, XMLDB_NOTNULL, null, null);
         
         // Adding keys to table imagenes.
@@ -127,11 +134,11 @@ function xmldb_local_wellness_upgrade($oldversion) {
     	
     	// Adding fields to table imc.
     	$table->add_field('id', XMLDB_TYPE_INTEGER, '11', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-    	$table->add_field('email', XMLDB_TYPE_CHAR, '25', null, XMLDB_NOTNULL, null, null);
-    	$table->add_field('email', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, null);	 
-    	$table->add_field('estatura', XMLDB_TYPE_INTEGER, '3', null, XMLDB_NOTNULL, null, null);
-    	$table->add_field('peso', XMLDB_TYPE_INTEGER, 3, null, XMLDB_NOTNULL, null, null);
-    	$table->add_field('imc', XMLDB_TYPE_INTEGER, '8', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('email', XMLDB_TYPE_TEXT, '20', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('ano', XMLDB_TYPE_TEXT, '4', null, XMLDB_NOTNULL, null, null);	 
+    	$table->add_field('estatura', XMLDB_TYPE_TEXT, '3', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('peso', XMLDB_TYPE_TEXT, '3', null, XMLDB_NOTNULL, null, null);
+    	$table->add_field('imc', XMLDB_TYPE_TEXT, '8', null, XMLDB_NOTNULL, null, null);
     	 
     	// Adding keys to table imc.
     	$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
