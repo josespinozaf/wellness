@@ -28,6 +28,7 @@ $string ['titlesalapesas'] = 'Bienvenido a Sala de Pesas';
 // **Rutina Aleatoria**
 $string ['rutale'] = 'Rutina Aleatoria';
 $string ['ejercicio'] = 'Ejercicio';
+$string ['opejercicio'] = 'Opciones de Ejercicios';
 $string ['intensidad'] = 'Intensidad';
 $string ['tren'] = 'Tren';
 $string ['categoria'] = 'Categoria';
@@ -57,7 +58,8 @@ $string ['unoaseis'] = '1 a 6';
 $string ['cientovadoscua'] = '120 a 240 seg';
 $string ['repnivel'] = 'Las repeticiones son según tu nivel y son de 4 series, ve tu nivel de repeticiones más abajo.';
 $string ['volver'] = 'Volver';
-$string ['calentamiento']= '*Inicia tu entrenamiento con un calentamiento de 10 min en trotadoras, elípticas, bicicletas, bici-mano, bici-mano-pie';
+$string ['calentamiento']= '*Inicia tu entrenamiento con un calentamiento:';
+$string ['trabajoesp']= '*Continúa la rutina con un trabajo específico de 45 minutos de duración entre Trabajo General, Fuerza/Resistencia y Aeróbico:';
 $string ['core']='*Realiza trabajo core durante 5 min.';
 $string ['vueltacalma']='*Vuelta a la calma por 5 min.';
 $string ['zona'] = 'Zona muscular';
@@ -84,6 +86,8 @@ $string ['otgen'] = 'Trabajo General';
 $string ['avan'] = 'Avanzado';
 $string ['inter'] = 'Intermedio';
 $string ['basico'] = 'Básico';
+$string ['duracion'] = 'Duración';
+
 
 
 // **Asistencias**

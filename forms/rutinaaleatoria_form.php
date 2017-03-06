@@ -22,7 +22,7 @@ class rutinaaleatoria_form extends moodleform {
 		
 		$mform->addElement('select', 'intensidad', '¿Qué intensidad quieres?:',$options);
 
-		$mform->addElement('select', 'categoria', '¿Qué tren de tu cuerpo quieres trabajar?:',$options_tren);
+		//$mform->addElement('select', 'categoria', '¿Qué tren de tu cuerpo quieres trabajar?:',$options_tren);
 		
 		
 		$buttonarray=array();

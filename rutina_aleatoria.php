@@ -26,38 +26,212 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		die ();
 	}
 	if ($formsend = $form->get_data ()) {
-		echo html_writer::tag ( 'p', '<h4>Rutina Aleatoria</h4>' );
-		echo html_writer::tag ( 'p', get_string('calentamiento','local_wellness'));
 		$intensidad = $formsend->intensidad;
-		$categoria = $formsend->categoria;
-		// Tabla con rutina aleatoria
+		echo html_writer::tag ( 'p', '<h1>Has elegido una rutina de nivel '.$intensidad.'</h1>' );
+		echo html_writer::tag ( 'p', '<h4>'.get_string('calentamiento','local_wellness').'</h4>');	
 		
+		// Tabla de calentamiento		
 		//esto se hace haciendo 5 tablas diferentes, una de calentamiento donde muestres todos los calentamientos, despues las demas pero 5 diferentes separadas con titulo
 		$ej = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios` WHERE `intensidad`=? AND `categoria`=? ORDER BY RAND() LIMIT 4", array (
 				$intensidad,
-				$categoria 
+				'Calentamiento'
 		) );
 		$table = new html_table ();
 		$table->head = array (
-				get_string ( 'calentamiento', 'local_wellness' ),
-				get_string ( 'intensidad', 'local_wellness' ),
-				get_string ( 'tren', 'local_wellness' ),
+				get_string ( 'opejercicio', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'duracion', 'local_wellness' ),
 				get_string ( 'linkvid', 'local_wellness' ) 
 		);
 		foreach ( $ej as $records ) {
 			$nombre = $records->nombre;
-			$intensidad = $records->intensidad;
-			$categoria = $records->categoria;
+			$zona = $records->zona;
+			$rep1 = $records->rep1;
 			$link = $records->link_video;
 			$table->data [] = array (
 					$nombre,
 					$intensidad,
-					$categoria,
+					$rep1,
 					'<a href="' . $link . '">Ver Video</a>' 
 			);
 		}
+		
 		echo html_writer::table ( $table );
-		echo html_writer::tag ( 'p', get_string('core','local_wellness'));
+		
+		$ej->close ();
+		//Tabla de trabajo específico		
+		echo html_writer::tag ( 'p', '<h4>'.get_string('trabajoesp','local_wellness').'</h4>');
+		echo html_writer::tag ( 'p', '<h5>Trabajo General:</h5>' );
+		$ej1 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
+									     WHERE `intensidad`=? 
+										 AND `categoria`='Trabajo General'
+										 AND `zona` LIKE '%ant%' 
+										 OR `zona` LIKE '%pos%'
+										 ORDER BY RAND() LIMIT 2", array (
+				$intensidad
+		) );
+		$tableespecifico = new html_table ();
+		$tableespecifico->head = array (
+				get_string ( 'ejercicio', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'rep1', 'local_wellness' ),
+				get_string ( 'rep2', 'local_wellness' ),
+				get_string ( 'rep3', 'local_wellness' ),
+				get_string ( 'rep4', 'local_wellness' ),
+				get_string ( 'rep5', 'local_wellness' ),
+				get_string ( 'linkvid', 'local_wellness' )
+		);
+		foreach ( $ej1 as $records ) {
+			$nombre = $records->nombre;
+			$zona = $records->zona;
+			$rep1 = $records->rep1;
+			$rep2 = $records->rep2;
+			$rep3 = $records->rep3;
+			$rep4 = $records->rep4;
+			$rep5 = $records->rep5;
+			$link = $records->link_video;
+			$tableespecifico->data [] = array (
+					$nombre,
+					$zona,
+					$rep1,
+					$rep2,
+					$rep3,
+					$rep4,
+					$rep5,
+					'<a href="' . $link . '">Ver Video</a>'
+			);
+		}
+		$ej1->close ();
+		echo html_writer::table ( $tableespecifico );
+		//Tabla de fuerza/resistencia
+		echo html_writer::tag ( 'p', '<h5>Fuerza/Resistencia:</h5>' );
+		$ej2 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
+									     WHERE `intensidad`=?
+										 AND `categoria`='Fuerza/Resistencia'
+										 ORDER BY RAND() LIMIT 1", array (
+												 		$intensidad
+												 ) );
+		$tablefuerza = new html_table ();
+		$tablefuerza->head = array (
+				get_string ( 'ejercicio', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'rep1', 'local_wellness' ),
+				get_string ( 'rep2', 'local_wellness' ),
+				get_string ( 'rep3', 'local_wellness' ),
+				get_string ( 'rep4', 'local_wellness' ),
+				get_string ( 'rep5', 'local_wellness' ),
+				get_string ( 'linkvid', 'local_wellness' )
+		);
+		foreach ( $ej2 as $records ) {
+			$nombre = $records->nombre;
+			$zona = $records->zona;
+			$rep1 = $records->rep1;
+			$rep2 = $records->rep2;
+			$rep3 = $records->rep3;
+			$rep4 = $records->rep4;
+			$rep5 = $records->rep5;
+			$link = $records->link_video;
+			$tablefuerza->data [] = array (
+					$nombre,
+					$zona,
+					$rep1,
+					$rep2,
+					$rep3,
+					$rep4,
+					$rep5,
+					'<a href="' . $link . '">Ver Video</a>'
+			);
+		}
+		
+		$ej2->close ();
+		echo html_writer::table ( $tablefuerza );
+		
+		//Tabla de aerobicos
+		echo html_writer::tag ( 'p', '<h5>AerÃ³bico:</h5>' );
+		$ej3 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
+									     WHERE `intensidad`=?
+										 AND `categoria`='Aeróbico'
+										 ORDER BY RAND() LIMIT 1", array (
+												 		$intensidad
+												 ) );
+		$tableaero = new html_table ();
+		$tableaero->head = array (
+				get_string ( 'ejercicio', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'rep1', 'local_wellness' ),
+				get_string ( 'rep2', 'local_wellness' ),
+				get_string ( 'rep3', 'local_wellness' ),
+				get_string ( 'rep4', 'local_wellness' ),
+				get_string ( 'rep5', 'local_wellness' ),
+				get_string ( 'linkvid', 'local_wellness' )
+		);
+		foreach ( $ej3 as $records ) {
+			$nombre = $records->nombre;
+			$zona = $records->zona;
+			$rep1 = $records->rep1;
+			$rep2 = $records->rep2;
+			$rep3 = $records->rep3;
+			$rep4 = $records->rep4;
+			$rep5 = $records->rep5;
+			$link = $records->link_video;
+			$tableaero->data [] = array (
+					$nombre,
+					$zona,
+					$rep1,
+					$rep2,
+					$rep3,
+					$rep4,
+					$rep5,
+					'<a href="' . $link . '">Ver Video</a>'
+			);
+		}
+		
+		$ej3->close ();
+		echo html_writer::table ( $tableaero );
+		
+		//Tabla CORE
+		echo html_writer::tag ( 'p', '<h4>'.get_string('core','local_wellness').'</h4>');
+		$ej4 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
+									     WHERE `intensidad`=?
+										 AND `categoria`='Core'
+										 ", array (
+												 		$intensidad
+												 ) );
+		$tablecore = new html_table ();
+		$tablecore->head = array (
+				get_string ( 'opejercicio', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'rep1', 'local_wellness' ),
+				get_string ( 'rep2', 'local_wellness' ),
+				get_string ( 'rep3', 'local_wellness' ),
+				get_string ( 'rep4', 'local_wellness' ),
+				get_string ( 'rep5', 'local_wellness' ),
+				get_string ( 'linkvid', 'local_wellness' )
+		);
+		foreach ( $ej4 as $records ) {
+			$nombre = $records->nombre;
+			$zona = $records->zona;
+			$rep1 = $records->rep1;
+			$rep2 = $records->rep2;
+			$rep3 = $records->rep3;
+			$rep4 = $records->rep4;
+			$rep5 = $records->rep5;
+			$link = $records->link_video;
+			$tablecore->data [] = array (
+					$nombre,
+					$zona,
+					$rep1,
+					$rep2,
+					$rep3,
+					$rep4,
+					$rep5,
+					'<a href="' . $link . '">Ver Video</a>'
+			);
+		}
+		
+		$ej4->close ();
+		echo html_writer::table ( $tablecore );
+		
 		echo html_writer::tag ( 'p', get_string('vueltacalma','local_wellness'));
 		echo html_writer::tag ( 'p', get_string ( 'repnivel', 'local_wellness' ) );
 		echo html_writer::tag ( 'a', get_string ( 'volver', 'local_wellness' ), array (
@@ -191,7 +365,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			$newej->rep3 = $rep3;
 			$newej->rep4 = $rep4;
 			$newej->rep5 = $rep5;
-
+			var_dump($newej);
 			$subir = $DB->insert_record ( "ejercicios", $newej, false );
 			if ($subir) {
 				echo get_string ( 'agrexito', 'local_wellness' );

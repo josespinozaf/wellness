@@ -13,34 +13,34 @@ class add_ejercicios_form extends moodleform {
 		$mform->setType ( 'nombre', PARAM_NOTAGS );
 		
 		$optionsC = array (
-				get_string ( 'oaerobico', 'local_wellness' ),
-				get_string ( 'ocalentamiento', 'local_wellness' ),
-				get_string ( 'ocore', 'local_wellness' ),
-				get_string ( 'ofueres', 'local_wellness' ),
-				get_string ( 'otgen', 'local_wellness' )
+				'Aeróbico' => 'Aeróbico',
+				'Calentamiento' => 'Calentamiento',
+				'Core' => 'Core',
+				'Fuerza/Resistencia' => 'Fuerza/Resistencia',
+				'Trabajo General' => 'Trabajo General' 
 		);
 		$mform->addElement ( 'select', 'categoria', 'Categoría:', $optionsC );
 		// $mform->setType('categoria', PARAM_NOTAGS);
 		
 		$optionsI = array (
-				get_string ( 'avan', 'local_wellness' ),
-				get_string ( 'inter', 'local_wellness' ),
-				get_string ( 'basico', 'local_wellness' )
+				'Avanzado' => 'Avanzado',
+				'Intermedio' => 'Intermedio',
+				'Básico' => 'Básico' 
 		);
 		$mform->addElement ( 'select', 'intensidad', 'Intensidad:', $optionsI );
 		// $mform->setType('intensidad', PARAM_NOTAGS);
 		
 		$optionsZ = array (
-				get_string ( 'tsup', 'local_wellness' ),
-				get_string ( 'tsupantpos', 'local_wellness' ),
-				get_string ( 'tsupant', 'local_wellness' ),
-				get_string ( 'tsuppos', 'local_wellness' ),
-				get_string ( 'tsupinf', 'local_wellness' ),
-				get_string ( 'tinf', 'local_wellness' ),
-				get_string ( 'tinfantpos', 'local_wellness' ),
-				get_string ( 'tinfant', 'local_wellness' ),
-				get_string ( 'tinfpos', 'local_wellness' ),
-				get_string ( 'todocuerpo', 'local_wellness' ) 
+				'Tren superior' => 'Tren superior',
+				'Tren superior ant/pos' => 'Tren superior ant/pos',
+				'Tren superior anterior' => 'Tren superior anterior',
+				'Tren superior posterior' => 'Tren superior posterior',
+				'Tren superior/inferior' => 'Tren superior/inferior',
+				'Tren inferior' => 'Tren inferior',
+				'Tren inferior ant/pos' => 'Tren inferior ant/pos',
+				'Tren inferior anterior' => 'Tren inferior anterior',
+				'Tren inferior posterior' => 'Tren inferior posterior',
+				'Todo el cuerpo' => 'Todo el cuerpo'
 		);
 		$mform->addElement ( 'select', 'zona', 'Zona Muscular:', $optionsZ );
 		

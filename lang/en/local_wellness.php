@@ -28,6 +28,7 @@ $string ['titlesalapesas'] = 'Welcome to the Weights Room';
 // **Rutina Aleatoria**
 $string ['rutale'] = 'Random Routine';
 $string ['ejercicio'] = 'Exercise';
+$string ['opejercicio'] = 'Exercises options';
 $string ['intensidad'] = 'Intensity';
 $string ['tren'] = 'Train';
 $string ['categoria'] = 'Category';
@@ -57,7 +58,8 @@ $string ['unoaseis'] = '1 to 6';
 $string ['cientovadoscua'] = '120 to 240 sec';
 $string ['repnivel'] = 'The repetitions are according to your level and are of 4 rounds, see your level of repetitions below.';
 $string ['volver'] = 'Back';
-$string ['calentamiento']= '*Start your workout with a warm-up of 10 min on treadmills, ellipticals, bicycles, bike-hand, bike-hand-foot';
+$string ['calentamiento']= '*Start your workout with a warm-up:';
+$string ['trabajoesp']= '*Continue your workout with a specific work of 45 minutes between General Work, Strenght/Resistance and Aerobic:';
 $string ['core']='*Do core work for 5 min.';
 $string ['vueltacalma']='*Calm return for 5 min.';
 $string ['zona'] = 'Muscular zone';
@@ -76,14 +78,15 @@ $string ['tinfantpos'] = 'Tren inferior ant/pos';
 $string ['tinfant'] = 'Tren inferior anterior';
 $string ['tinfpos'] = 'Tren inferior posterior';
 $string ['todocuerpo'] = 'Todo el cuerpo';
-$string ['oaerobico'] = 'Aeróbico';
-$string ['ocalentamiento'] = 'Calentamiento';
+$string ['oaerobico'] = 'Aerobic';
+$string ['ocalentamiento'] = 'Warm-up';
 $string ['ocore'] = 'Core';
-$string ['ofueres'] = 'Fuerza/Resistencia';
-$string ['otgen'] = 'Trabajo General';
+$string ['ofueres'] = 'Strenght/Resistance';
+$string ['otgen'] = 'General Work';
 $string ['avan'] = 'Advanced';
 $string ['inter'] = 'Medium';
 $string ['basico'] = 'Basic';
+$string ['duracion'] = 'Duration';
 
 
 // **Asistencias**
