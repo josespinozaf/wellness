@@ -26,16 +26,13 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		die ();
 	}
 	if ($formsend = $form->get_data ()) {
-		$intensidad = $formsend->intensidad;
-		echo html_writer::tag ( 'p', '<h1>Has elegido una rutina de nivel '.$intensidad.'</h1>' );
+		$intensidada = $formsend->intensidad;
+		echo html_writer::tag ( 'p', '<h1>Has elegido una rutina de nivel <u>'.$intensidada.'</u></h1>' );
 		echo html_writer::tag ( 'p', '<h4>'.get_string('calentamiento','local_wellness').'</h4>');	
 		
 		// Tabla de calentamiento		
 		//esto se hace haciendo 5 tablas diferentes, una de calentamiento donde muestres todos los calentamientos, despues las demas pero 5 diferentes separadas con titulo
-		$ej = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios` WHERE `intensidad`=? AND `categoria`=? ORDER BY RAND() LIMIT 4", array (
-				$intensidad,
-				'Calentamiento'
-		) );
+		$ej = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios` WHERE `categoria`='Calentamiento'" );
 		$table = new html_table ();
 		$table->head = array (
 				get_string ( 'opejercicio', 'local_wellness' ),
@@ -50,7 +47,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			$link = $records->link_video;
 			$table->data [] = array (
 					$nombre,
-					$intensidad,
+					$zona,
 					$rep1,
 					'<a href="' . $link . '">Ver Video</a>' 
 			);
@@ -61,14 +58,15 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		$ej->close ();
 		//Tabla de trabajo espec�fico		
 		echo html_writer::tag ( 'p', '<h4>'.get_string('trabajoesp','local_wellness').'</h4>');
-		echo html_writer::tag ( 'p', '<h5>Trabajo General:</h5>' );
+		echo html_writer::tag ( 'p', '<h4>'.get_string('infopesos','local_wellness').'</h4>');
+		echo html_writer::tag ( 'p', '<h5><u>Trabajo General:</u></h5>' );
 		$ej1 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
 									     WHERE `intensidad`=? 
 										 AND `categoria`='Trabajo General'
 										 AND `zona` LIKE '%ant%' 
 										 OR `zona` LIKE '%pos%'
 										 ORDER BY RAND() LIMIT 2", array (
-				$intensidad
+				$intensidada
 		) );
 		$tableespecifico = new html_table ();
 		$tableespecifico->head = array (
@@ -104,12 +102,12 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		$ej1->close ();
 		echo html_writer::table ( $tableespecifico );
 		//Tabla de fuerza/resistencia
-		echo html_writer::tag ( 'p', '<h5>Fuerza/Resistencia:</h5>' );
+		echo html_writer::tag ( 'p', '<h5><u>Fuerza/Resistencia:</u></h5>' );
 		$ej2 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
 									     WHERE `intensidad`=?
 										 AND `categoria`='Fuerza/Resistencia'
 										 ORDER BY RAND() LIMIT 1", array (
-												 		$intensidad
+												 		$intensidada
 												 ) );
 		$tablefuerza = new html_table ();
 		$tablefuerza->head = array (
@@ -147,12 +145,12 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		echo html_writer::table ( $tablefuerza );
 		
 		//Tabla de aerobicos
-		echo html_writer::tag ( 'p', '<h5>Aeróbico:</h5>' );
+		echo html_writer::tag ( 'p', '<h5><u>Aeróbico:</u></h5>' );
 		$ej3 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
 									     WHERE `intensidad`=?
-										 AND `categoria`='Aer�bico'
+										 AND `categoria`='Aeróbico'
 										 ORDER BY RAND() LIMIT 1", array (
-												 		$intensidad
+												 		$intensidada
 												 ) );
 		$tableaero = new html_table ();
 		$tableaero->head = array (
@@ -165,15 +163,15 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 				get_string ( 'rep5', 'local_wellness' ),
 				get_string ( 'linkvid', 'local_wellness' )
 		);
-		foreach ( $ej3 as $records ) {
-			$nombre = $records->nombre;
-			$zona = $records->zona;
-			$rep1 = $records->rep1;
-			$rep2 = $records->rep2;
-			$rep3 = $records->rep3;
-			$rep4 = $records->rep4;
-			$rep5 = $records->rep5;
-			$link = $records->link_video;
+		foreach ( $ej3 as $records1 ) {
+			$nombre = $records1->nombre;
+			$zona = $records1->zona;
+			$rep1 = $records1->rep1;
+			$rep2 = $records1->rep2;
+			$rep3 = $records1->rep3;
+			$rep4 = $records1->rep4;
+			$rep5 = $records1->rep5;
+			$link = $records1->link_video;
 			$tableaero->data [] = array (
 					$nombre,
 					$zona,
@@ -184,6 +182,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 					$rep5,
 					'<a href="' . $link . '">Ver Video</a>'
 			);
+			
 		}
 		
 		$ej3->close ();
@@ -195,7 +194,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 									     WHERE `intensidad`=?
 										 AND `categoria`='Core'
 										 ", array (
-												 		$intensidad
+												 		$intensidada
 												 ) );
 		$tablecore = new html_table ();
 		$tablecore->head = array (
@@ -232,12 +231,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		$ej4->close ();
 		echo html_writer::table ( $tablecore );
 		
-		echo html_writer::tag ( 'p', get_string('vueltacalma','local_wellness'));
-		echo html_writer::tag ( 'p', get_string ( 'repnivel', 'local_wellness' ) );
-		echo html_writer::tag ( 'a', get_string ( 'volver', 'local_wellness' ), array (
-				'class' => 'btn',
-				'onClick' => 'history.back();return true;' 
-		) );
+		echo html_writer::tag ( 'p', '<h4>'.get_string('vueltacalma','local_wellness').'</h4>');
 		
 		// Tabla de trabajo según %
 		$table_rep = new html_table ();
@@ -273,7 +267,12 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 				get_string ( 'unoaseis', 'local_wellness' ),
 				get_string ( 'cientovadoscua', 'local_wellness' ) 
 		);
+		echo html_writer::tag ( 'p', get_string ( 'repnivel', 'local_wellness' ) );
 		echo html_writer::table ( $table_rep );
+		echo html_writer::tag ( 'a', get_string ( 'volver', 'local_wellness' ), array (
+				'class' => 'btn',
+				'onClick' => 'history.back();return true;'
+		) );
 	} else {
 		$form->display ();
 	}
@@ -369,6 +368,12 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			$subir = $DB->insert_record ( "ejercicios", $newej, false );
 			if ($subir) {
 				echo get_string ( 'agrexito', 'local_wellness' );
+				echo html_writer::tag ( 'br', '' );
+				echo html_writer::tag ( 'a', get_string ( 'volver', 'local_wellness' ), array (
+						'class' => 'btn',
+						'onClick' => 'history.back();return true;'
+				) );
+				echo html_writer::tag ( 'br', '' );
 			} else {
 				echo get_string ( 'erroroc', 'local_wellness' );
 				redirect ( $url );
@@ -404,6 +409,3 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 // Footer
 echo $OUTPUT->footer ();
 ?>
-
-
-

@@ -87,6 +87,7 @@ $string ['avan'] = 'Avanzado';
 $string ['inter'] = 'Intermedio';
 $string ['basico'] = 'Básico';
 $string ['duracion'] = 'Duración';
+$string ['infopesos'] = '�Es importante que consultes el peso adecuado a tus capacidades antes de hacer los ejercicios!';
 
 
 

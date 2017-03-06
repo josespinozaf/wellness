@@ -68,16 +68,16 @@ $string ['rep2'] = 'Round 2 Reps';
 $string ['rep3'] = 'Round 3 Reps';
 $string ['rep4'] = 'Round 4 Reps';
 $string ['rep5'] = 'Round 5 Reps';
-$string ['tsup'] = 'Tren superior';
-$string ['tsupantpos'] = 'Tren superior ant/pos';
-$string ['tsupant'] = 'Tren superior anterior';
-$string ['tsuppos'] = 'Tren superior posterior';
-$string ['tsupinf'] = 'Tren superior/inferior';
-$string ['tinf'] = 'Tren inferior';
-$string ['tinfantpos'] = 'Tren inferior ant/pos';
-$string ['tinfant'] = 'Tren inferior anterior';
-$string ['tinfpos'] = 'Tren inferior posterior';
-$string ['todocuerpo'] = 'Todo el cuerpo';
+$string ['tsup'] = 'Upper body';
+$string ['tsupantpos'] = 'Upper body ant/pos';
+$string ['tsupant'] = 'Upper body';
+$string ['tsuppos'] = 'Upper body posterior';
+$string ['tsupinf'] = 'Upper/Lower body';
+$string ['tinf'] = 'Lower body';
+$string ['tinfantpos'] = 'Lower body ant/pos';
+$string ['tinfant'] = 'Lower body anterior';
+$string ['tinfpos'] = 'Lower body posterior';
+$string ['todocuerpo'] = 'Full body';
 $string ['oaerobico'] = 'Aerobic';
 $string ['ocalentamiento'] = 'Warm-up';
 $string ['ocore'] = 'Core';
@@ -87,6 +87,8 @@ $string ['avan'] = 'Advanced';
 $string ['inter'] = 'Medium';
 $string ['basico'] = 'Basic';
 $string ['duracion'] = 'Duration';
+$string ['infopesos'] = 'It is important for you to review your weight according to your capacities';
+
 
 
 // **Asistencias**
