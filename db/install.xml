@@ -11,6 +11,7 @@
         <FIELD NAME="link_video" TYPE="text" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="categoria" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="intensidad" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="zona" TYPE="text" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="rep1" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="rep2" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="rep3" TYPE="text" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>

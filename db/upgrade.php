@@ -54,6 +54,7 @@ function xmldb_local_wellness_upgrade($oldversion) {
         $table->add_field('link_video', XMLDB_TYPE_TEXT, '100', null, XMLDB_NOTNULL, null, null);
         $table->add_field('categoria', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
         $table->add_field('intensidad', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('zona', XMLDB_TYPE_TEXT, '100', null, XMLDB_NOTNULL, null, null);
         $table->add_field('rep1', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
         $table->add_field('rep2', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);
         $table->add_field('rep3', XMLDB_TYPE_TEXT, '50', null, XMLDB_NOTNULL, null, null);

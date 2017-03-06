@@ -60,6 +60,31 @@ $string ['volver'] = 'Volver';
 $string ['calentamiento']= '*Inicia tu entrenamiento con un calentamiento de 10 min en trotadoras, elípticas, bicicletas, bici-mano, bici-mano-pie';
 $string ['core']='*Realiza trabajo core durante 5 min.';
 $string ['vueltacalma']='*Vuelta a la calma por 5 min.';
+$string ['zona'] = 'Zona muscular';
+$string ['rep1'] = 'Rep serie 1';
+$string ['rep2'] = 'Rep serie 2';
+$string ['rep3'] = 'Rep serie 3';
+$string ['rep4'] = 'Rep serie 4';
+$string ['rep5'] = 'Rep serie 5';
+$string ['tsup'] = 'Tren superior';
+$string ['tsupantpos'] = 'Tren superior ant/pos';
+$string ['tsupant'] = 'Tren superior anterior';
+$string ['tsuppos'] = 'Tren superior posterior';
+$string ['tsupinf'] = 'Tren superior/inferior';
+$string ['tinf'] = 'Tren inferior';
+$string ['tinfantpos'] = 'Tren inferior ant/pos';
+$string ['tinfant'] = 'Tren inferior anterior';
+$string ['tinfpos'] = 'Tren inferior posterior';
+$string ['todocuerpo'] = 'Todo el cuerpo';
+$string ['oaerobico'] = 'Aeróbico';
+$string ['ocalentamiento'] = 'Calentamiento';
+$string ['ocore'] = 'Core';
+$string ['ofueres'] = 'Fuerza/Resistencia';
+$string ['otgen'] = 'Trabajo General';
+$string ['avan'] = 'Avanzado';
+$string ['inter'] = 'Intermedio';
+$string ['basico'] = 'Básico';
+
 
 // **Asistencias**
 $string['fecha']='Fecha';

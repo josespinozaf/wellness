@@ -31,13 +31,15 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		$intensidad = $formsend->intensidad;
 		$categoria = $formsend->categoria;
 		// Tabla con rutina aleatoria
+		
+		//esto se hace haciendo 5 tablas diferentes, una de calentamiento donde muestres todos los calentamientos, despues las demas pero 5 diferentes separadas con titulo
 		$ej = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios` WHERE `intensidad`=? AND `categoria`=? ORDER BY RAND() LIMIT 4", array (
 				$intensidad,
 				$categoria 
 		) );
 		$table = new html_table ();
 		$table->head = array (
-				get_string ( 'ejercicio', 'local_wellness' ),
+				get_string ( 'calentamiento', 'local_wellness' ),
 				get_string ( 'intensidad', 'local_wellness' ),
 				get_string ( 'tren', 'local_wellness' ),
 				get_string ( 'linkvid', 'local_wellness' ) 
@@ -122,17 +124,35 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 				get_string ( 'ejercicio', 'local_wellness' ),
 				get_string ( 'intensidad', 'local_wellness' ),
 				get_string ( 'categoria', 'local_wellness' ),
+				get_string ( 'zona', 'local_wellness' ),
+				get_string ( 'rep1', 'local_wellness' ),
+				get_string ( 'rep2', 'local_wellness' ),
+				get_string ( 'rep3', 'local_wellness' ),
+				get_string ( 'rep4', 'local_wellness' ),
+				get_string ( 'rep5', 'local_wellness' ),
 				get_string ( 'linkvid', 'local_wellness' ) 
 		);
 		foreach ( $eje as $records ) {
 			$nombre = $records->nombre;
 			$intensidad = $records->intensidad;
 			$categoria = $records->categoria;
+			$zona= $records->zona;
+			$rep1= $records->rep1;
+			$rep2= $records->rep2;
+			$rep3= $records->rep3;
+			$rep4= $records->rep4;
+			$rep5= $records->rep5;
 			$link = $records->link_video;
 			$table->data [] = array (
 					$nombre,
 					$intensidad,
 					$categoria,
+					$zona,
+					$rep1,
+					$rep2,
+					$rep3,
+					$rep4,
+					$rep5,
 					'<a href="' . $link . '">Ver Video</a>' 
 			);
 		}
@@ -150,15 +170,28 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		}
 		if ($formsendej = $formej->get_data ()) {
 			$nombre = $formsendej->nombre;
-			$categoria = $formsendej->categoria;
-			$intensidad = $formsendej->intensidad;
+ 			$categoria = $formsendej->categoria;
+    		$intensidad = $formsendej->intensidad;
+    		$zona = $formsendej->zona;
 			$link = $formsendej->link;
+			$rep1 = $formsendej->rep1;
+			$rep2 = $formsendej->rep2;
+			$rep3 = $formsendej->rep3;
+			$rep4 = $formsendej->rep4;
+			$rep5 = $formsendej->rep5;
 			
 			$newej = new stdClass ();
 			$newej->nombre = $nombre;
 			$newej->categoria = $categoria;
 			$newej->intensidad = $intensidad;
 			$newej->link_video = $link;
+			$newej->zona = $zona;
+			$newej->rep1 = $rep1;
+			$newej->rep2 = $rep2;
+			$newej->rep3 = $rep3;
+			$newej->rep4 = $rep4;
+			$newej->rep5 = $rep5;
+
 			$subir = $DB->insert_record ( "ejercicios", $newej, false );
 			if ($subir) {
 				echo get_string ( 'agrexito', 'local_wellness' );
@@ -194,7 +227,8 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		}
 	}
 }
-
+// Footer
+echo $OUTPUT->footer ();
 ?>
 
 
