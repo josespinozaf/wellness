@@ -15,7 +15,7 @@ $PAGE->navbar->add ( get_string ( 'navasistencias', 'local_wellness' ), new mood
 
 // Header
 echo $OUTPUT->header ();
-echo html_writer::tag ( 'h4', get_string('navasistencias','local_wellness'));
+echo html_writer::tag ( 'h1', get_string('navasistencias','local_wellness'));
 $table = new html_table ();
 $table->head = array (
 		get_string ( 'fecha', 'local_wellness' ),
@@ -25,9 +25,11 @@ $table->head = array (
 		get_string ( 'asistencia', 'local_wellness' )
 );
 
-echo "Tienes ".$decoded['asistenciasValidas']." asistencias validas.";
+echo "<h3>Asistencias válidas: <u>".$decoded['asistenciasValidas']."</u></h3>";
+echo "<h3>Castigos registrados: <u>".$decoded['castigosRegistrados']."</u></h3>";
 foreach($decoded['asistencias'] as $valor){
 	foreach($valor as $as){
+		var_dump($decoded);
 		list($fechainicio, $horainicio) = explode("T", $as['HoraInicio']);
 		list($fechatermino, $horatermino) = explode("T", $as['HoraTermino']);
 		$actividad = $as['Deporte'];
