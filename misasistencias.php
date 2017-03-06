@@ -29,7 +29,6 @@ echo "<h3>Asistencias válidas: <u>".$decoded['asistenciasValidas']."</u></h3>";
 echo "<h3>Castigos registrados: <u>".$decoded['castigosRegistrados']."</u></h3>";
 foreach($decoded['asistencias'] as $valor){
 	foreach($valor as $as){
-		var_dump($decoded);
 		list($fechainicio, $horainicio) = explode("T", $as['HoraInicio']);
 		list($fechatermino, $horatermino) = explode("T", $as['HoraTermino']);
 		$actividad = $as['Deporte'];
