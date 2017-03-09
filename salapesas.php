@@ -20,7 +20,8 @@ echo $OUTPUT->header ();
 if (has_capability ( "local/wellness:seebutton", $context )) {
 	
 	//boton al banco de rutinas
-	echo html_writer::link ( '/course/view.php?id=2', 'Editar rutinas sala de pesas', array (
+	$banco = new moodle_url('/course/view.php?id=2');
+	echo html_writer::link ( $banco, 'Editar rutinas sala de pesas', array (
 			'class' => 'btn',
 			'id' => 'editar_rutina',
 			'name' => 'editar_rutina'

@@ -2,6 +2,8 @@
 // **Pagina General**
 $string ['titulopagina'] = 'Deportes UAI';
 $string ['clasesyrutinas'] = 'Clases y Rutinas';
+$string ['santiago'] = 'Departamento Santiago';
+$string ['vina'] = 'Departamento Viña del mar';
 
 // **Barra Navegacion**
 
@@ -31,7 +33,7 @@ $string ['ejercicio'] = 'Ejercicio';
 $string ['opejercicio'] = 'Opciones de Ejercicios';
 $string ['intensidad'] = 'Intensidad';
 $string ['tren'] = 'Tren';
-$string ['categoria'] = 'Categoria';
+$string ['categoria'] = 'Categoría';
 $string ['linkvid'] = 'Link Video';
 $string ['entrenamiento'] = 'Entrenamiento';
 $string ['pesorut'] = 'Peso';
@@ -87,7 +89,7 @@ $string ['avan'] = 'Avanzado';
 $string ['inter'] = 'Intermedio';
 $string ['basico'] = 'Básico';
 $string ['duracion'] = 'Duración';
-$string ['infopesos'] = '�Es importante que consultes el peso adecuado a tus capacidades antes de hacer los ejercicios!';
+$string ['infopesos'] = '¡Es importante que consultes el peso adecuado a tus capacidades antes de hacer los ejercicios!';
 
 
 
@@ -113,7 +115,7 @@ $string ['elimexito'] = 'Ha sido eliminado con éxito.';
 $string ['agrexito'] = 'Ha sido agregado con éxito.';
 $string ['erroroc'] = 'Ha ocurrido un error.';
 $string ['imgexito'] = 'Se ha ingresado exitosamente la imagen ';
-$string ['imgactexito'] = 'Se ha acualizado exitosamente la imagen ';
+$string ['imgactexito'] = 'Se ha actualizado exitosamente la imagen ';
 $string ['imgerror'] = 'No se ha podido actualizar la imagen.';
 
 ?>

@@ -2,6 +2,8 @@
 // **Pagina General**
 $string ['titulopagina'] = 'UAI Sports';
 $string ['clasesyrutinas'] = 'Classes and Routines';
+$string ['santiago'] = 'Santiago Department';
+$string ['vina'] = 'Viña del mar Department';
 
 // **Barra Navegacion**
 
@@ -87,7 +89,7 @@ $string ['avan'] = 'Advanced';
 $string ['inter'] = 'Medium';
 $string ['basico'] = 'Basic';
 $string ['duracion'] = 'Duration';
-$string ['infopesos'] = 'It is important for you to review your weight according to your capacities';
+$string ['infopesos'] = 'It is important for you to review your weight according to your capacities!';
 
 
 
