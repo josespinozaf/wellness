@@ -2,8 +2,7 @@
 // **Pagina General**
 $string ['titulopagina'] = 'Deportes UAI';
 $string ['clasesyrutinas'] = 'Clases y Rutinas';
-$string ['santiago'] = 'Departamento Santiago';
-$string ['vina'] = 'Departamento Viña del mar';
+$string ['santiagovina'] = 'Departamentos Santiago y  Viña del mar';
 
 // **Barra Navegacion**
 
