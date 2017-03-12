@@ -109,6 +109,7 @@ $string ['formcancel'] = 'The form has been cancelled.';
 $string ['estatura'] = 'Height (cm)';
 $string ['peso'] = 'Weight (Kg)';
 $string ['imcm'] = 'BMI';
+$string ['noimc'] = 'You do not have any registry of your BMI, ask a teacher for help.';
 
 // **Respuestas**
 $string ['elimexito'] = 'It has been deleted successfully.';

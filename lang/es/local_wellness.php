@@ -4,6 +4,7 @@ $string ['titulopagina'] = 'Deportes UAI';
 $string ['clasesyrutinas'] = 'Clases y Rutinas';
 $string ['santiagovina'] = 'Departamentos Santiago y  Viña del mar';
 
+
 // **Barra Navegacion**
 
 $string ['navpagprinc'] = 'Página Principal';
@@ -108,6 +109,7 @@ $string ['formcancel'] = 'El formulario se ha cancelado.';
 $string ['estatura'] = 'Estatura (cm)';
 $string ['peso'] = 'Peso (Kg)';
 $string ['imcm'] = 'IMC';
+$string ['noimc'] = 'No tienes registro de IMC todavía, visita a un profesor.';
 
 // **Respuestas**
 $string ['elimexito'] = 'Ha sido eliminado con éxito.';

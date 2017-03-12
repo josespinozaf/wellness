@@ -364,7 +364,6 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			$newej->rep3 = $rep3;
 			$newej->rep4 = $rep4;
 			$newej->rep5 = $rep5;
-			var_dump($newej);
 			$subir = $DB->insert_record ( "ejercicios", $newej, false );
 			if ($subir) {
 				echo get_string ( 'agrexito', 'local_wellness' );

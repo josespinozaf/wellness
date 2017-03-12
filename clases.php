@@ -72,6 +72,30 @@ if (has_capability ( "local/wellness:seebutton", $context )) {
 	} else {
 		$formedit->display ();
 	}
+	
+	// Formulario para eliminar ejercicio
+	require_once ('forms/formulariofotoborrar.php');
+	
+	$formdel = new formulariofotoborrar ();
+	
+	if ($formdel->is_cancelled ()) {
+		redirect ( $url );
+		die ();
+	}
+	if ($formsenddel = $formdel->get_data ()) {
+		$nombre = $formsenddel->selectclases;
+		$delete = $DB->delete_records_select ( 'imagenes', '`nombre`=?', array (
+				$nombre
+		) );
+		if ($delete) {
+			echo get_string ( 'elimexito', 'local_wellness' );
+		} else {
+			echo get_string ( 'erroroc', 'local_wellness' );
+		}
+		redirect ( $url );
+	} else {
+		$formdel->display ();
+	}
 }
 // Query para las clases
 $result = $DB->get_recordset_sql ( "SELECT DISTINCT mc.* , im.*, cm.instance, cm.id FROM mdl_course_modules as cm
