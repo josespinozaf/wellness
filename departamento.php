@@ -15,7 +15,7 @@ $PAGE->navbar->add ( get_string ( 'navdepartamento', 'local_wellness' ), new moo
 // Header
 echo $OUTPUT->header ();
 
-echo html_writer::tag ( 'h1', get_string ( 'santiago', 'local_wellness' ) );
+echo html_writer::tag ( 'h1', get_string ( 'santiagovina', 'local_wellness' ) );
 
 // HTML writer para mostrar imagen, nombre y cargo de la persona
 // ****SANTIAGO****
@@ -29,7 +29,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Rodrigo Ampuero</b>', array (
@@ -49,7 +49,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 210 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Lilian Andrades</b>', array (
@@ -69,7 +69,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Guillermo Chamorro</b>', array (
@@ -89,7 +89,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Douglas Díaz</b>', array (
@@ -109,7 +109,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Verónica Orellana</b>', array (
@@ -129,7 +129,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Diego Osorio</b>', array (
@@ -149,7 +149,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Javiera Ponce</b>', array (
@@ -169,7 +169,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Javiera Ruz</b>', array (
@@ -189,7 +189,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Gloria Toro</b>', array (
@@ -209,7 +209,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Vicente Uribe</b>', array (
@@ -229,7 +229,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Secretaria Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Secretaria Deportes UAI Santiago', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Lorena Soto</b>', array (
@@ -238,9 +238,6 @@ echo html_writer::tag ( 'div', '<b>Lorena Soto</b>', array (
 echo html_writer::end_tag ( 'div', array (
 		'class' => 'imgasd' 
 ) );
-echo "<p>Deportes VI�A</p>";
-echo "<br>DEPORTES VI�A";
-echo html_writer::tag ( 'h1', get_string ( 'vina', 'local_wellness' ) );
 
 // ****VI�A****
 
@@ -254,7 +251,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Sub Directora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Sub Directora Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Carolina Torres</b>', array (
@@ -274,7 +271,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 210 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Rodrigo Abarca</b>', array (
@@ -294,7 +291,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Eric Blake</b>', array (
@@ -314,7 +311,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Marco Contreras</b>', array (
@@ -334,7 +331,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Javiera Hernández</b>', array (
@@ -354,7 +351,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesora Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesora Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Jocelyn Ortega</b>', array (
@@ -374,7 +371,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Profesor Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Profesor Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Rodrigo Tapia</b>', array (
@@ -394,7 +391,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 300,
 		'height' => 200 
 ) );
-echo html_writer::tag ( 'div', 'Secretaria Deportes UAI', array (
+echo html_writer::tag ( 'div', 'Secretaria Deportes UAI Viña', array (
 		'class' => 'descasd' 
 ) );
 echo html_writer::tag ( 'div', '<b>Valeska Chevez</b>', array (

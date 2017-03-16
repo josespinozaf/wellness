@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 // Configuracion de la pagina
 require_once (dirname ( __FILE__ ) . '/conf.php');
 $params = array ();
@@ -32,7 +32,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		
 		// Tabla de calentamiento		
 		//esto se hace haciendo 5 tablas diferentes, una de calentamiento donde muestres todos los calentamientos, despues las demas pero 5 diferentes separadas con titulo
-		$ej = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios` WHERE `categoria`='Calentamiento'" );
+		$ej = $DB->get_recordset_sql ( "SELECT `id`, `nombre`, `link_video`, `categoria`, `intensidad`, `zona`, `rep1`, `rep2`, `rep3`, `rep4`, `rep5` FROM `mdl_ejercicios` WHERE `categoria` = 'Calentamiento' GROUP BY `nombre`" );
 		$table = new html_table ();
 		$table->head = array (
 				get_string ( 'opejercicio', 'local_wellness' ),
@@ -56,7 +56,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		echo html_writer::table ( $table );
 		
 		$ej->close ();
-		//Tabla de trabajo específico		
+		//Tabla de trabajo especï¿½fico		
 		echo html_writer::tag ( 'p', '<h4>'.get_string('trabajoesp','local_wellness').'</h4>');
 		echo html_writer::tag ( 'p', '<h4>'.get_string('infopesos','local_wellness').'</h4>');
 		echo html_writer::tag ( 'p', '<h5><u>Trabajo General:</u></h5>' );
@@ -193,6 +193,7 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 		$ej4 = $DB->get_recordset_sql ( "SELECT * FROM `mdl_ejercicios`
 									     WHERE `intensidad`=?
 										 AND `categoria`='Core'
+										 ORDER BY RAND() LIMIT 1
 										 ", array (
 												 		$intensidada
 												 ) );
@@ -364,7 +365,6 @@ if (! has_capability ( 'local/wellness:seebutton', $context )) {
 			$newej->rep3 = $rep3;
 			$newej->rep4 = $rep4;
 			$newej->rep5 = $rep5;
-			var_dump($newej);
 			$subir = $DB->insert_record ( "ejercicios", $newej, false );
 			if ($subir) {
 				echo get_string ( 'agrexito', 'local_wellness' );

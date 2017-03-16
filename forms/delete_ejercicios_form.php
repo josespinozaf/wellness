@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
@@ -9,11 +9,11 @@ class delete_ejercicios_form extends moodleform {
 		
 		$mform = $this->_form; // Don't forget the underscore!
 	
-		$result= $DB->get_records_sql("SELECT DISTINCT `nombre` FROM `mdl_ejercicios`");
+		$result= $DB->get_records_sql("SELECT DISTINCT `nombre`,`intensidad`  FROM `mdl_ejercicios`");
 		
 		$options= array();
 		foreach($result as $rs)
-				$options[$rs->nombre] = $rs->nombre;
+				$options[$rs->nombre] = $rs->nombre." ".$rs->intensidad;
 
 		$mform->addElement('header', 'header', 'Para eliminar un ejercicio:');
 		

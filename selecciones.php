@@ -25,7 +25,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Básquetbol Hombres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Básquetbol Hombres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -42,7 +42,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Básquetbol Mujeres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Básquetbol Mujeres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -59,7 +59,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Futbolito Hombres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Futbolito Hombres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -76,7 +76,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Futbolito Mujeres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Futbolito Mujeres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -93,7 +93,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Hockey Mujeres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Hockey Mujeres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -105,12 +105,12 @@ echo html_writer::start_tag ( 'div', array (
 		'class' => 'imgselec' 
 ) );
 echo html_writer::empty_tag ( 'img', array (
-		'src' => './pix/voleim.jpg',
+		'src' => './pix/voleih.jpg',
 		'alt' => 6,
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Voleibol Hombres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Voleibol Hombres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
@@ -127,7 +127,7 @@ echo html_writer::empty_tag ( 'img', array (
 		'width' => 500,
 		'height' => 300 
 ) );
-echo html_writer::tag ( 'div', '<b>Voleibol Mujeres 2016</b>', array (
+echo html_writer::tag ( 'div', '<b>Voleibol Mujeres 2017</b>', array (
 		'class' => 'decselec' 
 ) );
 echo html_writer::end_tag ( 'div', array (
